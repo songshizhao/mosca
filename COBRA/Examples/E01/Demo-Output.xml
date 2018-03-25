@@ -1,0 +1,1184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CobraOutput xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Title>Example01 PWR FUEL ASSEMBLY - 5 SUBCHANNELS AND 4 FUEL RODS</Title>
+  <Info>Three-equation model with EPRI void model - Upflow solution</Info>
+  <Info>open channal model</Info>
+  <GeneralFlow>
+    <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.23" Pressure="14" h="18404.6" Pr="0.827" Re="91071.6" K="0.641" DNBR="0" />
+    <FluidData Position="0.071" Temperature="243.612" Enthalphy="1055.949" Density="819.444" Velocity="1.835" MassFlowRate="0.23" Pressure="14.111778" h="92511" Pr="0.824" Re="92511" K="0.638" DNBR="0" />
+    <FluidData Position="0.143" Temperature="248.83" Enthalphy="1080.538" Density="812.17" Velocity="1.851" MassFlowRate="0.23" Pressure="14.225132" h="94566" Pr="0.82" Re="94566" K="0.632" DNBR="0" />
+    <FluidData Position="0.214" Temperature="255.139" Enthalphy="1110.578" Density="803.062" Velocity="1.872" MassFlowRate="0.23" Pressure="14.340543" h="97112" Pr="0.818" Re="97112" K="0.625" DNBR="0" />
+    <FluidData Position="0.286" Temperature="262.28" Enthalphy="1145.033" Density="792.318" Velocity="1.898" MassFlowRate="0.23" Pressure="14.458485" h="100077" Pr="0.817" Re="100077" K="0.616" DNBR="0" />
+    <FluidData Position="0.357" Temperature="268.525" Enthalphy="1175.603" Density="782.541" Velocity="1.922" MassFlowRate="0.23" Pressure="14.57871" h="102708" Pr="0.819" Re="102708" K="0.608" DNBR="0" />
+    <FluidData Position="0.429" Temperature="274.408" Enthalphy="1204.821" Density="772.966" Velocity="1.945" MassFlowRate="0.23" Pressure="14.701047" h="105183" Pr="0.822" Re="105183" K="0.6" DNBR="0" />
+    <FluidData Position="0.5" Temperature="280.198" Enthalphy="1234.03" Density="763.154" Velocity="1.97" MassFlowRate="0.23" Pressure="14.825701" h="107727" Pr="0.828" Re="107727" K="0.592" DNBR="0" />
+    <FluidData Position="0.571" Temperature="284.953" Enthalphy="1258.374" Density="754.811" Velocity="1.992" MassFlowRate="0.23" Pressure="14.952382" h="109879" Pr="0.834" Re="109879" K="0.584" DNBR="0" />
+    <FluidData Position="0.643" Temperature="288.873" Enthalphy="1278.706" Density="747.736" Velocity="2.011" MassFlowRate="0.23" Pressure="15.080799" h="111688" Pr="0.84" Re="111688" K="0.578" DNBR="0" />
+    <FluidData Position="0.714" Temperature="291.519" Enthalphy="1292.555" Density="742.905" Velocity="2.024" MassFlowRate="0.23" Pressure="15.210383" h="112908" Pr="0.845" Re="112908" K="0.574" DNBR="0" />
+    <FluidData Position="0.786" Temperature="293.703" Enthalphy="1304.061" Density="738.881" Velocity="2.035" MassFlowRate="0.23" Pressure="15.340959" h="113924" Pr="0.849" Re="113924" K="0.57" DNBR="0" />
+    <FluidData Position="0.857" Temperature="295.342" Enthalphy="1312.728" Density="735.874" Velocity="2.043" MassFlowRate="0.23" Pressure="15.472236" h="114665" Pr="0.853" Re="114665" K="0.568" DNBR="0" />
+    <FluidData Position="0.929" Temperature="296.548" Enthalphy="1319.107" Density="733.701" Velocity="2.049" MassFlowRate="0.23" Pressure="15.604049" h="115210" Pr="0.855" Re="115210" K="0.566" DNBR="0" />
+    <FluidData Position="1" Temperature="297.244" Enthalphy="1322.758" Density="732.541" Velocity="2.053" MassFlowRate="0.23" Pressure="15.736261" h="115546" Pr="0.856" Re="115546" K="0.565" DNBR="0" />
+  </GeneralFlow>
+  <ChannelFlows>
+    <ChannelFlow ChannelIndex="1">
+      <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.041717680147859232" Pressure="14" h="18776.4" Pr="0.827" Re="82405.4" K="0.641" DNBR="0" />
+      <FluidData Position="0.071" Temperature="242.555" Enthalphy="1050.998" Density="820.915" Velocity="1.76" MassFlowRate="0.040079283234036422" Pressure="14.109695" h="18264.174" Pr="0.824" Re="80062.1" K="0.639" DNBR="0" />
+      <FluidData Position="0.143" Temperature="246.406" Enthalphy="1069.092" Density="815.626" Velocity="1.771" MassFlowRate="0.0400756693294237" Pressure="14.220608" h="18359.328" Pr="0.821" Re="81367.1" K="0.635" DNBR="0" />
+      <FluidData Position="0.214" Temperature="251.077" Enthalphy="1091.201" Density="809.037" Velocity="1.785" MassFlowRate="0.040074857254771348" Pressure="14.332921" h="18482.991" Pr="0.819" Re="82968.7" K="0.63" DNBR="0" />
+      <FluidData Position="0.286" Temperature="256.386" Enthalphy="1116.559" Density="801.317" Velocity="1.803" MassFlowRate="0.040071942804630951" Pressure="14.447068" h="18593.888" Pr="0.817" Re="84870.8" K="0.623" DNBR="0" />
+      <FluidData Position="0.357" Temperature="261.052" Enthalphy="1139.062" Density="794.348" Velocity="1.818" MassFlowRate="0.040075448906891312" Pressure="14.562652" h="18725.314" Pr="0.817" Re="86488.1" K="0.618" DNBR="0" />
+      <FluidData Position="0.429" Temperature="265.469" Enthalphy="1160.57" Density="787.574" Velocity="1.834" MassFlowRate="0.040083234121937171" Pressure="14.679814" h="18818.082" Pr="0.817" Re="88091.8" K="0.612" DNBR="0" />
+      <FluidData Position="0.5" Temperature="269.84" Enthalphy="1182.065" Density="780.685" Velocity="1.851" MassFlowRate="0.040087820003303881" Pressure="14.79866" h="18959.002" Pr="0.819" Re="89723.9" K="0.607" DNBR="0" />
+      <FluidData Position="0.571" Temperature="273.451" Enthalphy="1199.983" Density="774.872" Velocity="1.865" MassFlowRate="0.04009395497534067" Pressure="14.918851" h="19045.037" Pr="0.821" Re="91059.8" K="0.602" DNBR="0" />
+      <FluidData Position="0.643" Temperature="276.444" Enthalphy="1214.952" Density="769.976" Velocity="1.877" MassFlowRate="0.040105588242713819" Pressure="15.040191" h="19090.841" Pr="0.823" Re="92178.6" K="0.597" DNBR="0" />
+      <FluidData Position="0.714" Temperature="278.473" Enthalphy="1225.154" Density="766.656" Velocity="1.886" MassFlowRate="0.040111603750734491" Pressure="15.162426" h="19176.446" Pr="0.825" Re="92972.3" K="0.595" DNBR="0" />
+      <FluidData Position="0.786" Temperature="280.153" Enthalphy="1233.635" Density="763.905" Velocity="1.893" MassFlowRate="0.040115185019204691" Pressure="15.285333" h="19192.515" Pr="0.826" Re="93602.9" K="0.592" DNBR="0" />
+      <FluidData Position="0.857" Temperature="281.417" Enthalphy="1240.027" Density="761.86" Velocity="1.898" MassFlowRate="0.04011749115496669" Pressure="15.408707" h="19253.413" Pr="0.828" Re="94059.3" K="0.591" DNBR="0" />
+      <FluidData Position="0.929" Temperature="282.349" Enthalphy="1244.738" Density="760.391" Velocity="1.902" MassFlowRate="0.04011988073428107" Pressure="15.532475" h="19244.949" Pr="0.828" Re="94406.8" K="0.589" DNBR="0" />
+      <FluidData Position="1" Temperature="282.888" Enthalphy="1247.445" Density="759.616" Velocity="1.904" MassFlowRate="0.040120260735391274" Pressure="15.656433" h="19283.41" Pr="0.829" Re="94585.6" K="0.589" DNBR="0" />
+    </ChannelFlow>
+    <ChannelFlow ChannelIndex="2">
+      <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.083813089097997284" Pressure="14" h="17497.1" Pr="0.827" Re="117269.5" K="0.641" DNBR="0" />
+      <FluidData Position="0.071" Temperature="243.051" Enthalphy="1053.32" Density="820.226" Velocity="1.974" MassFlowRate="0.09022648456018896" Pressure="14.109263" h="18646.551" Pr="0.824" Re="127956.4" K="0.638" DNBR="0" />
+      <FluidData Position="0.143" Temperature="247.152" Enthalphy="1072.609" Density="814.567" Velocity="1.988" MassFlowRate="0.090244130307451362" Pressure="14.219588" h="18764.982" Pr="0.821" Re="130228.3" K="0.634" DNBR="0" />
+      <FluidData Position="0.214" Temperature="252.122" Enthalphy="1096.171" Density="807.511" Velocity="2.005" MassFlowRate="0.090247088132949238" Pressure="14.33142" h="18871.406" Pr="0.818" Re="132963.5" K="0.628" DNBR="0" />
+      <FluidData Position="0.286" Temperature="257.766" Enthalphy="1123.194" Density="799.236" Velocity="2.027" MassFlowRate="0.090281979913696284" Pressure="14.445243" h="19047.251" Pr="0.817" Re="136221.2" K="0.622" DNBR="0" />
+      <FluidData Position="0.357" Temperature="262.719" Enthalphy="1147.162" Density="791.759" Velocity="2.046" MassFlowRate="0.09030923259748258" Pressure="14.560707" h="19174.297" Pr="0.817" Re="139032.3" K="0.616" DNBR="0" />
+      <FluidData Position="0.429" Temperature="267.403" Enthalphy="1170.062" Density="784.482" Velocity="2.066" MassFlowRate="0.0903202671577409" Pressure="14.677937" h="19299.536" Pr="0.818" Re="141807.1" K="0.61" DNBR="0" />
+      <FluidData Position="0.5" Temperature="272.035" Enthalphy="1192.953" Density="777.07" Velocity="2.085" MassFlowRate="0.090327794921869653" Pressure="14.796756" h="19383.907" Pr="0.82" Re="144477.9" K="0.603" DNBR="0" />
+      <FluidData Position="0.571" Temperature="275.857" Enthalphy="1212.037" Density="770.808" Velocity="2.102" MassFlowRate="0.090330013463993872" Pressure="14.917012" h="19493.633" Pr="0.823" Re="146755" K="0.598" DNBR="0" />
+      <FluidData Position="0.643" Temperature="279.022" Enthalphy="1227.978" Density="765.527" Velocity="2.117" MassFlowRate="0.090324920682681178" Pressure="15.038549" h="19595.909" Pr="0.826" Re="148691.8" K="0.594" DNBR="0" />
+      <FluidData Position="0.714" Temperature="281.167" Enthalphy="1238.843" Density="761.939" Velocity="2.127" MassFlowRate="0.090317317758521365" Pressure="15.160918" h="19651.006" Pr="0.828" Re="149980.5" K="0.591" DNBR="0" />
+      <FluidData Position="0.786" Temperature="282.943" Enthalphy="1247.877" Density="758.96" Velocity="2.135" MassFlowRate="0.090314641797806738" Pressure="15.283936" h="19678.598" Pr="0.83" Re="151020.3" K="0.588" DNBR="0" />
+      <FluidData Position="0.857" Temperature="284.279" Enthalphy="1254.689" Density="756.743" Velocity="2.141" MassFlowRate="0.090313333808565183" Pressure="15.407439" h="19710.886" Pr="0.832" Re="151793.2" K="0.586" DNBR="0" />
+      <FluidData Position="0.929" Temperature="285.263" Enthalphy="1259.709" Density="755.148" Velocity="2.146" MassFlowRate="0.090311482301162718" Pressure="15.531379" h="19749.215" Pr="0.833" Re="152395.9" K="0.585" DNBR="0" />
+      <FluidData Position="1" Temperature="285.832" Enthalphy="1262.588" Density="754.303" Velocity="2.148" MassFlowRate="0.090311080872412644" Pressure="15.655462" h="19743.85" Pr="0.833" Re="152670.3" K="0.584" DNBR="0" />
+    </ChannelFlow>
+    <ChannelFlow ChannelIndex="3">
+      <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.018486005479996577" Pressure="14" h="17941" Pr="0.827" Re="103460.9" K="0.641" DNBR="0" />
+      <FluidData Position="0.071" Temperature="243.458" Enthalphy="1055.226" Density="819.659" Velocity="1.896" MassFlowRate="0.019100745957734689" Pressure="14.109448" h="18528.78" Pr="0.824" Re="108545.4" K="0.638" DNBR="0" />
+      <FluidData Position="0.143" Temperature="248.295" Enthalphy="1078.007" Density="812.935" Velocity="1.911" MassFlowRate="0.019100606290575084" Pressure="14.220194" h="18647.282" Pr="0.82" Re="110764.4" K="0.633" DNBR="0" />
+      <FluidData Position="0.214" Temperature="254.148" Enthalphy="1105.838" Density="804.529" Velocity="1.931" MassFlowRate="0.019100507317740583" Pressure="14.3328" h="18790.39" Pr="0.818" Re="113531.8" K="0.626" DNBR="0" />
+      <FluidData Position="0.286" Temperature="260.781" Enthalphy="1137.757" Density="794.632" Velocity="1.954" MassFlowRate="0.019084776468073144" Pressure="14.447466" h="18948.028" Pr="0.817" Re="116654.3" K="0.618" DNBR="0" />
+      <FluidData Position="0.357" Temperature="266.595" Enthalphy="1166.103" Density="785.637" Velocity="1.973" MassFlowRate="0.019059771920201248" Pressure="14.563689" h="19080.312" Pr="0.818" Re="119287.8" K="0.611" DNBR="0" />
+      <FluidData Position="0.429" Temperature="272.086" Enthalphy="1193.233" Density="776.834" Velocity="1.992" MassFlowRate="0.01902869893172817" Pressure="14.681448" h="19176.361" Pr="0.821" Re="121809.7" K="0.603" DNBR="0" />
+      <FluidData Position="0.5" Temperature="277.509" Enthalphy="1220.394" Density="767.815" Velocity="2.012" MassFlowRate="0.018996024063921979" Pressure="14.800804" h="19306.825" Pr="0.825" Re="124350.1" K="0.596" DNBR="0" />
+      <FluidData Position="0.571" Temperature="281.978" Enthalphy="1243.078" Density="760.145" Velocity="2.03" MassFlowRate="0.018974496774927206" Pressure="14.921608" h="19392.298" Pr="0.83" Re="126516.1" K="0.589" DNBR="0" />
+      <FluidData Position="0.643" Temperature="285.672" Enthalphy="1262.048" Density="753.644" Velocity="2.045" MassFlowRate="0.01895102017208521" Pressure="15.043577" h="19457.513" Pr="0.835" Re="128298.8" K="0.583" DNBR="0" />
+      <FluidData Position="0.714" Temperature="288.172" Enthalphy="1274.989" Density="749.202" Velocity="2.055" MassFlowRate="0.018932016925276969" Pressure="15.166289" h="19503.783" Pr="0.839" Re="129482.7" K="0.579" DNBR="0" />
+      <FluidData Position="0.786" Temperature="290.239" Enthalphy="1285.754" Density="745.501" Velocity="2.064" MassFlowRate="0.018920617329843886" Pressure="15.289707" h="19552.492" Pr="0.842" Re="130500.1" K="0.576" DNBR="0" />
+      <FluidData Position="0.857" Temperature="291.792" Enthalphy="1293.869" Density="742.734" Velocity="2.071" MassFlowRate="0.018914147695387955" Pressure="15.413681" h="19604.594" Pr="0.845" Re="131271.8" K="0.574" DNBR="0" />
+      <FluidData Position="0.929" Temperature="292.936" Enthalphy="1299.845" Density="740.733" Velocity="2.076" MassFlowRate="0.018908755973957247" Pressure="15.538046" h="19620.439" Pr="0.847" Re="131823.1" K="0.572" DNBR="0" />
+      <FluidData Position="1" Temperature="293.597" Enthalphy="1303.274" Density="739.661" Velocity="2.079" MassFlowRate="0.018908023440600823" Pressure="15.662662" h="19632.93" Pr="0.848" Re="132138.9" K="0.571" DNBR="0" />
+    </ChannelFlow>
+    <ChannelFlow ChannelIndex="4">
+      <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.057322150182764632" Pressure="14" h="19064.1" Pr="0.827" Re="76371.5" K="0.641" DNBR="0" />
+      <FluidData Position="0.071" Temperature="242.48" Enthalphy="1050.645" Density="821.019" Velocity="1.717" MassFlowRate="0.053728990832026639" Pressure="14.109793" h="18177.814" Pr="0.824" Re="72372.5" K="0.639" DNBR="0" />
+      <FluidData Position="0.143" Temperature="246.31" Enthalphy="1068.644" Density="815.762" Velocity="1.727" MassFlowRate="0.053719728745376526" Pressure="14.220763" h="18274.544" Pr="0.822" Re="73517.6" K="0.635" DNBR="0" />
+      <FluidData Position="0.214" Temperature="250.957" Enthalphy="1090.632" Density="809.211" Velocity="1.741" MassFlowRate="0.053718364128817434" Pressure="14.33319" h="18390.9" Pr="0.819" Re="74976" K="0.63" DNBR="0" />
+      <FluidData Position="0.286" Temperature="256.239" Enthalphy="1115.855" Density="801.538" Velocity="1.758" MassFlowRate="0.053707526604736378" Pressure="14.447375" h="18525.517" Pr="0.817" Re="76666.8" K="0.624" DNBR="0" />
+      <FluidData Position="0.357" Temperature="260.882" Enthalphy="1138.241" Density="794.61" Velocity="1.773" MassFlowRate="0.053703680885549415" Pressure="14.563059" h="18629.142" Pr="0.817" Re="78141.3" K="0.618" DNBR="0" />
+      <FluidData Position="0.429" Temperature="265.279" Enthalphy="1159.639" Density="787.876" Velocity="1.788" MassFlowRate="0.053711838242275121" Pressure="14.680238" h="18746.515" Pr="0.817" Re="79561" K="0.613" DNBR="0" />
+      <FluidData Position="0.5" Temperature="269.631" Enthalphy="1181.029" Density="781.027" Velocity="1.804" MassFlowRate="0.05372552500611933" Pressure="14.799021" h="18850.942" Pr="0.819" Re="81007.4" K="0.607" DNBR="0" />
+      <FluidData Position="0.571" Temperature="273.225" Enthalphy="1198.858" Density="775.251" Velocity="1.818" MassFlowRate="0.053734290895332416" Pressure="14.919208" h="18939.154" Pr="0.821" Re="82228" K="0.602" DNBR="0" />
+      <FluidData Position="0.643" Temperature="276.204" Enthalphy="1213.748" Density="770.386" Velocity="1.83" MassFlowRate="0.053745562002804392" Pressure="15.040595" h="19018.773" Pr="0.823" Re="83250.7" K="0.598" DNBR="0" />
+      <FluidData Position="0.714" Temperature="278.224" Enthalphy="1223.896" Density="767.088" Velocity="1.838" MassFlowRate="0.05375927020286355" Pressure="15.162764" h="19065.543" Pr="0.825" Re="83931.4" K="0.595" DNBR="0" />
+      <FluidData Position="0.786" Temperature="279.897" Enthalphy="1232.332" Density="764.354" Velocity="1.845" MassFlowRate="0.053766251799624763" Pressure="15.285635" h="19115.13" Pr="0.826" Re="84508.3" K="0.593" DNBR="0" />
+      <FluidData Position="0.857" Temperature="281.156" Enthalphy="1238.694" Density="762.321" Velocity="1.85" MassFlowRate="0.053769892847125918" Pressure="15.408994" h="19135.194" Pr="0.827" Re="84925.9" K="0.591" DNBR="0" />
+      <FluidData Position="0.929" Temperature="282.084" Enthalphy="1243.383" Density="760.862" Velocity="1.854" MassFlowRate="0.053773121950379012" Pressure="15.532764" h="19169.3" Pr="0.828" Re="85244" K="0.59" DNBR="0" />
+      <FluidData Position="1" Temperature="282.62" Enthalphy="1246.077" Density="760.093" Velocity="1.856" MassFlowRate="0.053773623440570656" Pressure="15.656732" h="19166.168" Pr="0.828" Re="85407.5" K="0.589" DNBR="0" />
+    </ChannelFlow>
+    <ChannelFlow ChannelIndex="5">
+      <FluidData Position="0" Temperature="240" Enthalphy="1039.062" Density="824.436" Velocity="1.824" MassFlowRate="0.028661075091382316" Pressure="14" h="19064.1" Pr="0.827" Re="76371.5" K="0.641" DNBR="0" />
+      <FluidData Position="0.071" Temperature="242.48" Enthalphy="1050.645" Density="821.019" Velocity="1.717" MassFlowRate="0.02686449541601332" Pressure="14.109793" h="18177.814" Pr="0.824" Re="72372.5" K="0.639" DNBR="0" />
+      <FluidData Position="0.143" Temperature="246.311" Enthalphy="1068.645" Density="815.761" Velocity="1.727" MassFlowRate="0.026859865327173341" Pressure="14.220763" h="18274.584" Pr="0.822" Re="73517.8" K="0.635" DNBR="0" />
+      <FluidData Position="0.214" Temperature="250.958" Enthalphy="1090.638" Density="809.21" Velocity="1.741" MassFlowRate="0.026859183165721393" Pressure="14.33319" h="18390.939" Pr="0.819" Re="74976.2" K="0.63" DNBR="0" />
+      <FluidData Position="0.286" Temperature="256.241" Enthalphy="1115.861" Density="801.535" Velocity="1.758" MassFlowRate="0.026853774208863267" Pressure="14.447374" h="18525.575" Pr="0.817" Re="76667.1" K="0.624" DNBR="0" />
+      <FluidData Position="0.357" Temperature="260.884" Enthalphy="1138.251" Density="794.607" Velocity="1.773" MassFlowRate="0.026851865689875479" Pressure="14.563058" h="18629.199" Pr="0.817" Re="78141.6" K="0.618" DNBR="0" />
+      <FluidData Position="0.429" Temperature="265.281" Enthalphy="1159.65" Density="787.873" Velocity="1.788" MassFlowRate="0.02685596154631863" Pressure="14.680237" h="18746.59" Pr="0.817" Re="79561.4" K="0.613" DNBR="0" />
+      <FluidData Position="0.5" Temperature="269.633" Enthalphy="1181.04" Density="781.023" Velocity="1.804" MassFlowRate="0.026862836004785152" Pressure="14.79902" h="18850.998" Pr="0.819" Re="81007.7" K="0.607" DNBR="0" />
+      <FluidData Position="0.571" Temperature="273.228" Enthalphy="1198.869" Density="775.246" Velocity="1.818" MassFlowRate="0.026867243890405852" Pressure="14.919207" h="18939.247" Pr="0.821" Re="82228.5" K="0.602" DNBR="0" />
+      <FluidData Position="0.643" Temperature="276.207" Enthalphy="1213.764" Density="770.381" Velocity="1.83" MassFlowRate="0.026872908899715414" Pressure="15.040593" h="19018.864" Pr="0.823" Re="83251.2" K="0.598" DNBR="0" />
+      <FluidData Position="0.714" Temperature="278.227" Enthalphy="1223.912" Density="767.083" Velocity="1.838" MassFlowRate="0.026879791362603628" Pressure="15.162761" h="19065.633" Pr="0.825" Re="83931.9" K="0.595" DNBR="0" />
+      <FluidData Position="0.786" Temperature="279.9" Enthalphy="1232.348" Density="764.348" Velocity="1.845" MassFlowRate="0.026883304053519946" Pressure="15.285631" h="19115.22" Pr="0.826" Re="84508.8" K="0.593" DNBR="0" />
+      <FluidData Position="0.857" Temperature="281.159" Enthalphy="1238.709" Density="762.316" Velocity="1.85" MassFlowRate="0.026885134493954271" Pressure="15.408989" h="19135.284" Pr="0.827" Re="84926.4" K="0.591" DNBR="0" />
+      <FluidData Position="0.929" Temperature="282.087" Enthalphy="1243.398" Density="760.856" Velocity="1.854" MassFlowRate="0.026886759040219945" Pressure="15.532758" h="19169.39" Pr="0.828" Re="85244.5" K="0.59" DNBR="0" />
+      <FluidData Position="1" Temperature="282.623" Enthalphy="1246.092" Density="760.088" Velocity="1.856" MassFlowRate="0.026887011511024628" Pressure="15.656725" h="19166.258" Pr="0.828" Re="85408" K="0.589" DNBR="0" />
+    </ChannelFlow>
+  </ChannelFlows>
+  <RodsTemperature>
+    <RodTemperature>
+      <SubRodTemperature Index="0" CladOutside="273.597" CladInside="321.245" h="18030.1" q="618116.565" qc="3077183.553" DNBR="4.978">
+        <PelletTemperature Radius="1" Temperature="321.68" />
+        <PelletTemperature Radius="0.9375" Temperature="349.228" />
+        <PelletTemperature Radius="0.875" Temperature="375.93" />
+        <PelletTemperature Radius="0.8125" Temperature="401.695" />
+        <PelletTemperature Radius="0.75" Temperature="426.406" />
+        <PelletTemperature Radius="0.6875" Temperature="449.786" />
+        <PelletTemperature Radius="0.625" Temperature="471.722" />
+        <PelletTemperature Radius="0.5625" Temperature="492.098" />
+        <PelletTemperature Radius="0.5" Temperature="510.793" />
+        <PelletTemperature Radius="0.4375" Temperature="527.638" />
+        <PelletTemperature Radius="0.375" Temperature="542.494" />
+        <PelletTemperature Radius="0.3125" Temperature="555.268" />
+        <PelletTemperature Radius="0.25" Temperature="565.874" />
+        <PelletTemperature Radius="0.1875" Temperature="574.238" />
+        <PelletTemperature Radius="0.125" Temperature="580.307" />
+        <PelletTemperature Radius="0.0625" Temperature="584.066" />
+        <PelletTemperature Radius="0" Temperature="587.969" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="1" CladOutside="290.527" CladInside="358.036" h="18487.2" q="899501.846" qc="3102618.207" DNBR="3.449">
+        <PelletTemperature Radius="1" Temperature="358.67" />
+        <PelletTemperature Radius="0.9375" Temperature="400.727" />
+        <PelletTemperature Radius="0.875" Temperature="442.39" />
+        <PelletTemperature Radius="0.8125" Temperature="483.067" />
+        <PelletTemperature Radius="0.75" Temperature="522.609" />
+        <PelletTemperature Radius="0.6875" Temperature="560.613" />
+        <PelletTemperature Radius="0.625" Temperature="596.706" />
+        <PelletTemperature Radius="0.5625" Temperature="630.658" />
+        <PelletTemperature Radius="0.5" Temperature="662.036" />
+        <PelletTemperature Radius="0.4375" Temperature="690.574" />
+        <PelletTemperature Radius="0.375" Temperature="716.026" />
+        <PelletTemperature Radius="0.3125" Temperature="738.069" />
+        <PelletTemperature Radius="0.25" Temperature="756.46" />
+        <PelletTemperature Radius="0.1875" Temperature="771.027" />
+        <PelletTemperature Radius="0.125" Temperature="781.632" />
+        <PelletTemperature Radius="0.0625" Temperature="788.218" />
+        <PelletTemperature Radius="0" Temperature="795.068" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="2" CladOutside="304.767" CladInside="385.606" h="18596" q="1099161.255" qc="3102598.034" DNBR="2.823">
+        <PelletTemperature Radius="1" Temperature="386.381" />
+        <PelletTemperature Radius="0.9375" Temperature="439.736" />
+        <PelletTemperature Radius="0.875" Temperature="492.955" />
+        <PelletTemperature Radius="0.8125" Temperature="545.776" />
+        <PelletTemperature Radius="0.75" Temperature="597.461" />
+        <PelletTemperature Radius="0.6875" Temperature="647.711" />
+        <PelletTemperature Radius="0.625" Temperature="695.829" />
+        <PelletTemperature Radius="0.5625" Temperature="741.476" />
+        <PelletTemperature Radius="0.5" Temperature="783.92" />
+        <PelletTemperature Radius="0.4375" Temperature="822.759" />
+        <PelletTemperature Radius="0.375" Temperature="857.583" />
+        <PelletTemperature Radius="0.3125" Temperature="887.985" />
+        <PelletTemperature Radius="0.25" Temperature="913.587" />
+        <PelletTemperature Radius="0.1875" Temperature="933.946" />
+        <PelletTemperature Radius="0.125" Temperature="948.774" />
+        <PelletTemperature Radius="0.0625" Temperature="957.985" />
+        <PelletTemperature Radius="0" Temperature="967.567" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="3" CladOutside="317.74" CladInside="408.936" h="18709.6" q="1261061.243" qc="3102386.267" DNBR="2.46">
+        <PelletTemperature Radius="1" Temperature="409.825" />
+        <PelletTemperature Radius="0.9375" Temperature="472.898" />
+        <PelletTemperature Radius="0.875" Temperature="536.405" />
+        <PelletTemperature Radius="0.8125" Temperature="599.826" />
+        <PelletTemperature Radius="0.75" Temperature="662.648" />
+        <PelletTemperature Radius="0.6875" Temperature="723.981" />
+        <PelletTemperature Radius="0.625" Temperature="783.245" />
+        <PelletTemperature Radius="0.5625" Temperature="839.623" />
+        <PelletTemperature Radius="0.5" Temperature="892.597" />
+        <PelletTemperature Radius="0.4375" Temperature="941.628" />
+        <PelletTemperature Radius="0.375" Temperature="985.561" />
+        <PelletTemperature Radius="0.3125" Temperature="1023.829" />
+        <PelletTemperature Radius="0.25" Temperature="1055.982" />
+        <PelletTemperature Radius="0.1875" Temperature="1081.608" />
+        <PelletTemperature Radius="0.125" Temperature="1100.364" />
+        <PelletTemperature Radius="0.0625" Temperature="1112.058" />
+        <PelletTemperature Radius="0" Temperature="1124.24" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="4" CladOutside="315.359" CladInside="396.728" h="18858.3" q="1119334.097" qc="3102863.786" DNBR="2.772">
+        <PelletTemperature Radius="1" Temperature="397.517" />
+        <PelletTemperature Radius="0.9375" Temperature="452.698" />
+        <PelletTemperature Radius="0.875" Temperature="507.724" />
+        <PelletTemperature Radius="0.8125" Temperature="562.405" />
+        <PelletTemperature Radius="0.75" Temperature="615.964" />
+        <PelletTemperature Radius="0.6875" Temperature="668.041" />
+        <PelletTemperature Radius="0.625" Temperature="718.015" />
+        <PelletTemperature Radius="0.5625" Temperature="765.384" />
+        <PelletTemperature Radius="0.5" Temperature="809.487" />
+        <PelletTemperature Radius="0.4375" Temperature="849.922" />
+        <PelletTemperature Radius="0.375" Temperature="886.236" />
+        <PelletTemperature Radius="0.3125" Temperature="918.006" />
+        <PelletTemperature Radius="0.25" Temperature="944.663" />
+        <PelletTemperature Radius="0.1875" Temperature="965.805" />
+        <PelletTemperature Radius="0.125" Temperature="981.214" />
+        <PelletTemperature Radius="0.0625" Temperature="990.792" />
+        <PelletTemperature Radius="0" Temperature="1000.758" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="5" CladOutside="317.261" CladInside="394.976" h="18987.2" q="1070195.124" qc="3102640.454" DNBR="2.899">
+        <PelletTemperature Radius="1" Temperature="395.73" />
+        <PelletTemperature Radius="0.9375" Temperature="448.357" />
+        <PelletTemperature Radius="0.875" Temperature="500.698" />
+        <PelletTemperature Radius="0.8125" Temperature="552.615" />
+        <PelletTemperature Radius="0.75" Temperature="603.299" />
+        <PelletTemperature Radius="0.6875" Temperature="652.51" />
+        <PelletTemperature Radius="0.625" Temperature="699.576" />
+        <PelletTemperature Radius="0.5625" Temperature="744.188" />
+        <PelletTemperature Radius="0.5" Temperature="785.607" />
+        <PelletTemperature Radius="0.4375" Temperature="823.478" />
+        <PelletTemperature Radius="0.375" Temperature="857.405" />
+        <PelletTemperature Radius="0.3125" Temperature="887.002" />
+        <PelletTemperature Radius="0.25" Temperature="911.906" />
+        <PelletTemperature Radius="0.1875" Temperature="931.708" />
+        <PelletTemperature Radius="0.125" Temperature="946.125" />
+        <PelletTemperature Radius="0.0625" Temperature="955.078" />
+        <PelletTemperature Radius="0" Temperature="964.39" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="6" CladOutside="321.511" CladInside="398.878" h="19098.9" q="1070195.124" qc="3102968.02" DNBR="2.899">
+        <PelletTemperature Radius="1" Temperature="399.632" />
+        <PelletTemperature Radius="0.9375" Temperature="452.547" />
+        <PelletTemperature Radius="0.875" Temperature="505.148" />
+        <PelletTemperature Radius="0.8125" Temperature="557.295" />
+        <PelletTemperature Radius="0.75" Temperature="608.227" />
+        <PelletTemperature Radius="0.6875" Temperature="657.662" />
+        <PelletTemperature Radius="0.625" Temperature="704.963" />
+        <PelletTemperature Radius="0.5625" Temperature="749.773" />
+        <PelletTemperature Radius="0.5" Temperature="791.387" />
+        <PelletTemperature Radius="0.4375" Temperature="829.449" />
+        <PelletTemperature Radius="0.375" Temperature="863.551" />
+        <PelletTemperature Radius="0.3125" Temperature="893.311" />
+        <PelletTemperature Radius="0.25" Temperature="918.36" />
+        <PelletTemperature Radius="0.1875" Temperature="938.241" />
+        <PelletTemperature Radius="0.125" Temperature="952.717" />
+        <PelletTemperature Radius="0.0625" Temperature="961.709" />
+        <PelletTemperature Radius="0" Temperature="971.06" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="7" CladOutside="316.673" CladInside="381.767" h="19206.9" q="892777.566" qc="3102913.922" DNBR="3.476">
+        <PelletTemperature Radius="1" Temperature="382.396" />
+        <PelletTemperature Radius="0.9375" Temperature="425.496" />
+        <PelletTemperature Radius="0.875" Temperature="468.019" />
+        <PelletTemperature Radius="0.8125" Temperature="509.635" />
+        <PelletTemperature Radius="0.75" Temperature="550.099" />
+        <PelletTemperature Radius="0.6875" Temperature="588.899" />
+        <PelletTemperature Radius="0.625" Temperature="625.823" />
+        <PelletTemperature Radius="0.5625" Temperature="660.463" />
+        <PelletTemperature Radius="0.5" Temperature="692.506" />
+        <PelletTemperature Radius="0.4375" Temperature="721.696" />
+        <PelletTemperature Radius="0.375" Temperature="747.652" />
+        <PelletTemperature Radius="0.3125" Temperature="770.11" />
+        <PelletTemperature Radius="0.25" Temperature="788.864" />
+        <PelletTemperature Radius="0.1875" Temperature="803.729" />
+        <PelletTemperature Radius="0.125" Temperature="814.557" />
+        <PelletTemperature Radius="0.0625" Temperature="821.282" />
+        <PelletTemperature Radius="0" Temperature="828.277" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="8" CladOutside="312.741" CladInside="367.548" h="19306.7" q="746395.149" qc="3102935.438" DNBR="4.157">
+        <PelletTemperature Radius="1" Temperature="368.074" />
+        <PelletTemperature Radius="0.9375" Temperature="403.413" />
+        <PelletTemperature Radius="0.875" Temperature="438.088" />
+        <PelletTemperature Radius="0.8125" Temperature="471.673" />
+        <PelletTemperature Radius="0.75" Temperature="504.033" />
+        <PelletTemperature Radius="0.6875" Temperature="534.986" />
+        <PelletTemperature Radius="0.625" Temperature="564.148" />
+        <PelletTemperature Radius="0.5625" Temperature="591.351" />
+        <PelletTemperature Radius="0.5" Temperature="616.417" />
+        <PelletTemperature Radius="0.4375" Temperature="639.094" />
+        <PelletTemperature Radius="0.375" Temperature="659.18" />
+        <PelletTemperature Radius="0.3125" Temperature="676.52" />
+        <PelletTemperature Radius="0.25" Temperature="690.97" />
+        <PelletTemperature Radius="0.1875" Temperature="702.402" />
+        <PelletTemperature Radius="0.125" Temperature="710.714" />
+        <PelletTemperature Radius="0.0625" Temperature="715.864" />
+        <PelletTemperature Radius="0" Temperature="721.212" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="9" CladOutside="303.707" CladInside="341.671" h="19385.5" q="509545.295" qc="3103082.135" DNBR="6.09">
+        <PelletTemperature Radius="1" Temperature="342.029" />
+        <PelletTemperature Radius="0.9375" Temperature="365.339" />
+        <PelletTemperature Radius="0.875" Temperature="387.826" />
+        <PelletTemperature Radius="0.8125" Temperature="409.414" />
+        <PelletTemperature Radius="0.75" Temperature="429.961" />
+        <PelletTemperature Radius="0.6875" Temperature="449.313" />
+        <PelletTemperature Radius="0.625" Temperature="467.386" />
+        <PelletTemperature Radius="0.5625" Temperature="484.096" />
+        <PelletTemperature Radius="0.5" Temperature="499.356" />
+        <PelletTemperature Radius="0.4375" Temperature="513.083" />
+        <PelletTemperature Radius="0.375" Temperature="525.15" />
+        <PelletTemperature Radius="0.3125" Temperature="535.495" />
+        <PelletTemperature Radius="0.25" Temperature="544.061" />
+        <PelletTemperature Radius="0.1875" Temperature="550.8" />
+        <PelletTemperature Radius="0.125" Temperature="555.68" />
+        <PelletTemperature Radius="0.0625" Temperature="558.699" />
+        <PelletTemperature Radius="0" Temperature="561.831" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="10" CladOutside="301.412" CladInside="333.148" h="19453.3" q="424146.931" qc="3103249.251" DNBR="7.316">
+        <PelletTemperature Radius="1" Temperature="333.447" />
+        <PelletTemperature Radius="0.9375" Temperature="352.636" />
+        <PelletTemperature Radius="0.875" Temperature="371.041" />
+        <PelletTemperature Radius="0.8125" Temperature="388.604" />
+        <PelletTemperature Radius="0.75" Temperature="405.262" />
+        <PelletTemperature Radius="0.6875" Temperature="420.925" />
+        <PelletTemperature Radius="0.625" Temperature="435.484" />
+        <PelletTemperature Radius="0.5625" Temperature="448.88" />
+        <PelletTemperature Radius="0.5" Temperature="461.057" />
+        <PelletTemperature Radius="0.4375" Temperature="471.961" />
+        <PelletTemperature Radius="0.375" Temperature="481.54" />
+        <PelletTemperature Radius="0.3125" Temperature="489.747" />
+        <PelletTemperature Radius="0.25" Temperature="496.54" />
+        <PelletTemperature Radius="0.1875" Temperature="501.882" />
+        <PelletTemperature Radius="0.125" Temperature="505.747" />
+        <PelletTemperature Radius="0.0625" Temperature="508.135" />
+        <PelletTemperature Radius="0" Temperature="510.61" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="11" CladOutside="297.907" CladInside="322.037" h="19476.1" q="320489.559" qc="3103192.094" DNBR="9.683">
+        <PelletTemperature Radius="1" Temperature="322.262" />
+        <PelletTemperature Radius="0.9375" Temperature="336.556" />
+        <PelletTemperature Radius="0.875" Temperature="350.175" />
+        <PelletTemperature Radius="0.8125" Temperature="363.082" />
+        <PelletTemperature Radius="0.75" Temperature="375.24" />
+        <PelletTemperature Radius="0.6875" Temperature="386.611" />
+        <PelletTemperature Radius="0.625" Temperature="397.157" />
+        <PelletTemperature Radius="0.5625" Temperature="406.842" />
+        <PelletTemperature Radius="0.5" Temperature="415.61" />
+        <PelletTemperature Radius="0.4375" Temperature="423.426" />
+        <PelletTemperature Radius="0.375" Temperature="430.263" />
+        <PelletTemperature Radius="0.3125" Temperature="436.099" />
+        <PelletTemperature Radius="0.25" Temperature="440.913" />
+        <PelletTemperature Radius="0.1875" Temperature="444.688" />
+        <PelletTemperature Radius="0.125" Temperature="447.414" />
+        <PelletTemperature Radius="0.0625" Temperature="449.098" />
+        <PelletTemperature Radius="0" Temperature="450.842" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="12" CladOutside="294.983" CladInside="312.917" h="19520.3" q="236953.304" qc="3103107.795" DNBR="13.096">
+        <PelletTemperature Radius="1" Temperature="313.084" />
+        <PelletTemperature Radius="0.9375" Temperature="323.531" />
+        <PelletTemperature Radius="0.875" Temperature="333.434" />
+        <PelletTemperature Radius="0.8125" Temperature="342.771" />
+        <PelletTemperature Radius="0.75" Temperature="351.523" />
+        <PelletTemperature Radius="0.6875" Temperature="359.668" />
+        <PelletTemperature Radius="0.625" Temperature="367.186" />
+        <PelletTemperature Radius="0.5625" Temperature="374.058" />
+        <PelletTemperature Radius="0.5" Temperature="380.265" />
+        <PelletTemperature Radius="0.4375" Temperature="385.79" />
+        <PelletTemperature Radius="0.375" Temperature="390.618" />
+        <PelletTemperature Radius="0.3125" Temperature="394.733" />
+        <PelletTemperature Radius="0.25" Temperature="398.124" />
+        <PelletTemperature Radius="0.1875" Temperature="400.781" />
+        <PelletTemperature Radius="0.125" Temperature="402.699" />
+        <PelletTemperature Radius="0.0625" Temperature="403.881" />
+        <PelletTemperature Radius="0" Temperature="405.106" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="13" CladOutside="290.932" CladInside="301.396" h="19539.1" q="137227.05" qc="3103296.254" DNBR="22.614">
+        <PelletTemperature Radius="1" Temperature="301.493" />
+        <PelletTemperature Radius="0.9375" Temperature="307.456" />
+        <PelletTemperature Radius="0.875" Temperature="313.077" />
+        <PelletTemperature Radius="0.8125" Temperature="318.347" />
+        <PelletTemperature Radius="0.75" Temperature="323.259" />
+        <PelletTemperature Radius="0.6875" Temperature="327.807" />
+        <PelletTemperature Radius="0.625" Temperature="331.984" />
+        <PelletTemperature Radius="0.5625" Temperature="335.784" />
+        <PelletTemperature Radius="0.5" Temperature="339.202" />
+        <PelletTemperature Radius="0.4375" Temperature="342.231" />
+        <PelletTemperature Radius="0.375" Temperature="344.869" />
+        <PelletTemperature Radius="0.3125" Temperature="347.11" />
+        <PelletTemperature Radius="0.25" Temperature="348.952" />
+        <PelletTemperature Radius="0.1875" Temperature="350.391" />
+        <PelletTemperature Radius="0.125" Temperature="351.429" />
+        <PelletTemperature Radius="0.0625" Temperature="352.068" />
+        <PelletTemperature Radius="0" Temperature="352.729" />
+      </SubRodTemperature>
+    </RodTemperature>
+    <RodTemperature>
+      <SubRodTemperature Index="0" CladOutside="273.466" CladInside="321.122" h="18100.7" q="618116.565" qc="3077183.553" DNBR="4.978">
+        <PelletTemperature Radius="1" Temperature="321.557" />
+        <PelletTemperature Radius="0.9375" Temperature="349.101" />
+        <PelletTemperature Radius="0.875" Temperature="375.799" />
+        <PelletTemperature Radius="0.8125" Temperature="401.559" />
+        <PelletTemperature Radius="0.75" Temperature="426.266" />
+        <PelletTemperature Radius="0.6875" Temperature="449.642" />
+        <PelletTemperature Radius="0.625" Temperature="471.575" />
+        <PelletTemperature Radius="0.5625" Temperature="491.947" />
+        <PelletTemperature Radius="0.5" Temperature="510.639" />
+        <PelletTemperature Radius="0.4375" Temperature="527.481" />
+        <PelletTemperature Radius="0.375" Temperature="542.335" />
+        <PelletTemperature Radius="0.3125" Temperature="555.107" />
+        <PelletTemperature Radius="0.25" Temperature="565.711" />
+        <PelletTemperature Radius="0.1875" Temperature="574.074" />
+        <PelletTemperature Radius="0.125" Temperature="580.141" />
+        <PelletTemperature Radius="0.0625" Temperature="583.9" />
+        <PelletTemperature Radius="0" Temperature="587.802" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="1" CladOutside="290.64" CladInside="358.14" h="18468.5" q="899501.846" qc="3096459.415" DNBR="3.442">
+        <PelletTemperature Radius="1" Temperature="358.774" />
+        <PelletTemperature Radius="0.9375" Temperature="400.837" />
+        <PelletTemperature Radius="0.875" Temperature="442.505" />
+        <PelletTemperature Radius="0.8125" Temperature="483.187" />
+        <PelletTemperature Radius="0.75" Temperature="522.735" />
+        <PelletTemperature Radius="0.6875" Temperature="560.744" />
+        <PelletTemperature Radius="0.625" Temperature="596.842" />
+        <PelletTemperature Radius="0.5625" Temperature="630.799" />
+        <PelletTemperature Radius="0.5" Temperature="662.181" />
+        <PelletTemperature Radius="0.4375" Temperature="690.724" />
+        <PelletTemperature Radius="0.375" Temperature="716.179" />
+        <PelletTemperature Radius="0.3125" Temperature="738.225" />
+        <PelletTemperature Radius="0.25" Temperature="756.618" />
+        <PelletTemperature Radius="0.1875" Temperature="771.187" />
+        <PelletTemperature Radius="0.125" Temperature="781.793" />
+        <PelletTemperature Radius="0.0625" Temperature="788.381" />
+        <PelletTemperature Radius="0" Temperature="795.231" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="2" CladOutside="305.006" CladInside="385.826" h="18577.3" q="1099161.255" qc="3096363.177" DNBR="2.817">
+        <PelletTemperature Radius="1" Temperature="386.6" />
+        <PelletTemperature Radius="0.9375" Temperature="439.971" />
+        <PelletTemperature Radius="0.875" Temperature="493.205" />
+        <PelletTemperature Radius="0.8125" Temperature="546.042" />
+        <PelletTemperature Radius="0.75" Temperature="597.742" />
+        <PelletTemperature Radius="0.6875" Temperature="648.007" />
+        <PelletTemperature Radius="0.625" Temperature="696.139" />
+        <PelletTemperature Radius="0.5625" Temperature="741.8" />
+        <PelletTemperature Radius="0.5" Temperature="784.256" />
+        <PelletTemperature Radius="0.4375" Temperature="823.106" />
+        <PelletTemperature Radius="0.375" Temperature="857.94" />
+        <PelletTemperature Radius="0.3125" Temperature="888.352" />
+        <PelletTemperature Radius="0.25" Temperature="913.962" />
+        <PelletTemperature Radius="0.1875" Temperature="934.326" />
+        <PelletTemperature Radius="0.125" Temperature="949.157" />
+        <PelletTemperature Radius="0.0625" Temperature="958.371" />
+        <PelletTemperature Radius="0" Temperature="967.955" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="3" CladOutside="318.108" CladInside="409.269" h="18696.7" q="1261061.243" qc="3096180.457" DNBR="2.455">
+        <PelletTemperature Radius="1" Temperature="410.157" />
+        <PelletTemperature Radius="0.9375" Temperature="473.254" />
+        <PelletTemperature Radius="0.875" Temperature="536.788" />
+        <PelletTemperature Radius="0.8125" Temperature="600.234" />
+        <PelletTemperature Radius="0.75" Temperature="663.081" />
+        <PelletTemperature Radius="0.6875" Temperature="724.441" />
+        <PelletTemperature Radius="0.625" Temperature="783.727" />
+        <PelletTemperature Radius="0.5625" Temperature="840.128" />
+        <PelletTemperature Radius="0.5" Temperature="893.125" />
+        <PelletTemperature Radius="0.4375" Temperature="942.181" />
+        <PelletTemperature Radius="0.375" Temperature="986.129" />
+        <PelletTemperature Radius="0.3125" Temperature="1024.411" />
+        <PelletTemperature Radius="0.25" Temperature="1056.577" />
+        <PelletTemperature Radius="0.1875" Temperature="1082.213" />
+        <PelletTemperature Radius="0.125" Temperature="1100.977" />
+        <PelletTemperature Radius="0.0625" Temperature="1112.676" />
+        <PelletTemperature Radius="0" Temperature="1124.863" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="4" CladOutside="315.886" CladInside="397.211" h="18842.6" q="1119334.097" qc="3096483.06" DNBR="2.766">
+        <PelletTemperature Radius="1" Temperature="397.999" />
+        <PelletTemperature Radius="0.9375" Temperature="453.218" />
+        <PelletTemperature Radius="0.875" Temperature="508.277" />
+        <PelletTemperature Radius="0.8125" Temperature="562.989" />
+        <PelletTemperature Radius="0.75" Temperature="616.58" />
+        <PelletTemperature Radius="0.6875" Temperature="668.687" />
+        <PelletTemperature Radius="0.625" Temperature="718.693" />
+        <PelletTemperature Radius="0.5625" Temperature="766.089" />
+        <PelletTemperature Radius="0.5" Temperature="810.218" />
+        <PelletTemperature Radius="0.4375" Temperature="850.678" />
+        <PelletTemperature Radius="0.375" Temperature="887.016" />
+        <PelletTemperature Radius="0.3125" Temperature="918.809" />
+        <PelletTemperature Radius="0.25" Temperature="945.48" />
+        <PelletTemperature Radius="0.1875" Temperature="966.632" />
+        <PelletTemperature Radius="0.125" Temperature="982.049" />
+        <PelletTemperature Radius="0.0625" Temperature="991.632" />
+        <PelletTemperature Radius="0" Temperature="1001.604" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="5" CladOutside="317.92" CladInside="395.581" h="18972.3" q="1070195.124" qc="3096017.864" DNBR="2.893">
+        <PelletTemperature Radius="1" Temperature="396.335" />
+        <PelletTemperature Radius="0.9375" Temperature="449.006" />
+        <PelletTemperature Radius="0.875" Temperature="501.388" />
+        <PelletTemperature Radius="0.8125" Temperature="553.341" />
+        <PelletTemperature Radius="0.75" Temperature="604.062" />
+        <PelletTemperature Radius="0.6875" Temperature="653.308" />
+        <PelletTemperature Radius="0.625" Temperature="700.411" />
+        <PelletTemperature Radius="0.5625" Temperature="745.056" />
+        <PelletTemperature Radius="0.5" Temperature="786.506" />
+        <PelletTemperature Radius="0.4375" Temperature="824.406" />
+        <PelletTemperature Radius="0.375" Temperature="858.36" />
+        <PelletTemperature Radius="0.3125" Temperature="887.982" />
+        <PelletTemperature Radius="0.25" Temperature="912.909" />
+        <PelletTemperature Radius="0.1875" Temperature="932.723" />
+        <PelletTemperature Radius="0.125" Temperature="947.149" />
+        <PelletTemperature Radius="0.0625" Temperature="956.108" />
+        <PelletTemperature Radius="0" Temperature="965.426" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="6" CladOutside="322.311" CladInside="399.613" h="19079.4" q="1070195.124" qc="3096021.091" DNBR="2.893">
+        <PelletTemperature Radius="1" Temperature="400.367" />
+        <PelletTemperature Radius="0.9375" Temperature="453.331" />
+        <PelletTemperature Radius="0.875" Temperature="505.981" />
+        <PelletTemperature Radius="0.8125" Temperature="558.171" />
+        <PelletTemperature Radius="0.75" Temperature="609.15" />
+        <PelletTemperature Radius="0.6875" Temperature="658.627" />
+        <PelletTemperature Radius="0.625" Temperature="705.972" />
+        <PelletTemperature Radius="0.5625" Temperature="750.82" />
+        <PelletTemperature Radius="0.5" Temperature="792.47" />
+        <PelletTemperature Radius="0.4375" Temperature="830.567" />
+        <PelletTemperature Radius="0.375" Temperature="864.703" />
+        <PelletTemperature Radius="0.3125" Temperature="894.493" />
+        <PelletTemperature Radius="0.25" Temperature="919.57" />
+        <PelletTemperature Radius="0.1875" Temperature="939.466" />
+        <PelletTemperature Radius="0.125" Temperature="953.954" />
+        <PelletTemperature Radius="0.0625" Temperature="962.952" />
+        <PelletTemperature Radius="0" Temperature="972.31" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="7" CladOutside="317.572" CladInside="382.603" h="19194.6" q="892777.566" qc="3095770.265" DNBR="3.468">
+        <PelletTemperature Radius="1" Temperature="383.232" />
+        <PelletTemperature Radius="0.9375" Temperature="426.382" />
+        <PelletTemperature Radius="0.875" Temperature="468.948" />
+        <PelletTemperature Radius="0.8125" Temperature="510.611" />
+        <PelletTemperature Radius="0.75" Temperature="551.114" />
+        <PelletTemperature Radius="0.6875" Temperature="589.955" />
+        <PelletTemperature Radius="0.625" Temperature="626.922" />
+        <PelletTemperature Radius="0.5625" Temperature="661.598" />
+        <PelletTemperature Radius="0.5" Temperature="693.676" />
+        <PelletTemperature Radius="0.4375" Temperature="722.9" />
+        <PelletTemperature Radius="0.375" Temperature="748.881" />
+        <PelletTemperature Radius="0.3125" Temperature="771.363" />
+        <PelletTemperature Radius="0.25" Temperature="790.137" />
+        <PelletTemperature Radius="0.1875" Temperature="805.018" />
+        <PelletTemperature Radius="0.125" Temperature="815.858" />
+        <PelletTemperature Radius="0.0625" Temperature="822.591" />
+        <PelletTemperature Radius="0" Temperature="829.594" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="8" CladOutside="313.745" CladInside="368.493" h="19290.6" q="746395.149" qc="3095620.306" DNBR="4.147">
+        <PelletTemperature Radius="1" Temperature="369.019" />
+        <PelletTemperature Radius="0.9375" Temperature="404.403" />
+        <PelletTemperature Radius="0.875" Temperature="439.117" />
+        <PelletTemperature Radius="0.8125" Temperature="472.742" />
+        <PelletTemperature Radius="0.75" Temperature="505.144" />
+        <PelletTemperature Radius="0.6875" Temperature="536.13" />
+        <PelletTemperature Radius="0.625" Temperature="565.327" />
+        <PelletTemperature Radius="0.5625" Temperature="592.564" />
+        <PelletTemperature Radius="0.5" Temperature="617.663" />
+        <PelletTemperature Radius="0.4375" Temperature="640.366" />
+        <PelletTemperature Radius="0.375" Temperature="660.476" />
+        <PelletTemperature Radius="0.3125" Temperature="677.839" />
+        <PelletTemperature Radius="0.25" Temperature="692.307" />
+        <PelletTemperature Radius="0.1875" Temperature="703.755" />
+        <PelletTemperature Radius="0.125" Temperature="712.076" />
+        <PelletTemperature Radius="0.0625" Temperature="717.231" />
+        <PelletTemperature Radius="0" Temperature="722.585" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="9" CladOutside="304.793" CladInside="342.711" h="19363.5" q="509545.295" qc="3095550.571" DNBR="6.075">
+        <PelletTemperature Radius="1" Temperature="343.07" />
+        <PelletTemperature Radius="0.9375" Temperature="366.411" />
+        <PelletTemperature Radius="0.875" Temperature="388.931" />
+        <PelletTemperature Radius="0.8125" Temperature="410.552" />
+        <PelletTemperature Radius="0.75" Temperature="431.125" />
+        <PelletTemperature Radius="0.6875" Temperature="450.503" />
+        <PelletTemperature Radius="0.625" Temperature="468.601" />
+        <PelletTemperature Radius="0.5625" Temperature="485.335" />
+        <PelletTemperature Radius="0.5" Temperature="500.619" />
+        <PelletTemperature Radius="0.4375" Temperature="514.365" />
+        <PelletTemperature Radius="0.375" Temperature="526.448" />
+        <PelletTemperature Radius="0.3125" Temperature="536.807" />
+        <PelletTemperature Radius="0.25" Temperature="545.384" />
+        <PelletTemperature Radius="0.1875" Temperature="552.132" />
+        <PelletTemperature Radius="0.125" Temperature="557.019" />
+        <PelletTemperature Radius="0.0625" Temperature="560.043" />
+        <PelletTemperature Radius="0" Temperature="563.179" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="10" CladOutside="302.551" CladInside="334.247" h="19429.9" q="424146.931" qc="3095564.002" DNBR="7.298">
+        <PelletTemperature Radius="1" Temperature="334.546" />
+        <PelletTemperature Radius="0.9375" Temperature="353.762" />
+        <PelletTemperature Radius="0.875" Temperature="372.194" />
+        <PelletTemperature Radius="0.8125" Temperature="389.784" />
+        <PelletTemperature Radius="0.75" Temperature="406.47" />
+        <PelletTemperature Radius="0.6875" Temperature="422.155" />
+        <PelletTemperature Radius="0.625" Temperature="436.733" />
+        <PelletTemperature Radius="0.5625" Temperature="450.149" />
+        <PelletTemperature Radius="0.5" Temperature="462.344" />
+        <PelletTemperature Radius="0.4375" Temperature="473.265" />
+        <PelletTemperature Radius="0.375" Temperature="482.859" />
+        <PelletTemperature Radius="0.3125" Temperature="491.08" />
+        <PelletTemperature Radius="0.25" Temperature="497.883" />
+        <PelletTemperature Radius="0.1875" Temperature="503.234" />
+        <PelletTemperature Radius="0.125" Temperature="507.104" />
+        <PelletTemperature Radius="0.0625" Temperature="509.496" />
+        <PelletTemperature Radius="0" Temperature="511.974" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="11" CladOutside="299.083" CladInside="323.178" h="19456" q="320489.559" qc="3095446.413" DNBR="9.658">
+        <PelletTemperature Radius="1" Temperature="323.404" />
+        <PelletTemperature Radius="0.9375" Temperature="337.719" />
+        <PelletTemperature Radius="0.875" Temperature="351.358" />
+        <PelletTemperature Radius="0.8125" Temperature="364.285" />
+        <PelletTemperature Radius="0.75" Temperature="376.463" />
+        <PelletTemperature Radius="0.6875" Temperature="387.853" />
+        <PelletTemperature Radius="0.625" Temperature="398.417" />
+        <PelletTemperature Radius="0.5625" Temperature="408.118" />
+        <PelletTemperature Radius="0.5" Temperature="416.899" />
+        <PelletTemperature Radius="0.4375" Temperature="424.726" />
+        <PelletTemperature Radius="0.375" Temperature="431.574" />
+        <PelletTemperature Radius="0.3125" Temperature="437.419" />
+        <PelletTemperature Radius="0.25" Temperature="442.24" />
+        <PelletTemperature Radius="0.1875" Temperature="446.021" />
+        <PelletTemperature Radius="0.125" Temperature="448.751" />
+        <PelletTemperature Radius="0.0625" Temperature="450.437" />
+        <PelletTemperature Radius="0" Temperature="452.184" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="12" CladOutside="296.187" CladInside="314.095" h="19503.4" q="236953.304" qc="3095331.394" DNBR="13.063">
+        <PelletTemperature Radius="1" Temperature="314.262" />
+        <PelletTemperature Radius="0.9375" Temperature="324.724" />
+        <PelletTemperature Radius="0.875" Temperature="334.642" />
+        <PelletTemperature Radius="0.8125" Temperature="343.994" />
+        <PelletTemperature Radius="0.75" Temperature="352.76" />
+        <PelletTemperature Radius="0.6875" Temperature="360.918" />
+        <PelletTemperature Radius="0.625" Temperature="368.448" />
+        <PelletTemperature Radius="0.5625" Temperature="375.332" />
+        <PelletTemperature Radius="0.5" Temperature="381.55" />
+        <PelletTemperature Radius="0.4375" Temperature="387.085" />
+        <PelletTemperature Radius="0.375" Temperature="391.921" />
+        <PelletTemperature Radius="0.3125" Temperature="396.044" />
+        <PelletTemperature Radius="0.25" Temperature="399.441" />
+        <PelletTemperature Radius="0.1875" Temperature="402.103" />
+        <PelletTemperature Radius="0.125" Temperature="404.024" />
+        <PelletTemperature Radius="0.0625" Temperature="405.208" />
+        <PelletTemperature Radius="0" Temperature="406.434" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="13" CladOutside="292.158" CladInside="302.606" h="19518.6" q="137227.05" qc="3095443.649" DNBR="22.557">
+        <PelletTemperature Radius="1" Temperature="302.702" />
+        <PelletTemperature Radius="0.9375" Temperature="308.675" />
+        <PelletTemperature Radius="0.875" Temperature="314.304" />
+        <PelletTemperature Radius="0.8125" Temperature="319.582" />
+        <PelletTemperature Radius="0.75" Temperature="324.502" />
+        <PelletTemperature Radius="0.6875" Temperature="329.057" />
+        <PelletTemperature Radius="0.625" Temperature="333.24" />
+        <PelletTemperature Radius="0.5625" Temperature="337.047" />
+        <PelletTemperature Radius="0.5" Temperature="340.47" />
+        <PelletTemperature Radius="0.4375" Temperature="343.505" />
+        <PelletTemperature Radius="0.375" Temperature="346.146" />
+        <PelletTemperature Radius="0.3125" Temperature="348.391" />
+        <PelletTemperature Radius="0.25" Temperature="350.236" />
+        <PelletTemperature Radius="0.1875" Temperature="351.678" />
+        <PelletTemperature Radius="0.125" Temperature="352.717" />
+        <PelletTemperature Radius="0.0625" Temperature="353.357" />
+        <PelletTemperature Radius="0" Temperature="354.02" />
+      </SubRodTemperature>
+    </RodTemperature>
+    <RodTemperature>
+      <SubRodTemperature Index="0" CladOutside="272.979" CladInside="320.666" h="18367.7" q="618116.565" qc="3077183.553" DNBR="4.978">
+        <PelletTemperature Radius="1" Temperature="321.102" />
+        <PelletTemperature Radius="0.9375" Temperature="348.629" />
+        <PelletTemperature Radius="0.875" Temperature="375.311" />
+        <PelletTemperature Radius="0.8125" Temperature="401.054" />
+        <PelletTemperature Radius="0.75" Temperature="425.747" />
+        <PelletTemperature Radius="0.6875" Temperature="449.109" />
+        <PelletTemperature Radius="0.625" Temperature="471.028" />
+        <PelletTemperature Radius="0.5625" Temperature="491.387" />
+        <PelletTemperature Radius="0.5" Temperature="510.066" />
+        <PelletTemperature Radius="0.4375" Temperature="526.898" />
+        <PelletTemperature Radius="0.375" Temperature="541.744" />
+        <PelletTemperature Radius="0.3125" Temperature="554.508" />
+        <PelletTemperature Radius="0.25" Temperature="565.105" />
+        <PelletTemperature Radius="0.1875" Temperature="573.463" />
+        <PelletTemperature Radius="0.125" Temperature="579.526" />
+        <PelletTemperature Radius="0.0625" Temperature="583.282" />
+        <PelletTemperature Radius="0" Temperature="587.182" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="1" CladOutside="290.678" CladInside="358.176" h="18386.1" q="899501.846" qc="3076573.684" DNBR="3.42">
+        <PelletTemperature Radius="1" Temperature="358.809" />
+        <PelletTemperature Radius="0.9375" Temperature="400.874" />
+        <PelletTemperature Radius="0.875" Temperature="442.544" />
+        <PelletTemperature Radius="0.8125" Temperature="483.229" />
+        <PelletTemperature Radius="0.75" Temperature="522.778" />
+        <PelletTemperature Radius="0.6875" Temperature="560.789" />
+        <PelletTemperature Radius="0.625" Temperature="596.888" />
+        <PelletTemperature Radius="0.5625" Temperature="630.848" />
+        <PelletTemperature Radius="0.5" Temperature="662.23" />
+        <PelletTemperature Radius="0.4375" Temperature="690.775" />
+        <PelletTemperature Radius="0.375" Temperature="716.231" />
+        <PelletTemperature Radius="0.3125" Temperature="738.278" />
+        <PelletTemperature Radius="0.25" Temperature="756.672" />
+        <PelletTemperature Radius="0.1875" Temperature="771.241" />
+        <PelletTemperature Radius="0.125" Temperature="781.848" />
+        <PelletTemperature Radius="0.0625" Temperature="788.436" />
+        <PelletTemperature Radius="0" Temperature="795.287" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="2" CladOutside="304.934" CladInside="385.759" h="18492.5" q="1099161.255" qc="3076324.579" DNBR="2.799">
+        <PelletTemperature Radius="1" Temperature="386.533" />
+        <PelletTemperature Radius="0.9375" Temperature="439.899" />
+        <PelletTemperature Radius="0.875" Temperature="493.129" />
+        <PelletTemperature Radius="0.8125" Temperature="545.961" />
+        <PelletTemperature Radius="0.75" Temperature="597.656" />
+        <PelletTemperature Radius="0.6875" Temperature="647.917" />
+        <PelletTemperature Radius="0.625" Temperature="696.045" />
+        <PelletTemperature Radius="0.5625" Temperature="741.702" />
+        <PelletTemperature Radius="0.5" Temperature="784.154" />
+        <PelletTemperature Radius="0.4375" Temperature="823.001" />
+        <PelletTemperature Radius="0.375" Temperature="857.831" />
+        <PelletTemperature Radius="0.3125" Temperature="888.241" />
+        <PelletTemperature Radius="0.25" Temperature="913.848" />
+        <PelletTemperature Radius="0.1875" Temperature="934.211" />
+        <PelletTemperature Radius="0.125" Temperature="949.041" />
+        <PelletTemperature Radius="0.0625" Temperature="958.254" />
+        <PelletTemperature Radius="0" Temperature="967.837" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="3" CladOutside="317.902" CladInside="409.082" h="18604.5" q="1261061.243" qc="3076220.64" DNBR="2.439">
+        <PelletTemperature Radius="1" Temperature="409.971" />
+        <PelletTemperature Radius="0.9375" Temperature="473.055" />
+        <PelletTemperature Radius="0.875" Temperature="536.573" />
+        <PelletTemperature Radius="0.8125" Temperature="600.005" />
+        <PelletTemperature Radius="0.75" Temperature="662.839" />
+        <PelletTemperature Radius="0.6875" Temperature="724.184" />
+        <PelletTemperature Radius="0.625" Temperature="783.458" />
+        <PelletTemperature Radius="0.5625" Temperature="839.846" />
+        <PelletTemperature Radius="0.5" Temperature="892.83" />
+        <PelletTemperature Radius="0.4375" Temperature="941.872" />
+        <PelletTemperature Radius="0.375" Temperature="985.812" />
+        <PelletTemperature Radius="0.3125" Temperature="1024.086" />
+        <PelletTemperature Radius="0.25" Temperature="1056.245" />
+        <PelletTemperature Radius="0.1875" Temperature="1081.876" />
+        <PelletTemperature Radius="0.125" Temperature="1100.635" />
+        <PelletTemperature Radius="0.0625" Temperature="1112.331" />
+        <PelletTemperature Radius="0" Temperature="1124.515" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="4" CladOutside="315.398" CladInside="396.765" h="18757.4" q="1119334.097" qc="3076536.843" DNBR="2.749">
+        <PelletTemperature Radius="1" Temperature="397.553" />
+        <PelletTemperature Radius="0.9375" Temperature="452.737" />
+        <PelletTemperature Radius="0.875" Temperature="507.765" />
+        <PelletTemperature Radius="0.8125" Temperature="562.449" />
+        <PelletTemperature Radius="0.75" Temperature="616.01" />
+        <PelletTemperature Radius="0.6875" Temperature="668.089" />
+        <PelletTemperature Radius="0.625" Temperature="718.066" />
+        <PelletTemperature Radius="0.5625" Temperature="765.437" />
+        <PelletTemperature Radius="0.5" Temperature="809.542" />
+        <PelletTemperature Radius="0.4375" Temperature="849.979" />
+        <PelletTemperature Radius="0.375" Temperature="886.294" />
+        <PelletTemperature Radius="0.3125" Temperature="918.067" />
+        <PelletTemperature Radius="0.25" Temperature="944.725" />
+        <PelletTemperature Radius="0.1875" Temperature="965.867" />
+        <PelletTemperature Radius="0.125" Temperature="981.277" />
+        <PelletTemperature Radius="0.0625" Temperature="990.855" />
+        <PelletTemperature Radius="0" Temperature="1000.821" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="5" CladOutside="317.274" CladInside="394.988" h="18871.4" q="1070195.124" qc="3076390.77" DNBR="2.875">
+        <PelletTemperature Radius="1" Temperature="395.741" />
+        <PelletTemperature Radius="0.9375" Temperature="448.369" />
+        <PelletTemperature Radius="0.875" Temperature="500.712" />
+        <PelletTemperature Radius="0.8125" Temperature="552.63" />
+        <PelletTemperature Radius="0.75" Temperature="603.314" />
+        <PelletTemperature Radius="0.6875" Temperature="652.525" />
+        <PelletTemperature Radius="0.625" Temperature="699.593" />
+        <PelletTemperature Radius="0.5625" Temperature="744.205" />
+        <PelletTemperature Radius="0.5" Temperature="785.625" />
+        <PelletTemperature Radius="0.4375" Temperature="823.496" />
+        <PelletTemperature Radius="0.375" Temperature="857.424" />
+        <PelletTemperature Radius="0.3125" Temperature="887.021" />
+        <PelletTemperature Radius="0.25" Temperature="911.926" />
+        <PelletTemperature Radius="0.1875" Temperature="931.728" />
+        <PelletTemperature Radius="0.125" Temperature="946.145" />
+        <PelletTemperature Radius="0.0625" Temperature="955.099" />
+        <PelletTemperature Radius="0" Temperature="964.41" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="6" CladOutside="321.445" CladInside="398.817" h="18992.3" q="1070195.124" qc="3076534.066" DNBR="2.875">
+        <PelletTemperature Radius="1" Temperature="399.571" />
+        <PelletTemperature Radius="0.9375" Temperature="452.482" />
+        <PelletTemperature Radius="0.875" Temperature="505.079" />
+        <PelletTemperature Radius="0.8125" Temperature="557.222" />
+        <PelletTemperature Radius="0.75" Temperature="608.15" />
+        <PelletTemperature Radius="0.6875" Temperature="657.582" />
+        <PelletTemperature Radius="0.625" Temperature="704.879" />
+        <PelletTemperature Radius="0.5625" Temperature="749.687" />
+        <PelletTemperature Radius="0.5" Temperature="791.297" />
+        <PelletTemperature Radius="0.4375" Temperature="829.356" />
+        <PelletTemperature Radius="0.375" Temperature="863.456" />
+        <PelletTemperature Radius="0.3125" Temperature="893.213" />
+        <PelletTemperature Radius="0.25" Temperature="918.259" />
+        <PelletTemperature Radius="0.1875" Temperature="938.14" />
+        <PelletTemperature Radius="0.125" Temperature="952.615" />
+        <PelletTemperature Radius="0.0625" Temperature="961.606" />
+        <PelletTemperature Radius="0" Temperature="970.956" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="7" CladOutside="316.536" CladInside="381.639" h="19087.8" q="892777.566" qc="3076443.112" DNBR="3.446">
+        <PelletTemperature Radius="1" Temperature="382.268" />
+        <PelletTemperature Radius="0.9375" Temperature="425.361" />
+        <PelletTemperature Radius="0.875" Temperature="467.877" />
+        <PelletTemperature Radius="0.8125" Temperature="509.487" />
+        <PelletTemperature Radius="0.75" Temperature="549.944" />
+        <PelletTemperature Radius="0.6875" Temperature="588.738" />
+        <PelletTemperature Radius="0.625" Temperature="625.656" />
+        <PelletTemperature Radius="0.5625" Temperature="660.291" />
+        <PelletTemperature Radius="0.5" Temperature="692.328" />
+        <PelletTemperature Radius="0.4375" Temperature="721.512" />
+        <PelletTemperature Radius="0.375" Temperature="747.464" />
+        <PelletTemperature Radius="0.3125" Temperature="769.92" />
+        <PelletTemperature Radius="0.25" Temperature="788.671" />
+        <PelletTemperature Radius="0.1875" Temperature="803.533" />
+        <PelletTemperature Radius="0.125" Temperature="814.359" />
+        <PelletTemperature Radius="0.0625" Temperature="821.083" />
+        <PelletTemperature Radius="0" Temperature="828.077" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="8" CladOutside="312.521" CladInside="367.34" h="19185.6" q="746395.149" qc="3076576.359" DNBR="4.122">
+        <PelletTemperature Radius="1" Temperature="367.866" />
+        <PelletTemperature Radius="0.9375" Temperature="403.196" />
+        <PelletTemperature Radius="0.875" Temperature="437.863" />
+        <PelletTemperature Radius="0.8125" Temperature="471.439" />
+        <PelletTemperature Radius="0.75" Temperature="503.79" />
+        <PelletTemperature Radius="0.6875" Temperature="534.734" />
+        <PelletTemperature Radius="0.625" Temperature="563.889" />
+        <PelletTemperature Radius="0.5625" Temperature="591.085" />
+        <PelletTemperature Radius="0.5" Temperature="616.144" />
+        <PelletTemperature Radius="0.4375" Temperature="638.815" />
+        <PelletTemperature Radius="0.375" Temperature="658.895" />
+        <PelletTemperature Radius="0.3125" Temperature="676.231" />
+        <PelletTemperature Radius="0.25" Temperature="690.677" />
+        <PelletTemperature Radius="0.1875" Temperature="702.106" />
+        <PelletTemperature Radius="0.125" Temperature="710.415" />
+        <PelletTemperature Radius="0.0625" Temperature="715.564" />
+        <PelletTemperature Radius="0" Temperature="720.91" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="9" CladOutside="303.363" CladInside="341.341" h="19275.3" q="509545.295" qc="3076791.89" DNBR="6.038">
+        <PelletTemperature Radius="1" Temperature="341.7" />
+        <PelletTemperature Radius="0.9375" Temperature="364.999" />
+        <PelletTemperature Radius="0.875" Temperature="387.476" />
+        <PelletTemperature Radius="0.8125" Temperature="409.054" />
+        <PelletTemperature Radius="0.75" Temperature="429.593" />
+        <PelletTemperature Radius="0.6875" Temperature="448.936" />
+        <PelletTemperature Radius="0.625" Temperature="467.001" />
+        <PelletTemperature Radius="0.5625" Temperature="483.703" />
+        <PelletTemperature Radius="0.5" Temperature="498.956" />
+        <PelletTemperature Radius="0.4375" Temperature="512.676" />
+        <PelletTemperature Radius="0.375" Temperature="524.739" />
+        <PelletTemperature Radius="0.3125" Temperature="535.079" />
+        <PelletTemperature Radius="0.25" Temperature="543.641" />
+        <PelletTemperature Radius="0.1875" Temperature="550.377" />
+        <PelletTemperature Radius="0.125" Temperature="555.255" />
+        <PelletTemperature Radius="0.0625" Temperature="558.273" />
+        <PelletTemperature Radius="0" Temperature="561.403" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="10" CladOutside="301.04" CladInside="332.789" h="19325.7" q="424146.931" qc="3076821.371" DNBR="7.254">
+        <PelletTemperature Radius="1" Temperature="333.088" />
+        <PelletTemperature Radius="0.9375" Temperature="352.268" />
+        <PelletTemperature Radius="0.875" Temperature="370.665" />
+        <PelletTemperature Radius="0.8125" Temperature="388.219" />
+        <PelletTemperature Radius="0.75" Temperature="404.868" />
+        <PelletTemperature Radius="0.6875" Temperature="420.524" />
+        <PelletTemperature Radius="0.625" Temperature="435.076" />
+        <PelletTemperature Radius="0.5625" Temperature="448.466" />
+        <PelletTemperature Radius="0.5" Temperature="460.637" />
+        <PelletTemperature Radius="0.4375" Temperature="471.536" />
+        <PelletTemperature Radius="0.375" Temperature="481.11" />
+        <PelletTemperature Radius="0.3125" Temperature="489.313" />
+        <PelletTemperature Radius="0.25" Temperature="496.102" />
+        <PelletTemperature Radius="0.1875" Temperature="501.441" />
+        <PelletTemperature Radius="0.125" Temperature="505.304" />
+        <PelletTemperature Radius="0.0625" Temperature="507.691" />
+        <PelletTemperature Radius="0" Temperature="510.165" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="11" CladOutside="297.469" CladInside="321.612" h="19365.6" q="320489.559" qc="3076851.48" DNBR="9.6">
+        <PelletTemperature Radius="1" Temperature="321.837" />
+        <PelletTemperature Radius="0.9375" Temperature="336.124" />
+        <PelletTemperature Radius="0.875" Temperature="349.735" />
+        <PelletTemperature Radius="0.8125" Temperature="362.634" />
+        <PelletTemperature Radius="0.75" Temperature="374.785" />
+        <PelletTemperature Radius="0.6875" Temperature="386.149" />
+        <PelletTemperature Radius="0.625" Temperature="396.689" />
+        <PelletTemperature Radius="0.5625" Temperature="406.367" />
+        <PelletTemperature Radius="0.5" Temperature="415.13" />
+        <PelletTemperature Radius="0.4375" Temperature="422.942" />
+        <PelletTemperature Radius="0.375" Temperature="429.776" />
+        <PelletTemperature Radius="0.3125" Temperature="435.608" />
+        <PelletTemperature Radius="0.25" Temperature="440.419" />
+        <PelletTemperature Radius="0.1875" Temperature="444.192" />
+        <PelletTemperature Radius="0.125" Temperature="446.917" />
+        <PelletTemperature Radius="0.0625" Temperature="448.599" />
+        <PelletTemperature Radius="0" Temperature="450.342" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="12" CladOutside="294.519" CladInside="312.464" h="19391.1" q="236953.304" qc="3076816.435" DNBR="12.985">
+        <PelletTemperature Radius="1" Temperature="312.631" />
+        <PelletTemperature Radius="0.9375" Temperature="323.072" />
+        <PelletTemperature Radius="0.875" Temperature="332.969" />
+        <PelletTemperature Radius="0.8125" Temperature="342.301" />
+        <PelletTemperature Radius="0.75" Temperature="351.047" />
+        <PelletTemperature Radius="0.6875" Temperature="359.187" />
+        <PelletTemperature Radius="0.625" Temperature="366.7" />
+        <PelletTemperature Radius="0.5625" Temperature="373.568" />
+        <PelletTemperature Radius="0.5" Temperature="379.771" />
+        <PelletTemperature Radius="0.4375" Temperature="385.292" />
+        <PelletTemperature Radius="0.375" Temperature="390.116" />
+        <PelletTemperature Radius="0.3125" Temperature="394.229" />
+        <PelletTemperature Radius="0.25" Temperature="397.617" />
+        <PelletTemperature Radius="0.1875" Temperature="400.273" />
+        <PelletTemperature Radius="0.125" Temperature="402.189" />
+        <PelletTemperature Radius="0.0625" Temperature="403.371" />
+        <PelletTemperature Radius="0" Temperature="404.595" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="13" CladOutside="290.419" CladInside="300.891" h="19427" q="137227.05" qc="3077024.497" DNBR="22.423">
+        <PelletTemperature Radius="1" Temperature="300.988" />
+        <PelletTemperature Radius="0.9375" Temperature="306.947" />
+        <PelletTemperature Radius="0.875" Temperature="312.564" />
+        <PelletTemperature Radius="0.8125" Temperature="317.831" />
+        <PelletTemperature Radius="0.75" Temperature="322.74" />
+        <PelletTemperature Radius="0.6875" Temperature="327.285" />
+        <PelletTemperature Radius="0.625" Temperature="331.459" />
+        <PelletTemperature Radius="0.5625" Temperature="335.257" />
+        <PelletTemperature Radius="0.5" Temperature="338.672" />
+        <PelletTemperature Radius="0.4375" Temperature="341.7" />
+        <PelletTemperature Radius="0.375" Temperature="344.335" />
+        <PelletTemperature Radius="0.3125" Temperature="346.575" />
+        <PelletTemperature Radius="0.25" Temperature="348.415" />
+        <PelletTemperature Radius="0.1875" Temperature="349.854" />
+        <PelletTemperature Radius="0.125" Temperature="350.891" />
+        <PelletTemperature Radius="0.0625" Temperature="351.529" />
+        <PelletTemperature Radius="0" Temperature="352.19" />
+      </SubRodTemperature>
+    </RodTemperature>
+    <RodTemperature>
+      <SubRodTemperature Index="0" CladOutside="272.844" CladInside="320.539" h="18443.4" q="618116.565" qc="3077183.553" DNBR="4.978">
+        <PelletTemperature Radius="1" Temperature="320.975" />
+        <PelletTemperature Radius="0.9375" Temperature="348.498" />
+        <PelletTemperature Radius="0.875" Temperature="375.175" />
+        <PelletTemperature Radius="0.8125" Temperature="400.913" />
+        <PelletTemperature Radius="0.75" Temperature="425.603" />
+        <PelletTemperature Radius="0.6875" Temperature="448.961" />
+        <PelletTemperature Radius="0.625" Temperature="470.876" />
+        <PelletTemperature Radius="0.5625" Temperature="491.231" />
+        <PelletTemperature Radius="0.5" Temperature="509.907" />
+        <PelletTemperature Radius="0.4375" Temperature="526.736" />
+        <PelletTemperature Radius="0.375" Temperature="541.579" />
+        <PelletTemperature Radius="0.3125" Temperature="554.341" />
+        <PelletTemperature Radius="0.25" Temperature="564.936" />
+        <PelletTemperature Radius="0.1875" Temperature="573.293" />
+        <PelletTemperature Radius="0.125" Temperature="579.355" />
+        <PelletTemperature Radius="0.0625" Temperature="583.11" />
+        <PelletTemperature Radius="0" Temperature="587.009" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="1" CladOutside="290.8" CladInside="358.288" h="18366.1" q="899501.846" qc="3069972.043" DNBR="3.413">
+        <PelletTemperature Radius="1" Temperature="358.922" />
+        <PelletTemperature Radius="0.9375" Temperature="400.993" />
+        <PelletTemperature Radius="0.875" Temperature="442.668" />
+        <PelletTemperature Radius="0.8125" Temperature="483.358" />
+        <PelletTemperature Radius="0.75" Temperature="522.915" />
+        <PelletTemperature Radius="0.6875" Temperature="560.93" />
+        <PelletTemperature Radius="0.625" Temperature="597.035" />
+        <PelletTemperature Radius="0.5625" Temperature="631" />
+        <PelletTemperature Radius="0.5" Temperature="662.387" />
+        <PelletTemperature Radius="0.4375" Temperature="690.936" />
+        <PelletTemperature Radius="0.375" Temperature="716.396" />
+        <PelletTemperature Radius="0.3125" Temperature="738.446" />
+        <PelletTemperature Radius="0.25" Temperature="756.843" />
+        <PelletTemperature Radius="0.1875" Temperature="771.414" />
+        <PelletTemperature Radius="0.125" Temperature="782.023" />
+        <PelletTemperature Radius="0.0625" Temperature="788.611" />
+        <PelletTemperature Radius="0" Temperature="795.464" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="2" CladOutside="305.192" CladInside="385.995" h="18472.5" q="1099161.255" qc="3069648.751" DNBR="2.793">
+        <PelletTemperature Radius="1" Temperature="386.769" />
+        <PelletTemperature Radius="0.9375" Temperature="440.153" />
+        <PelletTemperature Radius="0.875" Temperature="493.399" />
+        <PelletTemperature Radius="0.8125" Temperature="546.248" />
+        <PelletTemperature Radius="0.75" Temperature="597.959" />
+        <PelletTemperature Radius="0.6875" Temperature="648.236" />
+        <PelletTemperature Radius="0.625" Temperature="696.379" />
+        <PelletTemperature Radius="0.5625" Temperature="742.051" />
+        <PelletTemperature Radius="0.5" Temperature="784.515" />
+        <PelletTemperature Radius="0.4375" Temperature="823.374" />
+        <PelletTemperature Radius="0.375" Temperature="858.216" />
+        <PelletTemperature Radius="0.3125" Temperature="888.636" />
+        <PelletTemperature Radius="0.25" Temperature="914.253" />
+        <PelletTemperature Radius="0.1875" Temperature="934.62" />
+        <PelletTemperature Radius="0.125" Temperature="949.454" />
+        <PelletTemperature Radius="0.0625" Temperature="958.67" />
+        <PelletTemperature Radius="0" Temperature="968.255" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="3" CladOutside="318.297" CladInside="409.44" h="18590.7" q="1261061.243" qc="3069585.423" DNBR="2.434">
+        <PelletTemperature Radius="1" Temperature="410.328" />
+        <PelletTemperature Radius="0.9375" Temperature="473.437" />
+        <PelletTemperature Radius="0.875" Temperature="536.986" />
+        <PelletTemperature Radius="0.8125" Temperature="600.444" />
+        <PelletTemperature Radius="0.75" Temperature="663.304" />
+        <PelletTemperature Radius="0.6875" Temperature="724.676" />
+        <PelletTemperature Radius="0.625" Temperature="783.974" />
+        <PelletTemperature Radius="0.5625" Temperature="840.387" />
+        <PelletTemperature Radius="0.5" Temperature="893.397" />
+        <PelletTemperature Radius="0.4375" Temperature="942.464" />
+        <PelletTemperature Radius="0.375" Temperature="986.421" />
+        <PelletTemperature Radius="0.3125" Temperature="1024.709" />
+        <PelletTemperature Radius="0.25" Temperature="1056.882" />
+        <PelletTemperature Radius="0.1875" Temperature="1082.524" />
+        <PelletTemperature Radius="0.125" Temperature="1101.291" />
+        <PelletTemperature Radius="0.0625" Temperature="1112.993" />
+        <PelletTemperature Radius="0" Temperature="1125.182" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="4" CladOutside="315.966" CladInside="397.284" h="18740.5" q="1119334.097" qc="3069724.043" DNBR="2.742">
+        <PelletTemperature Radius="1" Temperature="398.072" />
+        <PelletTemperature Radius="0.9375" Temperature="453.296" />
+        <PelletTemperature Radius="0.875" Temperature="508.361" />
+        <PelletTemperature Radius="0.8125" Temperature="563.077" />
+        <PelletTemperature Radius="0.75" Temperature="616.673" />
+        <PelletTemperature Radius="0.6875" Temperature="668.785" />
+        <PelletTemperature Radius="0.625" Temperature="718.796" />
+        <PelletTemperature Radius="0.5625" Temperature="766.195" />
+        <PelletTemperature Radius="0.5" Temperature="810.328" />
+        <PelletTemperature Radius="0.4375" Temperature="850.792" />
+        <PelletTemperature Radius="0.375" Temperature="887.134" />
+        <PelletTemperature Radius="0.3125" Temperature="918.931" />
+        <PelletTemperature Radius="0.25" Temperature="945.603" />
+        <PelletTemperature Radius="0.1875" Temperature="966.757" />
+        <PelletTemperature Radius="0.125" Temperature="982.175" />
+        <PelletTemperature Radius="0.0625" Temperature="991.759" />
+        <PelletTemperature Radius="0" Temperature="1001.732" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="5" CladOutside="317.983" CladInside="395.638" h="18855.4" q="1070195.124" qc="3069327.857" DNBR="2.868">
+        <PelletTemperature Radius="1" Temperature="396.392" />
+        <PelletTemperature Radius="0.9375" Temperature="449.068" />
+        <PelletTemperature Radius="0.875" Temperature="501.454" />
+        <PelletTemperature Radius="0.8125" Temperature="553.409" />
+        <PelletTemperature Radius="0.75" Temperature="604.135" />
+        <PelletTemperature Radius="0.6875" Temperature="653.384" />
+        <PelletTemperature Radius="0.625" Temperature="700.49" />
+        <PelletTemperature Radius="0.5625" Temperature="745.138" />
+        <PelletTemperature Radius="0.5" Temperature="786.591" />
+        <PelletTemperature Radius="0.4375" Temperature="824.494" />
+        <PelletTemperature Radius="0.375" Temperature="858.45" />
+        <PelletTemperature Radius="0.3125" Temperature="888.075" />
+        <PelletTemperature Radius="0.25" Temperature="913.004" />
+        <PelletTemperature Radius="0.1875" Temperature="932.819" />
+        <PelletTemperature Radius="0.125" Temperature="947.246" />
+        <PelletTemperature Radius="0.0625" Temperature="956.206" />
+        <PelletTemperature Radius="0" Temperature="965.524" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="6" CladOutside="322.305" CladInside="399.608" h="18971.3" q="1070195.124" qc="3069132.1" DNBR="2.868">
+        <PelletTemperature Radius="1" Temperature="400.362" />
+        <PelletTemperature Radius="0.9375" Temperature="453.326" />
+        <PelletTemperature Radius="0.875" Temperature="505.975" />
+        <PelletTemperature Radius="0.8125" Temperature="558.165" />
+        <PelletTemperature Radius="0.75" Temperature="609.143" />
+        <PelletTemperature Radius="0.6875" Temperature="658.62" />
+        <PelletTemperature Radius="0.625" Temperature="705.965" />
+        <PelletTemperature Radius="0.5625" Temperature="750.812" />
+        <PelletTemperature Radius="0.5" Temperature="792.462" />
+        <PelletTemperature Radius="0.4375" Temperature="830.559" />
+        <PelletTemperature Radius="0.375" Temperature="864.695" />
+        <PelletTemperature Radius="0.3125" Temperature="894.485" />
+        <PelletTemperature Radius="0.25" Temperature="919.561" />
+        <PelletTemperature Radius="0.1875" Temperature="939.457" />
+        <PelletTemperature Radius="0.125" Temperature="953.945" />
+        <PelletTemperature Radius="0.0625" Temperature="962.943" />
+        <PelletTemperature Radius="0" Temperature="972.301" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="7" CladOutside="317.502" CladInside="382.538" h="19074.7" q="892777.566" qc="3068838.844" DNBR="3.437">
+        <PelletTemperature Radius="1" Temperature="383.167" />
+        <PelletTemperature Radius="0.9375" Temperature="426.313" />
+        <PelletTemperature Radius="0.875" Temperature="468.876" />
+        <PelletTemperature Radius="0.8125" Temperature="510.535" />
+        <PelletTemperature Radius="0.75" Temperature="551.035" />
+        <PelletTemperature Radius="0.6875" Temperature="589.873" />
+        <PelletTemperature Radius="0.625" Temperature="626.836" />
+        <PelletTemperature Radius="0.5625" Temperature="661.51" />
+        <PelletTemperature Radius="0.5" Temperature="693.585" />
+        <PelletTemperature Radius="0.4375" Temperature="722.806" />
+        <PelletTemperature Radius="0.375" Temperature="748.786" />
+        <PelletTemperature Radius="0.3125" Temperature="771.266" />
+        <PelletTemperature Radius="0.25" Temperature="790.038" />
+        <PelletTemperature Radius="0.1875" Temperature="804.918" />
+        <PelletTemperature Radius="0.125" Temperature="815.757" />
+        <PelletTemperature Radius="0.0625" Temperature="822.489" />
+        <PelletTemperature Radius="0" Temperature="829.492" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="8" CladOutside="313.6" CladInside="368.356" h="19168.3" q="746395.149" qc="3068795.417" DNBR="4.111">
+        <PelletTemperature Radius="1" Temperature="368.882" />
+        <PelletTemperature Radius="0.9375" Temperature="404.26" />
+        <PelletTemperature Radius="0.875" Temperature="438.968" />
+        <PelletTemperature Radius="0.8125" Temperature="472.587" />
+        <PelletTemperature Radius="0.75" Temperature="504.983" />
+        <PelletTemperature Radius="0.6875" Temperature="535.964" />
+        <PelletTemperature Radius="0.625" Temperature="565.156" />
+        <PelletTemperature Radius="0.5625" Temperature="592.388" />
+        <PelletTemperature Radius="0.5" Temperature="617.483" />
+        <PelletTemperature Radius="0.4375" Temperature="640.182" />
+        <PelletTemperature Radius="0.375" Temperature="660.289" />
+        <PelletTemperature Radius="0.3125" Temperature="677.648" />
+        <PelletTemperature Radius="0.25" Temperature="692.114" />
+        <PelletTemperature Radius="0.1875" Temperature="703.559" />
+        <PelletTemperature Radius="0.125" Temperature="711.878" />
+        <PelletTemperature Radius="0.0625" Temperature="717.033" />
+        <PelletTemperature Radius="0" Temperature="722.386" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="9" CladOutside="304.53" CladInside="342.459" h="19251.7" q="509545.295" qc="3068785.057" DNBR="6.023">
+        <PelletTemperature Radius="1" Temperature="342.818" />
+        <PelletTemperature Radius="0.9375" Temperature="366.151" />
+        <PelletTemperature Radius="0.875" Temperature="388.663" />
+        <PelletTemperature Radius="0.8125" Temperature="410.276" />
+        <PelletTemperature Radius="0.75" Temperature="430.843" />
+        <PelletTemperature Radius="0.6875" Temperature="450.215" />
+        <PelletTemperature Radius="0.625" Temperature="468.307" />
+        <PelletTemperature Radius="0.5625" Temperature="485.035" />
+        <PelletTemperature Radius="0.5" Temperature="500.313" />
+        <PelletTemperature Radius="0.4375" Temperature="514.055" />
+        <PelletTemperature Radius="0.375" Temperature="526.134" />
+        <PelletTemperature Radius="0.3125" Temperature="536.489" />
+        <PelletTemperature Radius="0.25" Temperature="545.064" />
+        <PelletTemperature Radius="0.1875" Temperature="551.81" />
+        <PelletTemperature Radius="0.125" Temperature="556.696" />
+        <PelletTemperature Radius="0.0625" Temperature="559.718" />
+        <PelletTemperature Radius="0" Temperature="562.853" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="10" CladOutside="302.264" CladInside="333.97" h="19300.7" q="424146.931" qc="3068653.96" DNBR="7.235">
+        <PelletTemperature Radius="1" Temperature="334.269" />
+        <PelletTemperature Radius="0.9375" Temperature="353.478" />
+        <PelletTemperature Radius="0.875" Temperature="371.904" />
+        <PelletTemperature Radius="0.8125" Temperature="389.487" />
+        <PelletTemperature Radius="0.75" Temperature="406.166" />
+        <PelletTemperature Radius="0.6875" Temperature="421.845" />
+        <PelletTemperature Radius="0.625" Temperature="436.419" />
+        <PelletTemperature Radius="0.5625" Temperature="449.829" />
+        <PelletTemperature Radius="0.5" Temperature="462.02" />
+        <PelletTemperature Radius="0.4375" Temperature="472.937" />
+        <PelletTemperature Radius="0.375" Temperature="482.528" />
+        <PelletTemperature Radius="0.3125" Temperature="490.744" />
+        <PelletTemperature Radius="0.25" Temperature="497.545" />
+        <PelletTemperature Radius="0.1875" Temperature="502.894" />
+        <PelletTemperature Radius="0.125" Temperature="506.763" />
+        <PelletTemperature Radius="0.0625" Temperature="509.153" />
+        <PelletTemperature Radius="0" Temperature="511.631" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="11" CladOutside="298.733" CladInside="322.838" h="19344.1" q="320489.559" qc="3068622.558" DNBR="9.575">
+        <PelletTemperature Radius="1" Temperature="323.064" />
+        <PelletTemperature Radius="0.9375" Temperature="337.373" />
+        <PelletTemperature Radius="0.875" Temperature="351.006" />
+        <PelletTemperature Radius="0.8125" Temperature="363.927" />
+        <PelletTemperature Radius="0.75" Temperature="376.099" />
+        <PelletTemperature Radius="0.6875" Temperature="387.483" />
+        <PelletTemperature Radius="0.625" Temperature="398.042" />
+        <PelletTemperature Radius="0.5625" Temperature="407.738" />
+        <PelletTemperature Radius="0.5" Temperature="416.515" />
+        <PelletTemperature Radius="0.4375" Temperature="424.339" />
+        <PelletTemperature Radius="0.375" Temperature="431.184" />
+        <PelletTemperature Radius="0.3125" Temperature="437.026" />
+        <PelletTemperature Radius="0.25" Temperature="441.844" />
+        <PelletTemperature Radius="0.1875" Temperature="445.624" />
+        <PelletTemperature Radius="0.125" Temperature="448.353" />
+        <PelletTemperature Radius="0.0625" Temperature="450.038" />
+        <PelletTemperature Radius="0" Temperature="451.785" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="12" CladOutside="295.813" CladInside="313.73" h="19373" q="236953.304" qc="3068557.594" DNBR="12.95">
+        <PelletTemperature Radius="1" Temperature="313.896" />
+        <PelletTemperature Radius="0.9375" Temperature="324.354" />
+        <PelletTemperature Radius="0.875" Temperature="334.267" />
+        <PelletTemperature Radius="0.8125" Temperature="343.615" />
+        <PelletTemperature Radius="0.75" Temperature="352.376" />
+        <PelletTemperature Radius="0.6875" Temperature="360.53" />
+        <PelletTemperature Radius="0.625" Temperature="368.057" />
+        <PelletTemperature Radius="0.5625" Temperature="374.937" />
+        <PelletTemperature Radius="0.5" Temperature="381.151" />
+        <PelletTemperature Radius="0.4375" Temperature="386.683" />
+        <PelletTemperature Radius="0.375" Temperature="391.517" />
+        <PelletTemperature Radius="0.3125" Temperature="395.637" />
+        <PelletTemperature Radius="0.25" Temperature="399.032" />
+        <PelletTemperature Radius="0.1875" Temperature="401.693" />
+        <PelletTemperature Radius="0.125" Temperature="403.612" />
+        <PelletTemperature Radius="0.0625" Temperature="404.796" />
+        <PelletTemperature Radius="0" Temperature="406.022" />
+      </SubRodTemperature>
+      <SubRodTemperature Index="13" CladOutside="291.737" CladInside="302.19" h="19405.1" q="137227.05" qc="3068685.558" DNBR="22.362">
+        <PelletTemperature Radius="1" Temperature="302.287" />
+        <PelletTemperature Radius="0.9375" Temperature="308.256" />
+        <PelletTemperature Radius="0.875" Temperature="313.882" />
+        <PelletTemperature Radius="0.8125" Temperature="319.158" />
+        <PelletTemperature Radius="0.75" Temperature="324.075" />
+        <PelletTemperature Radius="0.6875" Temperature="328.628" />
+        <PelletTemperature Radius="0.625" Temperature="332.809" />
+        <PelletTemperature Radius="0.5625" Temperature="336.613" />
+        <PelletTemperature Radius="0.5" Temperature="340.034" />
+        <PelletTemperature Radius="0.4375" Temperature="343.067" />
+        <PelletTemperature Radius="0.375" Temperature="345.708" />
+        <PelletTemperature Radius="0.3125" Temperature="347.951" />
+        <PelletTemperature Radius="0.25" Temperature="349.795" />
+        <PelletTemperature Radius="0.1875" Temperature="351.236" />
+        <PelletTemperature Radius="0.125" Temperature="352.275" />
+        <PelletTemperature Radius="0.0625" Temperature="352.915" />
+        <PelletTemperature Radius="0" Temperature="353.577" />
+      </SubRodTemperature>
+    </RodTemperature>
+  </RodsTemperature>
+</CobraOutput>

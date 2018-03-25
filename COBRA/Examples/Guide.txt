@@ -1,0 +1,79 @@
+﻿用例指导-概览。
+----------------------------------------------------------------
+*说明：简单示例
+E01：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+E02：稳态；水物性模型；自定义材料模型；5子通道4燃料棒；堆芯分析；
+E03：稳态；自定义流体模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+----------------------------------------------------------------
+*说明：以AP1000为原型分析
+E04：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+E05：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+E06：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+----------------------------------------------------------------
+E07：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+E08：稳态；水物性模型；默认材料模型；5子通道4燃料棒；堆芯分析；
+E09：
+E10：
+E11：
+E12：
+E13：
+E14：
+E15：
+
+
+
+
+
+
+
+            //确定燃料棒的材料
+            foreach (Material item in InputData.MaterialCollection.Materials)
+            {
+                if (item.Index == InputData.Rods.Rods[0].CladMaterialIndex)
+                {
+                    Clad = item;
+                    if (Clad.Type == "GetPropertyByName")
+                    {
+                        switch (item.Name)
+                        {
+                            case "UO2":
+                                Clad = KernelMaterial.UO2;
+                                break;
+                            case "Zr4":
+                                Clad = KernelMaterial.Zr4;
+                                break;
+                            case "Zr2":
+                                Clad = KernelMaterial.Zr2;
+                                break;
+                            case "Steel":
+                            //Clad = KernelMaterial.Steel;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+                if (item.Index == InputData.RodCollection.Rods[0].PelletMaterialIndex)
+                {
+                    Pellet = item;
+                    if (Pellet.Type == "GetPropertyByName")
+                    {
+                        switch (item.Name)
+                        {
+                            case "UO2":
+                                Pellet = KernelMaterial.UO2;
+                                break;
+                            case "Zr4":
+                                Pellet = KernelMaterial.Zr4;
+                                break;
+                            case "Zr2":
+                                Pellet = KernelMaterial.Zr2;
+                                break;
+                            case "Steel":
+                            //Pellet = KernelMaterial.Steel;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }

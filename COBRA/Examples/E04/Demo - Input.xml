@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+       xmlns="http://songshizhao.com/MyXMLSchema.xsd"      
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      
+       xsi:schemaLocation="http://songshizhao.com/MyXMLSchema.xsd ../MyXMLSchema.xsd">
+  
+  <Title Value="输入文件示例01:xxxxxxx,这里是标题">
+    <Info>这里是信息说明和备注,可以有多个</Info>
+    <Info>因为数据读取方式为反序列化XML</Info>
+    <Info>因此不能在这个输入文件中添加XML注释</Info>
+  </Title>
+ 
+
+
+
+  <Materials>
+
+    <GasGap/>
+    <Fluid Name="LightWater" Type="GetPropertyByName"  />
+   
+    <Material Index="1" Name="UO2" Type="UserDefine">
+      <K Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </K>
+      <Cp Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </Cp>
+    </Material>
+    <Material Index="2" Name="ZirClad" Type="UserDefine">
+      <K Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </K>
+      <Cp Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </Cp>
+    </Material>
+    <!--<Material Index="3" Name="GasGap" Type="GetPropertyByName" />-->
+    
+  </Materials>
+  <RodTypes Index="1" CladMaterialIndex="1" PelletMaterialIndex="2" Diameter="0.008" PelletDiameter="0.006" CladThickness="0.001" />
+  <Rods Segment="100" Length="1.4">
+    <Rod Index="1" Type="1">
+      <SubPower From="0" To="0.1" Value="11950" />
+      <SubPower From="0.1" To="0.2" Value="17390" />
+      <SubPower From="0.2" To="0.3" Value="21250" />
+      <SubPower From="0.3" To="0.4" Value="24380" />
+      <SubPower From="0.4" To="0.5" Value="21640" />
+      <SubPower From="0.5" To="0.6" Value="20690" />
+      <SubPower From="0.6" To="0.7" Value="20690" />
+      <SubPower From="0.7" To="0.8" Value="17260" />
+      <SubPower From="0.8" To="0.9" Value="14430" />
+      <SubPower From="0.9" To="1" Value="9851" />
+      <SubPower From="1" To="1.1" Value="8200" />
+      <SubPower From="1.1" To="1.2" Value="6196" />
+      <SubPower From="1.2" To="1.3" Value="4581" />
+      <SubPower From="1.3" To="1.4" Value="2653" />
+      <ContactedChannel Index="1" Angle="75" />
+      <ContactedChannel Index="2" Angle="105" />
+    </Rod>
+    <Rod Index="2" Type="1">
+      <SubPower From="0" To="0.1" Value="11950" />
+      <SubPower From="0.1" To="0.2" Value="17390" />
+      <SubPower From="0.2" To="0.3" Value="21250" />
+      <SubPower From="0.3" To="0.4" Value="24380" />
+      <SubPower From="0.4" To="0.5" Value="21640" />
+      <SubPower From="0.5" To="0.6" Value="20690" />
+      <SubPower From="0.6" To="0.7" Value="20690" />
+      <SubPower From="0.7" To="0.8" Value="17260" />
+      <SubPower From="0.8" To="0.9" Value="14430" />
+      <SubPower From="0.9" To="1" Value="9851" />
+      <SubPower From="1" To="1.1" Value="8200" />
+      <SubPower From="1.1" To="1.2" Value="6196" />
+      <SubPower From="1.2" To="1.3" Value="4581" />
+      <SubPower From="1.3" To="1.4" Value="2653" />
+      <ContactedChannel Index="1" Angle="75" />
+      <ContactedChannel Index="2" Angle="76.4" />
+      <ContactedChannel Index="3" Angle="28.6" />
+    </Rod>
+    <Rod Index="3" Type="1">
+      <SubPower From="0" To="0.1" Value="11950" />
+      <SubPower From="0.1" To="0.2" Value="17390" />
+      <SubPower From="0.2" To="0.3" Value="21250" />
+      <SubPower From="0.3" To="0.4" Value="24380" />
+      <SubPower From="0.4" To="0.5" Value="21640" />
+      <SubPower From="0.5" To="0.6" Value="20690" />
+      <SubPower From="0.6" To="0.7" Value="20690" />
+      <SubPower From="0.7" To="0.8" Value="17260" />
+      <SubPower From="0.8" To="0.9" Value="14430" />
+      <SubPower From="0.9" To="1" Value="9851" />
+      <SubPower From="1" To="1.1" Value="8200" />
+      <SubPower From="1.1" To="1.2" Value="6196" />
+      <SubPower From="1.2" To="1.3" Value="4581" />
+      <SubPower From="1.3" To="1.4" Value="2653" />
+      <ContactedChannel Index="2" Angle="80" />
+      <ContactedChannel Index="4" Angle="100" />
+    </Rod>
+    <Rod Index="4" Type="1">
+      <SubPower From="0" To="0.1" Value="11950" />
+      <SubPower From="0.1" To="0.2" Value="17390" />
+      <SubPower From="0.2" To="0.3" Value="21250" />
+      <SubPower From="0.3" To="0.4" Value="24380" />
+      <SubPower From="0.4" To="0.5" Value="21640" />
+      <SubPower From="0.5" To="0.6" Value="20690" />
+      <SubPower From="0.6" To="0.7" Value="20690" />
+      <SubPower From="0.7" To="0.8" Value="17260" />
+      <SubPower From="0.8" To="0.9" Value="14430" />
+      <SubPower From="0.9" To="1" Value="9851" />
+      <SubPower From="1" To="1.1" Value="8200" />
+      <SubPower From="1.1" To="1.2" Value="6196" />
+      <SubPower From="1.2" To="1.3" Value="4581" />
+      <SubPower From="1.3" To="1.4" Value="2653" />
+      <ContactedChannel Index="2" Angle="98.604" />
+      <ContactedChannel Index="3" Angle="61.416" />
+      <ContactedChannel Index="4" Angle="100.008" />
+      <ContactedChannel Index="5" Angle="100.008" />
+    </Rod>
+  </Rods>
+  <Grids>
+    <Grid Position="0" r="0" k="0" c="0" />
+    <Grid Position="0" r="0" k="0" c="0" />
+    <Grid Position="0" r="0" k="0" c="0" />
+    <Grid Position="0" r="0" k="0" c="0" />
+  </Grids>
+  <Channels>
+    <Channel Index="1" AreaFactor="1" FlowArea="2.77434E-05" WetPerimeter="0.0178024" HotPerimeter="0.010472">
+      <ConnectedChannel Index="2" Gap="0.0024" Distance="0.0086" />
+    </Channel>
+    <Channel Index="2" AreaFactor="1" FlowArea="5.5738E-05" WetPerimeter="0.0251328" HotPerimeter="0.0251328">
+      <ConnectedChannel Index="3" Gap="0.0029" Distance="0.0069" />
+      <ConnectedChannel Index="4" Gap="0.0024" Distance="0.009" />
+    </Channel>
+    <Channel Index="3" AreaFactor="1" FlowArea="1.22937E-05" WetPerimeter="0.0062832" HotPerimeter="0.0062832">
+      <ConnectedChannel Index="5" Gap="0.0012" Distance="0.0072" />
+    </Channel>
+    <Channel Index="4" AreaFactor="1" FlowArea="3.81208E-05" WetPerimeter="0.026394" HotPerimeter="0.0139627">
+      <ConnectedChannel Index="5" Gap="0.0015" Distance="0.0095" />
+    </Channel>
+    <Channel Index="5" AreaFactor="1" FlowArea="1.190604E-05" WetPerimeter="0.013197" HotPerimeter="0.0069813" />
+  </Channels>
+  
+  
+  <MassFlow MassVelocity="2" Temperature="240" Pressure="14"/>
+
+
+
+  <Option>
+    <Flow-Direction>1</Flow-Direction>
+    <AnsysType>1</AnsysType>
+    <IsOpenChannel>1</IsOpenChannel>
+    <DNBR-Formula>1</DNBR-Formula>
+    <Pellet-Node>0</Pellet-Node>
+    <Clad-Node>0</Clad-Node>
+
+    <Transient use="0">
+      <Timer Second="0" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>
+      <Timer Second="0.1" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>
+    </Transient>
+
+    <PowerFactor Multiplier="1.3" PelletShare="0.974" FluidShare="0.02" CladShare="0" />
+
+    <!--<UdfPara>
+      <FFF a="1" b="1" c="1"></FFF>
+      
+    </UdfPara>-->
+  </Option>
+</Root>

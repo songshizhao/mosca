@@ -1,0 +1,28 @@
+﻿        int PrecisionT = 3;//温度数据计算精度，默认为3
+        int Precisionh = 1;//对流换热系数计算精度，默认为1
+        int PrecisionH = 3;//比焓值计算精度，默认为3
+        int PrecisionRe = 1;//雷诺数计算精度，默认为1
+        int PrecisionDensity = 3;//密度计算精度，默认为3
+        int PrecisionVelocity = 3;//速度计算精度，默认为3
+        int PrecisionPressure = 3;//压降计算精度，默认为3
+        int PrecisionMassFlowRate = 9;//质量流速计算精度，默认为3
+        int PrecisionG = 3;//质量流密度计算精度，默认为3
+        int PrecisionK = 3;//导热系数计算精度，默认为3
+        int PrecisionPr = 3;//普朗特数计算精度，默认为3
+
+
+
+		            if (acc != null)
+            {
+                PrecisionT = acc.T;
+                Precisionh = acc.h;
+                PrecisionH = acc.H;
+                PrecisionRe = acc.Re;
+                PrecisionDensity = acc.Density;
+                PrecisionVelocity = acc.Velocity;
+                PrecisionPressure = acc.Pressure;
+                PrecisionMassFlowRate = acc.MassFlowRate;
+                PrecisionG = acc.G;
+                PrecisionK = acc.K;
+                PrecisionPr = acc.Pr;
+            }

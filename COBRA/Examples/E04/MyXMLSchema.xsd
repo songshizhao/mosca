@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MyXMLSchema"
+    targetNamespace="http://songshizhao.com/MyXMLSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://songshizhao.com/MyXMLSchema.xsd"
+    xmlns:mstns="http://songshizhao.com/MyXMLSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+
+  <!--根元素-->
+  <xs:element name="root" />
+  <!--标题-->
+  <xs:element name="Title">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Info" type="xs:string"></xs:element>
+      </xs:choice>
+      <xs:attribute name="Value" type="xs:string"/>
+    </xs:complexType>
+    
+  </xs:element>
+  <xs:element name="Info" type="xs:string"></xs:element>
+  <!--材料集合-->
+  <xs:element name="Materials">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Fluid" type="Fluid"/>
+        <xs:element name="GasGap" type="GasGap"/>
+        <xs:element name="Material" type="Material"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!--燃料棒类型-->
+  <xs:element name="RodTypes" type="RodTypes"/>
+
+  <!--燃料棒集合-->
+  <xs:element name="Rods" type="Rods"/>
+
+  <!--格架集合-->
+  <xs:element name="Grids">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Grid">
+          <xs:complexType>
+            <xs:attribute name="Position" type="xs:double"/>
+            <xs:attribute name="r" type="xs:double"/>
+            <xs:attribute name="k" type="xs:double"/>
+            <xs:attribute name="c" type="xs:double"/>
+          </xs:complexType>
+
+        </xs:element>
+
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Channels">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Channel" type="Channel"/>
+
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="MassFlow">
+    <xs:complexType>
+      <xs:attribute name="MassVelocity" type="xs:double"/>
+      <xs:attribute name="Temperature" type="xs:double"/>
+      <xs:attribute name="Pressure" type="xs:double"/>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:element name="Option">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AnsysType" type="xs:int"/>
+        <xs:element name="IsOpenChannel" type="xs:int"/>
+        <xs:element name="DNBR-Formula" type="xs:int"/>
+        <xs:element name="Pellet-Node" type="xs:int"/>
+        <xs:element name="Clad-Node" type="xs:int"/>
+        <xs:element name="Flow-Direction" type="xs:double"/>
+
+        <xs:element name="Transient">
+          <xs:complexType>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="Timer" >
+
+                <xs:complexType>
+                  <xs:attribute name="Second" type="xs:double"/>
+                  <xs:attribute name="PowerMultiplier" type="xs:double"/>
+                  <xs:attribute name="MassFlowMultiplier" type="xs:double"/>
+                </xs:complexType>
+                
+               
+              </xs:element>
+            </xs:choice>
+
+            <xs:attribute name="use" type="xs:boolean"/>
+            
+          </xs:complexType>
+        </xs:element>
+
+
+
+        <xs:element name="PowerFactor">
+          <xs:complexType>
+            <xs:attribute name="Multiplier" type="xs:double" />
+            <xs:attribute name="PelletShare" type="xs:double"/>
+            <xs:attribute name="FluidShare" type="xs:double"/>
+            <xs:attribute name="CladShare" type="xs:double"/>
+          </xs:complexType>
+        </xs:element>
+        
+        
+        
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <!--流体模型复合类型-->
+  <xs:complexType name="Fluid">
+    <xs:attribute name="Name" type="xs:string"/>
+    <xs:attribute name="Type" type="xs:string"/>
+    
+    <xs:attribute name="hf" type="xs:double" use="optional"/>
+    <xs:attribute name="hg" type="xs:double" use="optional"/>
+  </xs:complexType>
+
+  <!--气隙模型复合类型-->
+  <xs:complexType name="GasGap">
+    <!--必要参数-->
+    <xs:attribute name="Name" type="xs:string"/>
+    <xs:attribute name="Type" type="xs:string"/>
+    <!--可选参数-->
+    <xs:attribute name="H" type="xs:double" use="optional"/>
+    <xs:attribute name="FPRESS" type="xs:double" use="optional"/>
+    <xs:attribute name="VPLEN" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL1" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL2" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL3" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL4" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL5" type="xs:double" use="optional"/>
+    <xs:attribute name="FRAMOL6" type="xs:double" use="optional"/>
+  </xs:complexType>
+
+
+  <!--固体导热材料复合模型-->
+  <xs:complexType name="Material">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="K" type="K"/>
+      <xs:element name="Cp" type="Cp"/>
+    </xs:choice>    
+    <xs:attribute name="Index" type="xs:int"/>
+    <xs:attribute name="Name" type="xs:string"/>
+    <xs:attribute name="Type" type="xs:string"/>
+  </xs:complexType>
+
+  <!--热导率-->
+  <xs:complexType name="K">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Data" type="Data"/>
+    </xs:choice>
+    <!--value属性是可选的-->
+    <xs:attribute name="Value" type="xs:double" use="optional"/>
+  </xs:complexType>
+  <!--比热容-->
+  <xs:complexType name="Cp">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Data" type="Data"/>
+    </xs:choice>
+    <!--value属性是可选的-->
+    <xs:attribute name="Value" type="xs:double" use="optional"/>
+  </xs:complexType>
+  <!--通用随温度变化数据模型-->
+  <xs:complexType name="Data">
+    <xs:attribute name="T" type="xs:double"/>
+    <xs:attribute name="Value" type="xs:double"/>
+  </xs:complexType>
+
+ 
+  <!--燃料棒类型数据模型-->
+  <xs:complexType name="RodTypes">
+    <xs:attribute name="Index" type="xs:int"/>
+    <xs:attribute name="CladMaterialIndex" type="xs:int"/>
+    <xs:attribute name="PelletMaterialIndex" type="xs:int"/>
+    <xs:attribute name="Diameter" type="xs:double"/>
+    <xs:attribute name="PelletDiameter" type="xs:double"/>
+    <xs:attribute name="CladThickness" type="xs:double"/>
+  </xs:complexType>
+
+
+
+
+  <!--燃料棒集合模型-->
+  <xs:complexType name="Rods">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Rod" type="Rod"/>
+
+    </xs:choice>
+    <xs:attribute name="Length" type="xs:double"/>
+    <xs:attribute name="Segment" type="xs:int"/>
+  </xs:complexType>
+
+  <!--单根燃料棒模型-->
+  <xs:complexType name="Rod">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="SubPower" type="SubPower"/>
+
+      <xs:element name="ContactedChannel" type="ContactedChannel"/>
+
+      
+    </xs:choice>
+    <xs:attribute name="Type" type="xs:double"/>
+    <xs:attribute name="Index" type="xs:int"/>
+  </xs:complexType>
+
+  <!--分功率模型-->
+  <xs:complexType name="SubPower">
+
+    <xs:attribute name="From" type="xs:double"/>
+    <xs:attribute name="To" type="xs:double"/>
+    <xs:attribute name="Value" type="xs:double"/>
+  </xs:complexType>
+
+  <!--接触的通道模型-->
+  <xs:complexType name="ContactedChannel">
+
+    <xs:attribute name="Index" type="xs:int"/>
+    <xs:attribute name="Angle" type="xs:double"/>
+
+  </xs:complexType>
+
+  <!--通道模型-->
+  <xs:complexType name="Channel">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+
+      <xs:element name="ConnectedChannel">
+        <!--联通的通道模型-->
+        <xs:complexType>
+          <xs:attribute name="Index" type="xs:int"/>
+          <xs:attribute name="Gap" type="xs:double"/>
+          <xs:attribute name="Distance" type="xs:double"/>
+        </xs:complexType>       
+      </xs:element>
+
+
+    </xs:choice>
+    
+    <xs:attribute name="Index" type="xs:int"/>
+    <xs:attribute name="FlowArea" type="xs:double"/>
+    <xs:attribute name="WetPerimeter" type="xs:double"/>
+    <xs:attribute name="HotPerimeter" type="xs:double"/>
+    <xs:attribute name="AreaFactor" type="xs:double" use="optional"/>
+  </xs:complexType>
+
+
+
+  
+  
+  
+</xs:schema>
