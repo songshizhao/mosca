@@ -129,7 +129,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CobraDLL\Mosca-Core.csproj">
+    <ProjectReference Include="..\Mosca-Core\Mosca-Core.csproj">
       <Project>{4752fe1a-235d-4059-9906-477ff97c00d4}</Project>
       <Name>Mosca-Core</Name>
     </ProjectReference>

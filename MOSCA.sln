@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-PC", "COBRA\Mosca-PC.csproj", "{0340755C-29EA-483F-8D64-E34ED0502AF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-PC", "Mosca-PC\Mosca-PC.csproj", "{0340755C-29EA-483F-8D64-E34ED0502AF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Core", "CobraDLL\Mosca-Core.csproj", "{4752FE1A-235D-4059-9906-477FF97C00D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Core", "Mosca-Core\Mosca-Core.csproj", "{4752FE1A-235D-4059-9906-477FF97C00D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Web", "WebCobra\Mosca-Web.csproj", "{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Web", "Mosca-Web\Mosca-Web.csproj", "{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
