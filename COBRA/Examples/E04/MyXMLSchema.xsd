@@ -81,8 +81,8 @@
         <xs:element name="AnsysType" type="xs:int"/>
         <xs:element name="IsOpenChannel" type="xs:int"/>
         <xs:element name="DNBR-Formula" type="xs:int"/>
-        <xs:element name="Pellet-Node" type="xs:int"/>
-        <xs:element name="Clad-Node" type="xs:int"/>
+        <xs:element name="Pellet-Segment" type="xs:int"/>
+        <xs:element name="Clad-Segment" type="xs:int"/>
         <xs:element name="Flow-Direction" type="xs:double"/>
 
         <xs:element name="Transient">

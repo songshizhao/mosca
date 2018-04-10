@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Title>Example01 PWR FUEL ASSEMBLY - 5 SUBCHANNELS AND 4 FUEL RODS</Title>
-  <Info>Three-equation model with EPRI void model - Upflow solution</Info>
-  <Info>open channal model</Info>
+  <Title>测试测试测试测试测试测试测试测试测试测试测试</Title>
+  <Info>说明说明1</Info>
+  <Info>说明说明2</Info>
 
   <Materials>
     <Fluid Name="LightWater" Type="GetPropertyByName"/>

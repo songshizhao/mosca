@@ -1,7 +1,6 @@
 ﻿//计算主程序>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//说明：该函数方法必须反序列化InputModel InputData对象后
-//作为输入，才可以进行实际计算。
-//FIRST CREATED BY SONGSHIZHAO @ 2017年8月15日
+//说明：该函数方法必须使用IOManager输入后才可进行和计算
+//创建于 2017-8-15;上次编辑2018-3-25
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 using CobraDLL;
 using System;
@@ -13,742 +12,803 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
 using CobraDLL.Models;
-
+using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace CobraDLL
 {
-    public class Main:Formula
+    public class Main:FormulaBase
     {
-        public Main() { }
-
-        /// <summary>输入文件模型 </summary>
-        public InputModel InputData { get; set; }
-        /// <summary>输出文件模型</summary>
-        public OutputModel OutputData { get; set; }
-        /// <summary>输入文件xml文本</summary>
-        public string InputXmlString { get; set; }
-        /// <summary>输出文件xml文本</summary>
-        public string OutputXmlString { get; set; }
-
-        /// 数据输入,反序列化xml为对象
-        public string FileInput(string XmlString)
+        
+        //管理输入和输出
+        public IOManager MyIOManager = new IOManager();
+        //消息输出
+        public static IMsgCenter MsgCenter { get; set; }
+        public Main()
         {
-            string InputResult = "";
-            using (MemoryStream MS = new MemoryStream(Encoding.UTF8.GetBytes(XmlString)))
+            //设置一个无消息输出的默认值
+            MsgCenter = new TempMsgCenter();
+        }
+        public void RunAllSteps()
+        {
+            //读取输入参数
+            BeginRecognize();
+            //设置输出参数
+            SetOutput();
+            //计算平均通道
+            CaculateGeneralFlow();
+            //计算子通道
+            CaculateChannelFlow();
+            //计算稳态燃料棒温度场
+            CaculateRodsTemperature();
+            //计算瞬态
+            if (MyIOManager.InputData.Options.Transient.Use == true)
             {
-                using (XmlReader xr = XmlReader.Create(MS))
-                {
-                    XmlSerializer xmlSearializer = new XmlSerializer(typeof(InputModel));
-
-                    InputData = (InputModel)xmlSearializer.Deserialize(xr);
-                    InputResult = "Read XML Success";
-                }
+                RunTransirentFromSteady();
             }
 
-            return InputResult;            
         }
 
 
-        /// 数据输出，序列化xml文本 
-        public string FileOutput()
-        {
 
-            using (MemoryStream ms = new MemoryStream())
+
+
+
+        #region Gloable全局变量
+        //子通道数
+        private int Ni;
+        //燃料棒数
+        private int Nk;
+        //轴向分段数
+        private int Nj;
+        //总功率因子
+        private double PowerFactor;
+        //燃料芯块份额
+        private double PelletShare;
+        //包壳份额
+        private double CladShare;
+        //冷却剂份额
+        private double FluidShare;
+        //总的流通面积
+        private double TotalArea =0;
+        //总湿周 
+        private double TotalLw =0;
+        //总热周 
+        private double TotalLh =0;
+        //总等效水力直径
+        private double TotalDi;
+        //最大的压力迭代次数限制，默认20
+        private int MaxIteration = 20;
+        //燃料芯块结点划分
+        private int PelletSegment;
+        //燃料包壳结点划分
+        private int CladSegment;
+        //流体流动方向
+        private double flow_direction;
+        //CHF计算方式指示器
+        private int chf_indicator;
+        /////////////////////////////
+        //输入的冷却剂模型
+        private Fluid Coolent = new Fluid();
+        //输入的充气间隙模型
+        private GasGap GasGap;
+        //输入的固体材料模型 集合
+        private List<Material> Materials = new List<Material>();
+        private List<RodType> RodTypes = new List<RodType>();
+        //输入的通道数据模型 集合
+        private List<Channel> Channels = new List<Channel>();
+        //燃料棒数据模型 集合
+        private List<Rod> Rods;
+        //定位格架数据模型 集合
+        private List<Grid> Grids;
+        //计算的精确度
+        private Precision Acc = new Precision();
+        //入口流量模型
+        private MassFlow MassFlow;
+        //瞬态计算模型
+        private Transient Transient;
+        //输入的计算选项
+        private Options options;
+        //存储的稳态计算温度场(用于初始化瞬态计算)
+        private List<Matrix<double>> RodsTField=new List<Matrix<double>>();
+        #endregion
+
+        #region 计算主程序
+        /// <summary>
+        /// 将输入数据和程序中变量做对应，需要存在输入文件后再调用
+        /// 全局变量赋值，并简化表示方法，初步计算
+        /// </summary>        
+        public void BeginRecognize()
+        {
+            ////////////////////////////////////////////////////////////
+            //主要对输入数据的表示方法进行简化处理,被赋值的变量均为[全局变量]
+            //同时可对输入数据进行[简单的]计算
+            //
+            InputModel InputData = MyIOManager.InputData;
+            //子通道对象
+            Channels = InputData.ChannelCollection.Channels;
+            //燃料棒对象
+            Rods = InputData.RodCollection.Rods;
+            //燃料棒类型集合
+            RodTypes = InputData.RodTypes;
+            //子通道数
+            Ni = Channels.Count;
+            //轴向分段数
+            Nj = InputData.RodCollection.Segment;
+            //燃料棒个数
+            Nk = Rods.Count;
+            //最大迭代次数
+            MaxIteration = InputData.Options.MaxIteration;
+            //功率因子
+            PowerFactor = InputData.Options.PowerFactor.Multiplier;
+            //燃料芯块功率份额
+            PelletShare = InputData.Options.PowerFactor.PelletShare;
+            //燃料包壳功率份额
+            CladShare = InputData.Options.PowerFactor.CladShare;
+            //流体中慢化功率份额
+            FluidShare = InputData.Options.PowerFactor.FluidShare;
+            //临界热流密度CHF计算公式选用
+            chf_indicator = InputData.Options.DNBR_Formula;
+            //冷却剂模型
+            Coolent = InputData.MaterialCollection.Fluid;
+            //气体间隙
+            GasGap = InputData.MaterialCollection.GasGap;
+            //固体材料集合
+            Materials = InputData.MaterialCollection.Materials;
+            //初始的流量数据模型
+            MassFlow = InputData.MassFlow;
+            //流体流动方向与垂直方向的夹角cosθ(向上为正;-1~1)
+            flow_direction = MassFlow.Flow_Direction;
+            //定位格架模型
+            Grids = InputData.GridCollection.Grids;
+            foreach (Channel Ch in Channels)
             {
-                var setting = new XmlWriterSettings()
+                //计算总流通面积
+                TotalArea += Ch.FlowArea;
+                //计算总湿周
+                TotalLw += Ch.WetPerimeter;
+                TotalLh += Ch.HotPerimeter;
+            }
+            //计算总的等效直径
+            TotalDi = 4 * TotalArea / TotalLw;
+            //获取参数计算要求的精确度 i.e.参数小数点后保留位数
+            Acc = InputData.Options.Precision;
+            //读取瞬态设置
+            Transient = InputData.Options.Transient;
+            //计算选项
+            options = InputData.Options;
+            //包壳分段数(计算温度)
+            CladSegment = options.CladSegment;
+            //芯块分段数(计算温度)
+            PelletSegment = options.PelletSegment;
+
+            MsgCenter.ShowMessage("子通道数:" + Ni);
+            MsgCenter.ShowMessage("轴向分段:" + Nj);
+            MsgCenter.ShowMessage("燃料棒数:" + Nk);
+            MsgCenter.ShowMessage("流动方向:" + flow_direction);
+            MsgCenter.ShowMessage("是否计算瞬态:" + MyIOManager.InputData.Options.Transient.Use.ToString());
+
+            //foreach (System.Reflection.PropertyInfo p in options.GetType().GetProperties())
+            //{
+            //    Console.WriteLine("Name:{0} Value:{1}", p.Name, p.GetValue(options));
+            //}
+        }
+
+        /// <summary>设置输出对象，实例化</summary>
+        public void SetOutput()
+        {
+            MsgCenter.ShowMessage("设置输出格式");
+            MyIOManager.OutputData = new OutputModel
+            {
+                Title = MyIOManager.InputData.Title,
+                SteadyResult = new Result
                 {
-                    Encoding = new UTF8Encoding(false),
-                    Indent = true,
+                    //平均流
+                    GeneralFlow = new GeneralFlow
+                    {
+                        FluidDatas = new List<FluidData>(),
+                    },
+                    //子通道流
+                    ChannelsFlow = new List<ChannelFlow>(),
+                    //燃料棒温度场
+                    RodsTemperature = new List<RodTemperature>()
+                    {
+
+                    },
+                }
+            };
+            if (MyIOManager.InputData.Options.Transient.Use==true)
+            {
+                //如果输入文件定义了瞬态价算
+                MyIOManager.OutputData.TransientResult = new TransientResult
+                {
+                    TransientTimers=new List<TransientTimer>(),
                 };
+            }
+            //子通道轴向迭代
 
-                using (XmlWriter writer = XmlWriter.Create(ms, setting))
+        }
+
+
+
+        /// <summary>计算稳态平均通道(单通道)</summary>
+        public void CaculateGeneralFlow()
+        {
+            MsgCenter.ShowMessage("计算基本流动数据...");
+            //存放计算结果的集合
+            List<FluidData> fluid_datas = new List<FluidData>();
+            
+            //计算平均流,Nj为轴向分段数,节点为Nj+1个
+            for (int j = 0; j < Nj+1; j++)
+            {
+                if (j == 0)
                 {
+                    //j=0为一个初始节点,即入口节点
+                    FluidData init = new FluidData
+                    {
+                        //入口温度
+                        Temperature = MassFlow.Temperature,
+                        //入口位置
+                        Position = 0.000,
+                        //入口压力
+                        Pressure = MassFlow.Pressure,
+                        //入口质量流量
+                        MassFlowRate = MassFlow.MassVelocity,
+                    };
+                    //入口比焓,根据入口温度和压力返回入口流体比焓
+                    init.Enthalphy = Coolent.GetH(init.Temperature, init.Pressure);
+                    init.Enthalphy = Math.Round(init.Enthalphy, Acc.H);
+                    //入口冷却剂密度,根据温度和压力
+                    init.Density = Coolent.GetDensity(init.Temperature, init.Pressure);
+                    init.Density = Math.Round(init.Density, Acc.Density);
+                    //入口冷却剂流速(m/s) V=m/(A·ρ)
+                    init.Velocity = init.MassFlowRate / TotalArea / init.Density;
+                    init.Velocity = Math.Round(init.Velocity, Acc.Velocity);
+                    //导热系数
+                    init.K = Coolent.GetK(init.Temperature, init.Pressure);
+                    init.K = Math.Round(init.K, Acc.K);
+                    //运动粘度Kv=μ/ρ
+                    init.Kv = Coolent.GetKv(init.Temperature, init.Pressure);
+                    init.Kv = Math.Round(init.Kv, Acc.Kv);
+                    //雷诺数
+                    init.Re = init.Velocity * TotalDi / init.Kv;
+                    init.Re = Math.Round(init.Re, Acc.Re);
+                    //普朗特数                                              
+                    init.Pr = Coolent.GetPr(init.Temperature, init.Pressure);
+                    init.Pr = Math.Round(init.Pr, Acc.Pr);
+                    //对流换热系数
+                    init.h = h_convect(init.Re, init.Pr, init.K, TotalDi);
+                    init.h = Math.Round(init.h, Acc.h);
+                    //将数据添加到计算结果集合
+                    fluid_datas.Add(init);
+                }
+                //如果不是入口节点j!=0
+                else
+                {
+                    //获得上一个节点数据Previous
+                    FluidData pre = fluid_datas[j-1];
+                    //计算第j个节点的数据(第j段,共J段),根据入口温度求出比焓
+                    double Hin = Coolent.GetH(pre.Temperature, pre.Pressure);
+                    //总线功率,累加所有燃料棒功率份额
+                    double TotalSubPower = 0;
+                    //遍历所有燃料棒
+                    foreach (Rod rod in Rods)
+                    {
+                        //遍历所有与此燃料棒接触的子通道
+                        foreach (var contact_chl in rod.ContactedChannel)
+                        {
+                            //总的线功率+=燃料功率*功率份额(因存在对称边界半根燃料棒计算的算例)
+                            TotalSubPower += rod.SubPowerCollection[j-1].Value * contact_chl.Angle / 360;
+                        }
+                    }
+                    //总线功率 X 功率因子
+                    TotalSubPower = TotalSubPower * PowerFactor;
+                    //获取当前段的长度,选择一个燃料棒进行计算
+                    double Lj = Rods[0].SubPowerCollection[j-1].To - Rods[0].SubPowerCollection[j-1].From;
+                    //新建-出口节点数据
+                    FluidData next = new FluidData();
+                    //出口比焓,根据功率计算出口焓值,因为比焓单位是kJ/kg,所以power(W/m)除以1000
+                    double Hout = Hin + TotalSubPower / 1000 * Lj / pre.MassFlowRate;
+                    next.Enthalphy = Math.Round(Hout, 3);
+                    //出口位置百分比
+                    next.Position = Math.Round((double)j/ Nj, 3);
+                    //计算出口温度
+                    double Tout = Coolent.GetT(next.Enthalphy, next.Pressure);
+                    next.Temperature = Math.Round(Tout, Acc.T);
+                    //质量流速
+                    double massVelocity = MyIOManager.InputData.MassFlow.MassVelocity;
+                    next.MassFlowRate= Math.Round(massVelocity, Acc.MassFlowRate);
+                    //密度
+                    next.Density = Math.Round(Coolent.GetDensity(next.Temperature, next.Pressure), Acc.Density);
+                    //出口流速m/s
+                    next.Velocity = Math.Round(next.MassFlowRate / TotalArea / next.Density, Acc.Velocity);
+                    //求运动粘度
+                    next.Kv = Coolent.GetKv(next.Temperature, next.Pressure);
+                    next.Kv= Math.Round(next.Kv, Acc.Kv);
+                    //雷诺数              
+                    next.Re = next.Velocity * TotalDi / next.Kv;
+                    next.Re = Math.Round(next.Re, Acc.Re);
+                    //普朗特数
+                    next.Pr = Coolent.GetPr(next.Temperature, next.Pressure);
+                    next.Pr = Math.Round(next.Pr, Acc.Pr);
+                    //导热系数
+                    next.K = Coolent.GetK(next.Temperature, next.Pressure);
+                    next.K = Math.Round(next.K, Acc.K);
+                    //重力压降Pa
+                    double Ph = next.Density * G * Lj * flow_direction;
+                    //摩擦压降Pa
+                    double Pf = FrictionFactor(next.Re) * Lj / TotalDi * next.Density * next.Velocity * next.Velocity / 2;
+                    //加速压降Pa
+                    double Pa = next.Density * (next.Velocity + pre.Velocity) / 2 * (next.Velocity - pre.Velocity);
+                    //总压降 - Mpa
+                    double deltaP = (Ph + Pf + Pa) * 0.000001;
+                    //压降 - Mpa
+                    next.Pressure = pre.Pressure + deltaP;
+                    next.Pressure = Math.Round(next.Pressure,Acc.Pressure+6);
+                    ///计算临界热流密度
+                    //饱和液体比焓
+                    double Hf = Coolent.GetHf(pre.Pressure);
+                    //饱和蒸汽比焓
+                    double Hg = Coolent.GetHg(pre.Pressure);
+                    //热平衡寒气率
+                    double Xe = (next.Enthalphy- Hf) / (Hg - Hf);
+                    //计算临界热流密度
+                    double Qc = Q_Critical(Xe, TotalDi, next.MassFlowRate, Hf, next.Enthalphy,chf_indicator);
+                    //本地临界热流密度
+                    double Ql = TotalSubPower / TotalLh;
+                    //DNBR默认保留三位小数点
+                    next.DNBR = Math.Round(Qc / Ql, 3);
+                    //对流换热系数
+                    next.h = h_convect(next.Re, next.Pr, next.K, TotalDi);
+                    next.h = Math.Round(next.Re, Acc.h);
 
-                    XmlSerializer xmlSearializer = new XmlSerializer(typeof(OutputModel));
-                    xmlSearializer.Serialize(writer, OutputData);
-                    OutputXmlString = Encoding.UTF8.GetString(ms.ToArray());
+                    fluid_datas.Add(next);
                 }
 
+                MyIOManager.OutputData.SteadyResult.GeneralFlow = new GeneralFlow
+                {
+                    FluidDatas = fluid_datas,
+                };
+            }
+        }
+
+        ///<summary>计算子通道流场稳态,所说的稳态*不能*是已经发生膜态沸腾的状态</summary>
+        public void CaculateChannelFlow()
+        {
+            ///使用压力迭代方法确定不同子通道之间的流量，此计算方法使用压力迭代确定
+            ///一些局部变量
+            MsgCenter.ShowMessage("计算子通道数据,流量计算方式压力迭代：进出口迭代...");
+            //质量流量迭代
+            double[] m = new double[Ni];
+            //压降迭代,每个子通道的压降
+            double[] DeltaP = new double[Ni];
+            //每个子通道的分段压降,Ni行xNj列初值为0
+            Matrix<double> P_Local = Matrix<double>.Build.Dense(Ni,Nj+1,0);
+            //压降迭代因子
+            double Sigma = 0;
+            //新建输出对象
+            List<ChannelFlow> ChannelFlows = new List<ChannelFlow>();
+            //遍历所有子通道
+            for (int i = 0; i < Ni; i++)
+            {
+                ChannelFlow channelFlow = new ChannelFlow
+                {
+                    //流动计算结果 编号与输入的子通道编号相对应
+                    ChannelIndex = Channels[i].Index,
+                    FluidDatas = new List<FluidData>()
+                };
+                for (int j = 0; j < Nj+1; j++)
+                {
+                    channelFlow.FluidDatas.Add(new FluidData());
+                }
+                ChannelFlows.Add(channelFlow);
+                //质量流量 分配初值
+                m[i] = MassFlow.MassVelocity * Channels[i].FlowArea / TotalArea;
             }
 
-            return OutputXmlString;
+            
+            int Iteration = 0;
+            //迭代压降
+            do
+            {
+                Iteration += 1;
+                MsgCenter.ShowMessage(String.Format("压力迭代次数：{0}, 最大迭代次数限制{1}", Iteration, MaxIteration));
+                if (Iteration > MaxIteration)
+                {
+                    MsgCenter.ShowMessage("超过最大迭代次数限制");
+                    break;
+                }
+
+                //所有子通道
+                for (int i = 0; i < Ni; i++)
+                {
+                    //初始化压降
+                    DeltaP[i] = 0;
+                    //新建子通道对象
+                    ChannelFlow ChannelFlow = new ChannelFlow
+                    {
+
+                        ChannelIndex = Channels[i].Index,
+                        FluidDatas = new List<FluidData>(),
+                    };
+                    //每个通道数据节点（0~Nj，共Nj+1个）
+                    for (int j = 0; j < Nj + 1; j++)
+                    {
+                        //给入口节点赋初值
+                        if (j == 0)
+                        {
+                            //第i个子通道
+                            Channel channel = Channels[i];
+                            //初始节点
+                            FluidData InitNode = new FluidData
+                            {
+                                //入口温度
+                                Temperature = MassFlow.Temperature,
+                                //位置
+                                Position = 0.000,
+                                //入口压力
+                                Pressure =MyIOManager.InputData.MassFlow.Pressure,
+                                //入口质量流量(初始迭代根据面积平均分配)
+                                MassFlowRate = m[i],
+                            };
+                            //比焓
+                            InitNode.Enthalphy = Coolent.GetH(InitNode.Temperature, InitNode.Pressure);
+                            InitNode.Enthalphy = Math.Round(InitNode.Enthalphy, Acc.H);
+                            //密度
+                            InitNode.Density = Coolent.GetDensity(InitNode.Temperature, InitNode.Pressure);
+                            InitNode.Density = Math.Round(InitNode.Density, Acc.Density);
+                            //流速m/s
+                            InitNode.Velocity = Math.Round(InitNode.MassFlowRate / channel.FlowArea / InitNode.Density, Acc.Velocity);
+                            //等效水力直径
+                            double De = 4 * channel.FlowArea / channel.WetPerimeter;
+                            //运动粘度
+                            double Kv = Coolent.GetKv(InitNode.Temperature, InitNode.Pressure);
+                            //雷诺数
+                            InitNode.Re = InitNode.Velocity * De / Kv;
+                            InitNode.Re = Math.Round(InitNode.Re, Acc.Re);
+                            //普朗特数
+                            InitNode.Pr = Coolent.GetPr(InitNode.Temperature, InitNode.Pressure);
+                            InitNode.Pr = Math.Round(InitNode.Pr, Acc.Pr);
+                            //导热系数
+                            InitNode.K = Coolent.GetK(InitNode.Temperature, InitNode.Pressure);
+                            InitNode.K = Math.Round(InitNode.K, Acc.K);
+                            //对流换热系数
+                            InitNode.h = h_convect(InitNode.Re, InitNode.Pr, InitNode.K, De);
+                            InitNode.h = Math.Round(InitNode.h, Acc.h);
+                            //初始化子通道数据节点加入
+                            ChannelFlows[i].FluidDatas[j] = InitNode;
+                            P_Local[i, j] = InitNode.Pressure;
+                        }
+                        //j!=0
+                        else
+                        {
+                            //计算当前段的长度j>=1
+                            double Lj = Rods[0].SubPowerCollection[j - 1].To - Rods[0].SubPowerCollection[j - 1].From;
+                            //当前计算的子通道对象
+                            Channel channel = Channels[i];
+                            //前一个节点
+                            FluidData pre = ChannelFlows[i].FluidDatas[j - 1];
+                            //当前子通道燃料棒功率输出
+                            double SubPowerJ = 0;
+                            //遍历所有燃料棒
+                            foreach (Rod rod in Rods)
+                            {
+                                //燃料棒所有接触的通道
+                                foreach (var ContactedChannel in rod.ContactedChannel)
+                                {
+                                    //如果与燃料棒接触的通道,如果是当前正在计算的通道
+                                    if (ContactedChannel.Index == channel.Index)
+                                    {
+                                        SubPowerJ += rod.SubPowerCollection[j - 1].Value * ContactedChannel.Angle / 360;
+                                    }
+                                }
+
+                            }
+                            //乘以功率因子
+                            SubPowerJ = SubPowerJ * PowerFactor;
+                            
+                            //计算新节点,NodeToNext计算子通道节点
+                            FluidData next = NodeToNext
+                                (
+                                Coolent, 
+                                pre, 
+                                channel, 
+                                Lj, 
+                                SubPowerJ, 
+                                m[i], 
+                                Acc,
+                                out double DeltaPij,
+                                chf_indicator,
+                                flow_direction
+                                );
+                         
+                            //存储计算结果
+                            ChannelFlows[i].FluidDatas[j] = next;
+                            //i棒j段压降
+                            P_Local[i, j]= next.Pressure;
+                            //压降用于迭代
+                            DeltaP[i] += DeltaPij;
+                            //Debug.WriteLine("通道压降:" + DeltaP[i]);
+                        }
+
+                    }
+                }
+
+
+                //初始化Sigma
+                Sigma = 0;
+                //平均压降
+                double AvgPressure = 0;
+                for (int i = 0; i < Ni; i++)
+                {
+                    //MsgCenter.ShowMessage(String.Format("通道{0}压降:{1}", i, DeltaP[i]));
+                    AvgPressure += DeltaP[i];
+                }
+                //平均压降
+                AvgPressure = AvgPressure / Ni;
+
+                for (int i = 0; i < Ni; i++)
+                {
+                    Sigma += Math.Abs(DeltaP[i] - AvgPressure);// 所有偏差之和
+                }
+                double TotalM = 0;
+                for (int i = 0; i < Ni; i++)
+                {
+                    //子通道i压降和平均压降的比值
+                    double Factor = Math.Sqrt(AvgPressure/DeltaP[i]);
+                    //重新分配压降
+                    m[i] = Factor * m[i];// 所有偏差之和
+                    //计算平衡后的总质量流速
+                    TotalM += m[i];
+                }
+                //计算平衡后与平衡前的比值
+                double k = MassFlow.MassVelocity / TotalM;
+                //纠正后的总质量流速
+                double TotalM2 = 0;
+                //保持总质量流速不变
+                for (int i = 0; i < Ni; i++)
+                {
+                    //对质量流量进行修正
+                    m[i] = k * m[i];
+                    TotalM2 += m[i];
+                    MsgCenter.ShowMessage(String.Format("通道{0}质量流速:{1}", i, m[i]));
+                }
+
+                MsgCenter.ShowMessage(String.Format("Sigma->{0}", Sigma));
+            }
+            while (Sigma > 100);
+
+
+            MyIOManager.OutputData.SteadyResult.ChannelsFlow = ChannelFlows;
+
+            MsgCenter.ShowMessage("--------压力场预览--------");
+            MsgCenter.ShowMessage(P_Local.ToMatrixString());//P_Local.ToMatrixString(5,15)
+
         }
 
 
 
 
+        ///<summary>计算燃料棒温度场,需要先计算流量场数据</summary>
+        public void CaculateRodsTemperature()
+        {
+            MsgCenter.ShowMessage("计算燃料棒温度场...");
+            //燃料棒周围主流流体温度
+            Matrix<double> Tf = Matrix<double>.Build.Dense(Nj, Nk, 0);
+            //燃料棒周围主流流体对流换热系数
+            Matrix<double> h = Matrix<double>.Build.Dense(Nj, Nk, 0);
+            Matrix<double> massFlowDensity = Matrix<double>.Build.Dense(Nj, Nk, 0);
 
 
-        #region Gloable全局
+            //遍历所有燃料棒
+            for (int k = 0; k < Nk; k++)
+            {
+                //新建一个用于存储一个燃料棒输出的对象
+                RodTemperature RodkTemperature = new RodTemperature
+                {
+                    Index=Rods[k].Index,
+                    SubRodTemperature = new List<SubRodTemperature>(),
+                };
+                //径向温度节点数
+                int size = CladSegment + PelletSegment + 2;
+                //燃料棒k的温度场 矩阵
+                Matrix<double> RodTField = Matrix<double>.Build.Dense(Nj, size, 0);
+                //List<Vector> RodTfield = new List<Vector>();
+                bool isTypeFound = false;
+                RodType rodType = new RodType();
+                //找到燃料棒k的燃料棒类型
+                foreach (RodType type in RodTypes)
+                {
+                    if (type.Index == Rods[k].Type)
+                    {
+                        rodType = type;
+                        //找到了燃料棒类型
+                        isTypeFound = true;
+                        break;
+                    }
+                }
+                //如果未找到燃料棒类型
+                if (!isTypeFound)
+                {
+                    MsgCenter.ShowMessage(String.Format("燃料棒{0}未找到匹配的{1}燃料棒类型", k, Rods[k].Type));
+                }
+                //寻找燃料棒固体材料数据
+                Material Clad = new Material();
+                Material Pellet = new Material();
+                foreach (var material in Materials)
+                {
+                    if (material.Index == rodType.CladMaterialIndex)
+                    {
+                        Clad = material;
+                    }
+                    else if (material.Index == rodType.PelletMaterialIndex)
+                    {
+                        Pellet = material;
+                    }
 
-        double G = 9.8;//重力加速度
-        int Ni;//子通道数
-        int Nj;//轴向分段数</summary>
-        int Nk;//燃料棒数
-        const double PI = 3.1416;//圆周率π=3.1416
-        public static long Range = 97;//默认水物性参数 IF97 或者 IF67 默认=97
+                }
+                //燃料棒直径
+                double d_rod = rodType.Diameter;
+                //燃料芯块直径
+                double d_pellet = rodType.PelletDiameter;
+                //燃料包壳厚度
+                double clad_thickness = rodType.CladThickness;
+                //气体间隙通过计算得出
+                double gap_thickness = (d_rod - d_pellet) * 0.5 - clad_thickness;
+                //分段计算燃料棒温度场
+                for (int j = 0; j < Nj; j++)
+                {
+                    //燃料k，节点j温度场向量
+                    //var vectorT = new DenseVector(new double[size]);
+                    //轴向分段燃料棒温度场
+                    SubRodTemperature subRodTemperature = new SubRodTemperature();
+                    //分段长度
+                    double Lj = Rods[0].SubPowerCollection[j].To - Rods[0].SubPowerCollection[j].From;
+                    //接触的全部角度
+                    double TotalAngle = 0;
+                    double Xe=0;
+                    FluidData FluidJ;
+                    //遍历与[燃料棒k] 接触的 子通道,找到流体外部边界条件
+                    foreach (ContactedChannel EachContactedChannel in Rods[k].ContactedChannel)
+                    {
+                        //与燃料棒k接触的所有子通道流体物性参数计算结果
+                        ChannelFlow ChannelFlowOfContactChannel = new ChannelFlow();
+                        //找到与燃料棒接触的子通道计算结果
+                        foreach (ChannelFlow channelFlow in MyIOManager.OutputData.SteadyResult.ChannelsFlow)
+                        {
+                            //通道数据 index和连接的通道 index相同
+                            if (channelFlow.ChannelIndex == EachContactedChannel.Index)
+                            {
+                                ChannelFlowOfContactChannel = channelFlow;
+                            }
+                        }
+                        FluidJ = ChannelFlowOfContactChannel.FluidDatas[j];
+                        h[j, k] += FluidJ.h * EachContactedChannel.Angle;
+                        Tf[j, k] += FluidJ.Temperature * EachContactedChannel.Angle;
+                        Xe= FluidJ.Xe * EachContactedChannel.Angle;
+                        //质量流密度
+                        massFlowDensity[j, k] += FluidJ.Velocity * FluidJ.Density * EachContactedChannel.Angle;
+                        //累加接触的角度份额
+                        TotalAngle += EachContactedChannel.Angle;
+                    }
+                    //加权平均对流换热系数
+                    h[j, k] = h[j, k] / TotalAngle;
+                    //加权平均流体温度
+                    Tf[j, k] = Tf[j, k] / TotalAngle;
+                    //加权平均热平衡含气率
+                    Xe = Xe / TotalAngle;
+                    //加权平均质量流密度
+                    massFlowDensity[j, k] = massFlowDensity[j, k] / TotalAngle;
+                    //线性功率，单位W/M
+                    double Linearpower = Rods[k].SubPowerCollection[j].Value * PowerFactor;
+                    //体热源W/m3
+                    double fi_pellet = Linearpower * PelletShare / (0.25 * PI * d_pellet * d_pellet);
+                    //clad面积
+                    double cladArea = 0.25 * PI * (d_rod * d_rod - (d_rod - 2 * clad_thickness) * (d_rod - 2 * clad_thickness));
+                    //包壳 体热流密度
+                    double fi_clad = Linearpower * CladShare / cladArea;
+                    //包壳分段长度
+                    double deltaR_clad = clad_thickness / CladSegment;
+                    //芯块分段长度
+                    double deltaR_pellet = d_pellet * 0.5 / PelletSegment;
+                    //包壳外表面 - 热流密度
+                    double q = Linearpower * (1 - FluidShare) / (PI * d_rod);
+                    //包壳外表面 - 温度
+                    double Tw = q / h[j, k] + Tf[j, k];
+                    //·····内推温度场
 
-        double PowerFactor = 1;//总功率因子
-        double PelletShare = 1;//燃料芯块份额
-        double CladShare = 0;//包壳份额
-        double FluidShare = 0;//冷却剂份额
+                    RodTField[j, 0] = Tw;
+                    //稳态,温度场由外向内内推
+                    for (int layer = 0; layer < CladSegment; layer++)
+                    {
+                        //外径
+                        double r_outside = 0.5 * d_rod - deltaR_clad * layer;
+                        //内径
+                        double r_inside = 0.5 * d_rod - deltaR_clad * (layer + 1);
+                        //层平均半径
+                        double r_av = (r_inside + r_outside) * 0.5;
+                        //已经内推过的层面积
+                        double layerArea = PI * (d_rod * d_rod * 0.25 - r_inside * r_inside);
+                        //内推过的层发热线功率 
+                        double layerHeat = layerArea * fi_clad;
+                        //层导热热阻ln（d2/d1）/2π lamd l   Clad.K.Get(vectorT[layer]) 
+                        double R_layer = Math.Log(r_outside / r_inside) / (2 * PI * Clad.GetK(RodTField[j,layer]) * Lj);
+                        //内推节点      
+                        RodTField[j,layer + 1] = (Linearpower - layerHeat) * Lj * R_layer + RodTField[j, layer];
+                    }
+                    subRodTemperature.CladInsideT = RodTField[j, CladSegment];
+                    //稳态下气体间隙传递的热流密度（导出热量等于芯块Pellet产热）
+                    double q_gap = Linearpower * PelletShare / (PI * d_pellet);
+                    //芯块外表面温度
+                    RodTField[j, CladSegment +1] = RodTField[j, CladSegment] + q_gap / GasGap.Get_h();
+                    //计算燃料棒
+                    for (int layer = 0; layer < PelletSegment; layer++)
+                    {
+                        //外径
+                        double r_outside = 0.5 * d_pellet - deltaR_pellet * layer;
+                        //内径
+                        double r_inside = 0.5 * d_pellet - deltaR_pellet * (layer + 1);
+                        //层平均半径
+                        double r_av = (r_inside + r_outside) * 0.5;
+                        //已经内推过的层面积
+                        double layerArea = PI * (0.25 * d_pellet * d_pellet - r_inside * r_inside);
+                        //层发热线功率
+                        double layerHeat = layerArea * fi_pellet;
+                        //层导热热阻ln（d2/d1）/2π*lamd*l   Clad.K.Get(vectorT[layer]) 
+                        double R_layer = Math.Log(r_outside / r_inside) / (2 * PI * Clad.GetK(RodTField[j,layer]) * Lj);
+                        RodTField[j, layer + CladSegment + 2] = (Linearpower * PelletShare - layerHeat) * Lj * R_layer + RodTField[j, layer + CladSegment + 1];
+
+                    }
+                    //芯块中心温度（根据有内热源传热方程）
+                    RodTField[j, PelletSegment + CladSegment + 1] = RodTField[j, PelletSegment + CladSegment] + 0.25 * fi_pellet / Pellet.GetK(RodTField[j, PelletSegment + CladSegment]) * deltaR_pellet * deltaR_pellet;
+                    //设置输出对象
+                    subRodTemperature.Index = j;
+                    subRodTemperature.CladOutsideT = RodTField[j, 0];
+                    subRodTemperature.CladInsideT = RodTField[j, CladSegment];
+                    subRodTemperature.PelletOutsideT= RodTField[j, CladSegment + 1];
+                    subRodTemperature.PelletCenterT= RodTField[j, PelletSegment + CladSegment + 1];
+                    subRodTemperature.h = h[j, k];
+                    subRodTemperature.Index = Rods[k].Index;
+                    subRodTemperature.Q = q;
+                    //临界热流密度
+                    subRodTemperature.Qc = Q_Critical(Xe, d_rod, massFlowDensity[j, k], Coolent.GetHf(Tf[j, k]), Coolent.GetH(Tf[j, k]), chf_indicator);
+                    //DNBR
+                    subRodTemperature.DNBR = Math.Round(q / subRodTemperature.Qc, 3);
+                    //加入计算结果集合
+                    RodkTemperature.SubRodTemperature.Add(subRodTemperature);
+
+                }//---结束轴向J循环
+
+                //温度场矩阵加入输出对象//燃料棒k的温度场 矩阵Matrix<double> RodTField = Matrix<double>.Build.DenseOfColumnVectors(RodTfield);
+                RodkTemperature.TemperatureField = RodTField;
+                MyIOManager.OutputData.SteadyResult.RodsTemperature.Add(RodkTemperature);
+
+                //输出消息提示
+                MsgCenter.ShowMessage(String.Format("-----燃料棒{0}的温度场-----",Rods[k].Index));
+                MsgCenter.ShowMessage(RodTField.ToMatrixString(Nj, PelletSegment + CladSegment + 2));
+                //MsgCenter.ShowMessage(h.ToMatrixString());
+                //MsgCenter.ShowMessage(Tf.ToMatrixString());
+                //MsgCenter.ShowMessage(massFlowDensity.ToMatrixString());
+
+            }//结束燃料棒k循环
 
 
-        double TotalArea = 0;//总的流通面积
-        double TotalLw = 0;//总等效湿周 
-        double Di;//等效水力直径
 
- 
-        List<Channel> Channels = new List<Channel>();//输入的通道数据模型
-        Fluid Coolent = new Fluid();//输入的冷却剂
-        GasGap GasGap = new GasGap();//输入的充气间隙模型
-        List<Material> Materials = new List<Material>();//
-        List<RodType> RodTypes = new List<RodType>();//
+        }
 
 
-        Precision acc=new Precision();
+
+
+        private void RunTransirentFromSteady()
+        {
+
+        }
+
         #endregion
 
 
 
 
-
-
-
-
-
-        /// <summary>将输入数据和程序中变量做进一步对应，数据简单分析，并简化表示方法，初步计算</summary>
-        public void BeginRecognize()
-        {
-            //************************************************************
-            //在这个方法中主要进行数据的识别和初步匹配                     *
-            //不要在此方法中 声明任何变量或者对象                          *
-            //被赋值的所有变量都属于全局变量                              *
-            //这些变量或者对象已经在外部进行了定义和赋值                    *
-            //可以在此方法中对数据进行简单的整理                          *
-            //可以使用循环，但不应该存在*大量*数据运算                     *
-            //************************************************************
-
-            Channels = InputData.ChannelCollection.Channels;//子通道对象
-            Ni = Channels.Count; //子通道数
-            Nj = InputData.RodCollection.Segment; //轴向分段数
-            Nk = InputData.RodCollection.Rods.Count;//燃料棒个数
- 
-            PowerFactor = InputData.Options.PowerFactor.Value;//功率因子
-            PelletShare = InputData.Options.PowerFactor.PelletShare;//燃料芯块功率份额
-            CladShare = InputData.Options.PowerFactor.CladShare;//燃料包壳功率份额
-            FluidShare = InputData.Options.PowerFactor.FluidShare;//流体中慢化功率份额
-
-            Coolent = InputData.MaterialCollection.Fluid;//冷却剂
-            GasGap = InputData.MaterialCollection.GasGap;//气体间隙
-            Materials = InputData.MaterialCollection.Materials;//固体材料结合
-            RodTypes = InputData.RodTypes;//燃料棒类型集合
-
- 
-            foreach (Channel CH in Channels)
-            {
-                TotalArea += CH.FlowArea;
-                TotalLw += CH.WetPerimeter;
-            }
-            Di = 4 * TotalArea / TotalLw; //总的等效直径
-
-            Precision acc = InputData.Options.Precision;//计算要求的精确度
-
-        }
-
-
-
-        /// <summary>设置输出对象，实例化</summary>
-        public void SetOutput()
-        {
-            this.OutputData = new OutputModel
-            {
-                Title = InputData.Title.Value,
-                //Info = InputData.Infos,
-                //平均流
-                GeneralFlow = new GeneralFlow
-                {
-                    FluidDatas = new List<FluidData>(),
-                },
-                //子通道流
-                ChannelFlows = new ChannelFlowCollection
-                {
-                    ChannelFlow = new List<ChannelFlow>(),
-                },
-                //燃料棒温度场
-                RodsTemperature = new RodsTemperature {
-                    RodTemperature = new List<RodTemperature>(),
-                },
-            };
-        }
-
-
-
-        /// <summary>计算平均流-稳态</summary>
-        public void CaculateGeneralFlow()
-        {
-            //计算平均流
-            for (int j = 0; j < Nj; j++)
-            {
-                if (j == 0)
-                {
-                    //初始化入口节点数据，只有j=0时才进行
-                    FluidData Initial = new FluidData
-                    {
-                        Temperature = InputData.MassFlow.Temperature,//入口温度
-                        Position = 0.000,
-                        Pressure = InputData.MassFlow.Pressure,//入口压力
-                        MassFlowRate = InputData.MassFlow.MassVelocity,
-
-                    };
-                    //入口比焓
-                    Initial.Enthalphy = Coolent.GetH(Initial.Temperature, Initial.Pressure);
-                    Initial.Enthalphy = Math.Round(Initial.Enthalphy, acc.H);
-                    //入口冷却剂密度
-                    Initial.Density = Coolent.GetDensity(Initial.Temperature, Initial.Pressure);
-                    Initial.Density = Math.Round(Initial.Density, acc.Density);
-                    //入口冷却剂流速
-                    Initial.Velocity = Initial.MassFlowRate / TotalArea / Initial.Density;
-                    Initial.Velocity = Math.Round(Initial.Velocity, acc.Velocity);
-                    //导热系数
-                    Initial.K = Coolent.GetK(Initial.Temperature, Initial.Pressure);
-                    Initial.K = Math.Round(Initial.K, acc.K);
-                    //动力粘度
-                    double Kv = Coolent.GetK_Viscosity(Initial.Temperature, Initial.Pressure);
-                    //雷诺数
-                    Initial.Re = Initial.Velocity * Di / Kv;
-                    Initial.Re = Math.Round(Initial.Re, acc.Re);
-                    //普朗特数                                              
-                    Initial.Pr = Coolent.GetPr(Initial.Temperature, Initial.Pressure);
-                    Initial.Pr = Math.Round(Initial.Pr, acc.Pr);
-                    //对流换热系数
-                    Initial.h = h_convect(Initial.Re, Initial.Pr, Initial.K, Di);
-                    Initial.h = Math.Round(Initial.h, acc.h);
-                    //将入口初始数据添加到输出
-                    OutputData.GeneralFlow.FluidDatas.Add(Initial);
-                }
-                //获得上一个节点数据               
-                FluidData Previous = OutputData.GeneralFlow.FluidDatas[j];
-                //根据入口温度求出比焓
-                double Hin = Coolent.GetH(Previous.Temperature, Previous.Pressure);
-
-                //总分段的-线功率
-                double TotalSubPower = 0;
-                foreach (Rod rod in InputData.RodCollection.Rods)
-                {
-                    foreach (var ContactedChannel in rod.ContactedChannel)
-                    {
-                        TotalSubPower += rod.SubPowerCollection[j].Value * ContactedChannel.Angle / 360;
-                    }
-                }
-                //总线功率 X 功率因子
-                TotalSubPower = TotalSubPower * PowerFactor;
-                //获取当前段的长度
-                double Ln = InputData.RodCollection.Rods[0].SubPowerCollection[j].To - InputData.RodCollection.Rods[0].SubPowerCollection[j].From;//计算当前段的高度
-
-                //新建-出口节点数据
-                FluidData Next = new FluidData();
-                //根据功率计算出口焓值
-                double Hout = Hin + TotalSubPower / 1000 * Ln / Previous.MassFlowRate;
-                //出口比焓
-                Next.Enthalphy = Math.Round(Hout, 3);
-                //出口位置百分比
-                Next.Position = Math.Round((double)(j + 1) / Nj, 3);
-                // 先预定为上一个节点的压力
-                Next.Pressure = Previous.Pressure;
-                //计算出口温度
-                double Tout = Coolent.GetT(Next.Enthalphy, Next.Pressure);
-
-                //出口温度
-                Next.Temperature = Math.Round(Tout, acc.T);
-
-                //质量流速
-                Next.MassFlowRate = InputData.MassFlow.MassVelocity;
-                //密度
-
-                Next.Density = Math.Round(Coolent.GetDensity(Next.Temperature, Next.Pressure), acc.Density);
-
-                //出口流速
-                Next.Velocity = Math.Round(Next.MassFlowRate / TotalArea / Next.Density, acc.Velocity);
-                //重力压降
-                double Ph = Next.Density * G * Ln * InputData.MassFlow.Flow_Direction;
-                //求运动粘度
-                double U = Coolent.GetK_Viscosity(Next.Temperature, Next.Pressure);
-
-                //雷诺数              
-                Next.Re = Next.Velocity * Di / U;
-                Next.Re = Math.Round(Next.Re, 0);
-
-                Next.Pr = Coolent.GetPr(Next.Temperature, Next.Pressure);
-                Next.Pr = Math.Round(Next.Pr, acc.Pr);
-
-                Next.K = Coolent.GetK(Next.Temperature, Next.Pressure);
-                Next.K = Math.Round(Next.K, acc.K);
-
-                Next.h = h_convect(Next.Re, Next.Pr, Next.K, Di);
-                Next.h = Math.Round(Next.Re, acc.h);
-
-                Debug.WriteLine("h->" + Next.h);
-
-
-                //摩擦压降 - Pa
-                double Pf = FrictionFactor(Next.Re) * Ln / Di * Next.Density * Next.Velocity * Next.Velocity / 2;
-                //加速压降 - Pa
-                double Pa = Next.Density * (Next.Velocity + Previous.Velocity) / 2 * (Next.Velocity - Previous.Velocity);
-                //总压降 - Mpa
-                double deltaP = (Ph + Pf + Pa) * 0.000001;
-                //压降 - Mpa
-                Next.Pressure = Previous.Pressure + deltaP;
-                Next.Pressure = Math.Round(Next.Pressure, 6);
-
-                OutputData.GeneralFlow.FluidDatas.Add(Next);
-
-            }
-        }
-
-
-#if DEBUG
-#endif
-
-
-        ///<summary>计算子通道流场-稳态</summary>
-        public void CaculateChannelFlow()
-        {
-            //质量流量迭代
-            double[] m = new double[Ni];
-            //压降迭代
-            double[] DeltaP = new double[Ni];
-
-            for (int i = 0; i < Ni; i++)//新建输出对象
-            {
-                ChannelFlow SubChannel = new ChannelFlow();//新建子通道对象
-                SubChannel.ChannelIndex = InputData.ChannelCollection.Channels[i].Index;
-                OutputData.ChannelFlows.ChannelFlow.Add(SubChannel);
-                OutputData.ChannelFlows.ChannelFlow[i].FluidDatas = new List<FluidData>();
-                for (int j = 0; j < Nj+1; j++)
-                {
-                    OutputData.ChannelFlows.ChannelFlow[i].FluidDatas.Add(new FluidData());
-                }
-            }
-
-            //新建output输出燃料棒对象
-      
-            for (int k = 0; k < Nk; k++)
-            {
-
-                RodTemperature rt = new RodTemperature
-                {
-                    SubRodTemperature = new List<SubRodTemperature>()
-                };
-                OutputData.RodsTemperature.RodTemperature.Add(rt);
-            }
- 
-            //子通道轴向迭代
-            for (int j = 0; j < Nj; j++)
-            {
-
-                double Sigma = 0;
-                //给入口节点初值
-                if (j == 0)
-                {
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        Channel ThisChannel = Channels[i];
-                        m[i] = InputData.MassFlow.MassVelocity * ThisChannel.FlowArea / TotalArea;
-                        FluidData Initial = new FluidData
-                        {
-                            Temperature = InputData.MassFlow.Temperature,//入口温度
-                            Position = 0.000,
-                            Pressure = InputData.MassFlow.Pressure,//入口压力
-                            MassFlowRate = m[i],
-                        };
-
-                        Initial.Enthalphy = Coolent.GetH( Initial.Temperature,Initial.Pressure);
-                        Initial.Enthalphy = Math.Round(Initial.Enthalphy, acc.H);
-                         
-                        Initial.Density = Coolent.GetDensity(Initial.Temperature,Initial.Pressure);
-                        Initial.Density= Math.Round(Initial.Density, acc.Density);
-
-
-                        Initial.Velocity = Math.Round(Initial.MassFlowRate /ThisChannel.FlowArea/ Initial.Density, acc.Velocity);
-                        //计算对流换热系数
-                        double De = 4 * ThisChannel.FlowArea / ThisChannel.WetPerimeter;//等效水力直径
-
-                        double U = Coolent.GetK_Viscosity(Initial.Temperature, Initial.Pressure);
-                        //雷诺数
-                        Initial.Re = Initial.Velocity * De / U;
-                        Initial.Re = Math.Round(Initial.Re,acc.Re);
-
-                        Initial.Pr = Coolent.GetPr(Initial.Temperature, Initial.Pressure);
-                        Initial.Pr = Math.Round(Initial.Pr, acc.Pr);
- 
-                        Initial.K= Coolent.GetK(Initial.Temperature, Initial.Pressure);
-                        Initial.K = Math.Round(Initial.K,acc.K);
-
-                        Initial.h = h_convect(Initial.Re, Initial.Pr, Initial.K, De);
-                        Initial.h = Math.Round(Initial.h,acc.h);
- 
-                        OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j]=Initial;//初始化子通道数据
-                    }
-                }
-                double Ln = InputData.RodCollection.Rods[0].SubPowerCollection[j].To - InputData.RodCollection.Rods[0].SubPowerCollection[j].From;//计算当前段的高度
-
-                do
-                {
-                    //子通道计算
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        Channel ThisChannel =Channels[i];//当前计算的子通道对象
-                        FluidData Previous = OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j];//获得上一个节点数据
- 
-                        double Hin = Coolent.GetH(Previous.Temperature, Previous.Pressure);
-
-                        double SubPower = 0;
-                        //当前子通道燃料棒功率输出
-                        foreach (Rod rod in InputData.RodCollection.Rods)
-                        {
-                            foreach (var ContactedChannel in rod.ContactedChannel)
-                            {
-                                if (ContactedChannel.Index == ThisChannel.Index)
-                                {
-                                    SubPower += rod.SubPowerCollection[j].Value * ContactedChannel.Angle / 360;
-                                }
-                            }
-
-                        }
-
-
-                        double De = 4 * ThisChannel.FlowArea / ThisChannel.WetPerimeter;//等效水力直径
-                        //新建-出口节点数据
-                        FluidData Next = new FluidData();
-                        //根据功率计算出口焓值
-                        double Hout = Hin + SubPower * 0.001 * Ln / Previous.MassFlowRate;
-                        //出口比焓
-                        Next.Enthalphy = Math.Round(Hout,acc.H);
-                        //出口位置百分比
-                        Next.Position = Math.Round((double)(j + 1) / Nj, 3);
-                        // 先预定为上一个节点的压力
-                        Next.Pressure = Previous.Pressure;
-                        
-                        //出口温度
-                        Next.Temperature = Coolent.GetT(Next.Enthalphy, Next.Pressure);
-                        Next.Temperature = Math.Round(Next.Temperature, acc.T);
-                        
-                        //质量流速
-                        Next.MassFlowRate = m[i];//  Math.Round(m[i], PrecisionMassFlowRate);//
- 
-                        Next.Density = Math.Round(Coolent.GetDensity(Next.Temperature, Next.Pressure),acc.Density); //密度
-                        Next.Velocity = Math.Round( Next.MassFlowRate / ThisChannel.FlowArea / Next.Density, acc.Velocity); //出口流速
-
-                        double Ph = Next.Density * G * Ln * InputData.MassFlow.Flow_Direction;//重力压降
-                         
-                        double U = Coolent.GetK_Viscosity(Next.Temperature, Next.Pressure);
-                        //雷诺数
-                        Next.Re= Next.Velocity * De / U;
-                        Next.Re = Math.Round(Next.Re,acc.Re);
-                        
-                        Next.Pr = Coolent.GetPr( Next.Temperature, Next.Pressure);
-                        Next.Pr = Math.Round(Next.Pr, acc.Pr);
-
-                        Next.K= Coolent.GetK(Next.Temperature, Next.Pressure);
-                        Next.K = Math.Round(Next.K,acc.K);
-
-                        Next.h = h_convect(Next.Re, Next.Pr, Next.K, De);
-                        Next.h = Math.Round(Next.h,acc.h);
-
-
-                        double Pf = FrictionFactor(Next.Re) * Ln / De * Next.Density * Next.Velocity * Next.Velocity / 2;
-                        double Pa = Next.Density * (Next.Velocity + Previous.Velocity) / 2 * (Next.Velocity-Previous.Velocity);
-                        double P = (Ph + Pf + Pa) ;
-                        Next.Pressure = Previous.Pressure + P * 0.000001;
-                        Next.Pressure = Math.Round(Next.Pressure,6);
-
-                        OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j+1]=Next;
-
-                        DeltaP[i]= P;
-                    }
-
-                    //=====================================分段压力迭代
-                    Sigma = 0;
-                    double AvgPressure = 0;//平均压力
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        AvgPressure += DeltaP[i];// 所有偏差之和
-                        //Debug.WriteLine("子通道"+ i+"压降："+DeltaP[i]);
-                    }
-                    AvgPressure = AvgPressure / Ni;
-                    //Debug.WriteLine(AvgPressure + "平均压降");
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        Sigma += Math.Abs(DeltaP[i] - AvgPressure);// 所有偏差之和
-                    }
-                    double TotalM = 0;
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        double Factor = (AvgPressure - DeltaP[i]) / AvgPressure*0.01;
-
-                        m[i] =m[i] + Factor * m[i];// 所有偏差之和
-
-                        TotalM += m[i];
-                    }
-                    
-                    double k = InputData.MassFlow.MassVelocity/ TotalM;
-                    for (int i = 0; i < Ni; i++)
-                    {
-                        m[i] = k * m[i];//对质量流量进行修正
-                        Debug.WriteLine( "子通道" + i+"流量"+m[i]);
-                    }
-                    Debug.WriteLine("Sigma->" + Sigma);
-                }
-                while (Sigma>1000);
-            }
-
-
-            
-        }
-
-
-
-
-        ///<summary>计算燃料棒温度场-稳态</summary>
-        public void CaculateRodsTemperature() 
-        {
-            //燃料棒温度场计算
-            for (int j = 0; j < Nj; j++)
-            {
-                double Ln = InputData.RodCollection.Rods[0].SubPowerCollection[j].To - InputData.RodCollection.Rods[0].SubPowerCollection[j].From;//计算当前段的高度
-                //i是燃料棒
-                for (int i = 0; i < InputData.RodCollection.Rods.Count; i++)
-                {
-                    double h = 0;//燃料棒i周围的，加权平均对流换热系数
-                    double Tf = 0;
-                    double TotalAngle = 0;
-                    double G1 = 0;
-                    //传热计算
-                    int rodtype=InputData.RodCollection.Rods[i].Type;
-                    
-
-                    double d_rod = InputData.RodTypes[rodtype].Diameter;
-                    double d_pellet = InputData.RodTypes[rodtype].PelletDiameter;
-                    double CladThickness = InputData.RodTypes[rodtype].CladThickness;
-                    double GapThickness = (d_rod - d_pellet) * 0.5 - CladThickness;
-
-
-                    int CladMaterialIndex = InputData.RodTypes[rodtype].CladMaterialIndex;
-                    int PelletMaterialIndex = InputData.RodTypes[rodtype].PelletMaterialIndex;
-
-                    Material Clad = InputData.MaterialCollection.Materials[CladMaterialIndex];
-                    Material Pellet = InputData.MaterialCollection.Materials[PelletMaterialIndex];
-
-                    //遍历 与 [燃料棒i] 接触的 子通道
-                    foreach (ContactedChannel item in InputData.RodCollection.Rods[i].ContactedChannel)
-                    {
-                        ChannelFlow OneContactChannel = new ChannelFlow();
-                        foreach (ChannelFlow cf in OutputData.ChannelFlows.ChannelFlow)
-                        {
-                            if (cf.ChannelIndex == item.Index)
-                            {
-                                OneContactChannel = cf;
-                            }
-                        }
-
-                        double h_channel = OneContactChannel.FluidDatas[j].h;
-
-                        h += h_channel * item.Angle;
-                        Tf += OneContactChannel.FluidDatas[j].Temperature * item.Angle;
-                        TotalAngle += item.Angle;//累加接触的角度份额
-                        G1 += OneContactChannel.FluidDatas[j].Velocity * OneContactChannel.FluidDatas[j].Density * item.Angle;
-                    }
-
-                    h = h / TotalAngle;
-                    Tf = Tf / TotalAngle;
-                    G1 = G1 / TotalAngle;
-
-                    Debug.WriteLine("G1->" + G1);
-
-                    //线性功率，单位W/M
-                    double Linearpower = InputData.RodCollection.Rods[i].SubPowerCollection[j].Value;
-                    Linearpower = Linearpower * PowerFactor;
-                    //包壳外表面 - 温度
-                    double Tw = Linearpower * (1 - FluidShare) / PI / d_rod / h + Tf;
-
-                    //燃料包壳节点数
-                    int CladNode = InputData.Options.CladNode;
-                    int PelletNode = InputData.Options.PelletNode;
-
-
-
-                    double[] T_Clad = new double[CladNode];
-                    double[] T_Pellet = new double[PelletNode];
-
-                    T_Clad[0] = Tw;
-                    //包壳 -稳态 -控制体积- 模型 -没考虑- 产热
-                    for (int n = 1; n < CladNode; n++)
-                    {
-                        double r1 = 0.5 * d_rod - (n - 1) * CladThickness / (CladNode - 1);
-                        double r2 = 0.5 * d_rod - n * CladThickness / (CladNode - 1);
-
-                        double R = Math.Log(r1 / r2) / (2 * PI * Clad.K.Get(T_Clad[n - 1]) * Ln);
-                        T_Clad[n] = Linearpower * Ln * R + T_Clad[n - 1];
-                    }
-
-                    double h_gasGap = InputData.MaterialCollection.GasGap.h;
-                    double T_pellet_outside = Linearpower / h_gasGap / (2 * PI) + T_Clad[CladNode - 1];
-
-                    T_Pellet[0] = T_pellet_outside;
-                    //芯块 -稳态 -控制体积- 模型 
-                    for (int n = 1; n < PelletNode - 1; n++)
-                    {
-                        //环外径 - 占比
-                        double d1 = 1 - (double)(n - 1) / (PelletNode - 1);
-                        //Debug.WriteLine("d1->" + d1);
-                        //环内径 - 占比
-                        double d2 = 1 - (double)n / (PelletNode - 1);
-                        //Debug.WriteLine("d2->" + d2);
-                        //热阻
-                        double R = Math.Log(d1 / d2) / (2 * PI * Pellet.K.Get(T_Pellet[n - 1]) * Ln);
-                        //平均半径
-                        double d_avg = (d1 + d2) * 0.5;
-                        //环内部产热
-                        double InsideHeat = Linearpower * PelletShare * Ln * (d_avg * d_avg);
-
-                        //Debug.WriteLine("GenerateHeat->"+ InsideHeat);
-
-                        T_Pellet[n] = T_Pellet[n - 1] + InsideHeat * R;
-                    }
-                    T_Pellet[PelletNode - 1] = T_Pellet[PelletNode - 2] + 0.25 * Linearpower / Pellet.K.Get(T_Pellet[PelletNode - 2]) * (1.0 / (PelletNode - 1) / (PelletNode - 1));
-
-                    //燃料棒温度场
-
-                    //燃料棒节点
-                    SubRodTemperature srt = new SubRodTemperature
-                    {
-                        Index = j,
-                        CladOutside = Math.Round(T_Clad[0], 3),
-                        CladInside = Math.Round(T_Clad[CladNode - 1], 3),
-                        PelletTemperatures = new List<PelletTemperature>(),
-                        h =Math.Round( h,acc.h),
-                        Q = Math.Round(Linearpower / d_rod / PI, 3),
-                    };
-
-                    double P = OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j].Pressure;
-                    double H = OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j].Enthalphy;
-                    double MassVelocity = OutputData.ChannelFlows.ChannelFlow[i].FluidDatas[j].MassFlowRate;
-                    //double G1 = MassVelocity / InputData.ChannelCollection.Channels[i].FlowArea;
-
-                    double Hf = Coolent.GetHf(P);
-                    double Hg = Coolent.GetHg(P);
-
-                    double Xe = (H - Hf) / (Hg - Hf);
-                    //Debug.WriteLine("Xe->" + Xe);
-               
-                    double qc = Q_Critical(Xe, d_rod, G1, Hf, H, InputData.Options.DNBR_Formula);
-                    srt.Qc = Math.Round(qc, 3);
-                    srt.DNBR = Math.Round(srt.Qc / srt.Q, 3);
-
-
-                    for (int n = 0; n < PelletNode; n++)
-                    {
-                        //燃料芯块温度场
-                        PelletTemperature pt = new PelletTemperature
-                        {
-                            Radius = Math.Round(1 - (double)n / (PelletNode - 1), 4),
-                            Temperature = Math.Round(T_Pellet[n], acc.T),
-                        };
-                        srt.PelletTemperatures.Add(pt);
-                    }
-                    OutputData.RodsTemperature.RodTemperature[i].SubRodTemperature.Add(srt);
-                }
-            }
-        }
-
-
-
-
-
-
-        public void RunAllSteps()
-        {
-            BeginRecognize();
-            SetOutput();
-            CaculateGeneralFlow();
-            CaculateChannelFlow();
-            CaculateRodsTemperature();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public double FrictionFactor(double Re)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double Nu(double Re, double Pr)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double h_convect(double Re, double Pr, double Lamd, double de)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double Q_Critical(double Xe, double d, double G, double h_f, double h_in, int formlula)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double W3_Formula(double Xe, double d, double G, double h_f, double h_in)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double EPRI_Formula(double Xe, double d, double G, double h_f, double h_in)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public double Biasi_Formula(double Xe, double d, double G, double h_f, double h_in)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public void df()
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
 

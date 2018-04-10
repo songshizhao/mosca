@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +21,16 @@ namespace CobraDLL.Models
         public List<FluidProperty> FluidPropertys { get; set; }
         /// <summary>饱和液体比焓,只有使用自定义冷却剂模型时需要</summary>
         [XmlAttribute("hf")]
-        public double HL { get; set; }
+        private double HL { get; set; }
         /// <summary>饱和气体比焓,只有使用自定义冷却剂模型时需要</summary>
         [XmlAttribute("hg")]
-        public double HG { get; set; }
+        private double HG { get; set; }
         //可选使用if97或者if67
         private long Range = 97;
 
 
         /// <summary>根据温度返回比焓</summary>
-        public double GetH(double T, double P = 0)
+        internal double GetH(double T, double P = 0)
         {
 
             double ReturnH = 0;
@@ -63,6 +64,7 @@ namespace CobraDLL.Models
             {
 
                 WaterProperty.PT2H(P, T, out ReturnH, out Range);
+                //Debug.WriteLine("内置物性比焓为:"+ReturnH);
 
             }
 
@@ -71,7 +73,7 @@ namespace CobraDLL.Models
         }
 
         /// <summary>根据温度返回热导率</summary>
-        public double GetK(double T, double P = 0)
+        internal double GetK(double T, double P = 0)
         {
             double ReturnValue = 0;
             //如果为自定义类型
@@ -112,7 +114,7 @@ namespace CobraDLL.Models
         }
 
         /// <summary>根据温度返回普朗特数</summary>
-        public double GetPr(double T, double P = 0)
+        internal double GetPr(double T, double P = 0)
         {
 
             double ReturnValue = 0;
@@ -154,7 +156,7 @@ namespace CobraDLL.Models
         }
 
         /// <summary>根据温度返回运动粘度</summary>
-        public double GetK_Viscosity(double T, double P = 0)
+        internal double GetKv(double T, double P = 0)
         {
 
             double ReturnValue = 0;
@@ -196,7 +198,7 @@ namespace CobraDLL.Models
 
 
 
-        public double GetDensity(double T, double P = 0)
+        internal double GetDensity(double T, double P = 0)
         {
 
             double ReturnValue = 0;
@@ -240,7 +242,7 @@ namespace CobraDLL.Models
 
 
 
-        public double GetHf(double P)
+        internal double GetHf(double P)
         {
             double result = 0;
             if (Type == "UserDefine")
@@ -255,7 +257,7 @@ namespace CobraDLL.Models
             return result;
         }
 
-        public double GetHg(double P)
+        internal double GetHg(double P)
         {
             double result = 0;
             if (Type == "UserDefine")
@@ -270,7 +272,7 @@ namespace CobraDLL.Models
             return result;
         }
 
-        public double GetT(double H, double P = 0)
+        internal double GetT(double H, double P = 0)
         {
 
             double ReturnValue = 0;

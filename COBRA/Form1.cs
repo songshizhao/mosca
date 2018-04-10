@@ -11,10 +11,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Threading;
 
 namespace COBRA
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form,IMsgCenter
     {
         public Form1()
         {
@@ -31,8 +33,7 @@ namespace COBRA
             {
                 textBox2.Text = Settings.Default.OutputFileName;
             }
-            string r = FileIO.OutputDemoXml();
-            Debug.WriteLine(r);
+            //string r = IOManager.OutputDemoInputXml();
         }
         //选择输入文件
         private void InputOpenFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -71,154 +72,48 @@ namespace COBRA
         //点击开始计算按钮
         private void button3_Click(object sender, EventArgs e)
         {
-
-
+            //Dll主程序实例化
             Main m = new Main();
-
-
-
+            //设置消息提示
+            Main.MsgCenter = this;
+            //输入对接
             using (StreamReader reader = new StreamReader(textBox1.Text))
             {
 
                 string XmlString = reader.ReadToEnd();
                 //给计算程序输入数据
-                string InputResult = m.FileInput(XmlString);
-                if (InputResult != "Read XML Success")
-                {
-                    DebugTextBox.AppendText("\n Error：F0001:" + InputResult + "\n");
-                    return;//放弃计算
-                }
-                else
-                {
-                    //识别成功
-                    DebugTextBox.AppendText("\n" + InputResult + "...\n");
-
-                }
+                m.MyIOManager.Input(XmlString);
             }
-            m.SetOutput();
+            //开始计算
+            m.RunAllSteps();
+            
 
-            //在这里认为进行了5%的工作
-            progressBar1.Value = 5;
-
-
-            progressBar1.Value = 10;
-
-            m.BeginRecognize();
-            DebugTextBox.AppendText("\n" + "Recognize Input" + "...\n");
-            progressBar1.Value = 15;
-
-
-            m.CaculateGeneralFlow();
-            DebugTextBox.AppendText("\n" + "Caculate General Flow" + "...\n");
-            progressBar1.Value = 25;
-
-
-            m.CaculateChannelFlow();
-            DebugTextBox.AppendText("\n" + "Caculate Channel Flow" + "...\n");
-            progressBar1.Value = 45;
-
-
-            m.CaculateRodsTemperature();
-            DebugTextBox.AppendText("\n" + "Caculate Rods Temperature" + "...\n");
-            progressBar1.Value = 100;
-
-
-
-
-            //设置输出
-            try
-            {
-                m.SetOutput();
-            }
-            catch (Exception ex)
-            {
-
-                DebugTextBox.AppendText("\n Error：F0003:" + ex.Message + "\n");
-                return;//放弃计算
-            }
-            //在这里认为进行了10%的工作
-            progressBar1.Value = 10;
-            //输入数据处理
-
-
-
-            try
-            {
-                m.BeginRecognize();
-                DebugTextBox.AppendText("\n" + "Recognize Input" + "...\n");
-            }
-            catch (Exception ex)
-            {
-
-                DebugTextBox.AppendText("\n" + ex.Message + "\n");
-                return;//放弃计算
-            }
-            //在这里认为进行了15%的工作
-            progressBar1.Value = 15;
-            try
-            {
-                m.CaculateGeneralFlow();
-                DebugTextBox.AppendText("\n" + "Caculate General Flow" + "...\n");
-            }
-            catch (Exception ex)
-            {
-
-                DebugTextBox.AppendText("\n" + ex.Message + "\n");
-                return;//放弃计算
-            }
-            //在这里认为进行了25%的工作
-            progressBar1.Value = 25;
-            try
-            {
-                m.CaculateChannelFlow();
-                DebugTextBox.AppendText("\n" + "Caculate Channel Flow" + "...\n");
-            }
-            catch (Exception ex)
-            {
-
-                DebugTextBox.AppendText("\n" + ex.Message + "\n");
-                return;//放弃计算
-            }
-
-            //在这里认为进行了35%的工作
-            progressBar1.Value = 35;
-            try
-            {
-                m.CaculateRodsTemperature();
-                DebugTextBox.AppendText("\n" + "Caculate Rods Temperature" + "...\n");
-            }
-            catch (Exception ex)
-            {
-
-                DebugTextBox.AppendText("\n" + ex.Message + "\n");
-                return;//放弃计算
-            }
-            //在这里认为进行了45%的工作
-            progressBar1.Value = 45;
-
-            //开始输出计算的结果
-
-
-
-            try
-            {
-                string XmlOutput = m.FileOutput();
-                using (StreamWriter writer = new StreamWriter(textBox2.Text, false, Encoding.UTF8))
-                {
-                    //writer.Encoding = ;
-                    writer.Write(XmlOutput);
-                }
-                DebugTextBox.AppendText("\n" + "Completed！" + "...\n");
-            }
-            catch (Exception ex)
-            {
-                DebugTextBox.AppendText("\n" + "F0002" + ex.Message + "\n");
-                return;
-            }
-
-            //在这里认为进行了100%的工作
-            progressBar1.Value = 100;
         }
+
+
+
+        void AppendMessageToTextBox(string msg)
+        {
+            
+        }
+
+        public async Task ShowMessage(string msg)
+        {
+            //await Task.Run(() =>{ });
+            DebugTextBox.AppendText("\n" + msg + "\n");
+            
+            //return null;
+        }
+
+        public async Task ShowProcess(double process)
+        {
+           // return null;
+            //throw new NotImplementedException();
+        }
+
+
+
+
     }
 }
 

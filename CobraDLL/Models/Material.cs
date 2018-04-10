@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,26 +23,53 @@ namespace CobraDLL.Models
         [XmlAttribute("Type")]
         public string Type { get; set; }
 
+
+        private KCollection k=new KCollection();
         ///热导率
         [XmlElement("K")]
-        public KCollection K { get; set; }
+        public KCollection K
+        {
+            get { return k; }
+            set { k = value; }
+        }
+
+        private CpCollection cp=new CpCollection();
         ///比热容
         [XmlElement("Cp")]
-        public CpCollection Cp { get; set; }
-    }
-
-
-    //热导率
-    public class KCollection
-    {
-        [XmlAttribute("Value")]
-        public double Value { get; set; }
-        [XmlElement("Data")]
-        public List<Data> KData { get; set; }
-
-        public double Get(double T)
+        public CpCollection Cp
         {
+            get { return cp; }
+            set { cp= value; }
+        }
 
+        /// <summary>
+        /// 根据温度返回 导热系数 lamd
+        /// </summary>
+        /// <param name="T"></param>
+        /// <returns></returns>
+        internal double GetK(double T)
+        {
+            double Value = K.Value;
+            List<Data> KData = K.KData;
+            if (Type == "GetPropertyByName")
+            {
+                switch (Name)
+                {
+                    case "UO2":
+                        KData=KernelMaterial.UO2.K.KData;
+                        break;
+                    case "Zr4":
+                        KData = KernelMaterial.Zr4.K.KData;
+                        //Debug.WriteLine("Kdata 数据" + KData.Count);
+                        //Main.MsgCenter.ShowMessage("Kdata 数据"+ KData.Count);
+                        break;
+                    case "Zr2":
+                        KData = KernelMaterial.Zr2.K.KData;
+                        break;
+                    default:
+                        break;
+                }
+            }
             if (Value <= 0)
             {
                 int x = 0;//比T小的最大序列
@@ -72,6 +100,81 @@ namespace CobraDLL.Models
 
 
         }
+        /// <summary>
+        /// 根据温度返回 比热容 Cp
+        /// </summary>
+        /// <param name="T"></param>
+        /// <returns></returns>
+        internal double Get(double T)
+        {
+            double Value = K.Value;
+            List<Data> CpData = Cp.CpData;
+            if (Type == "GetPropertyByName")
+            {
+                switch (Name)
+                {
+                    case "UO2":
+                        CpData = KernelMaterial.UO2.Cp.CpData;
+                        break;
+                    case "Zr4":
+                        CpData = KernelMaterial.Zr4.Cp.CpData;
+                        break;
+                    case "Zr2":
+                        CpData = KernelMaterial.Zr2.Cp.CpData;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (Value <= 0)
+            {
+                int x = 0;//比T小的最大序列
+                int y = CpData.Count;//比T大的最小序列
+                for (int i = 0; i < CpData.Count; i++)
+                {
+                    if (CpData[i].T < T && i >= x)
+                    {
+                        x = i;
+                    }
+                    else if (CpData[i].T > T && i <= y)
+                    {
+                        y = i;
+                    }
+                    else if (CpData[i].T == T)
+                    {
+                        return CpData[i].Value;
+                    }
+                }
+                double value = (T - CpData[x].T) / (CpData[y].T - CpData[x].T) * (CpData[y].Value - CpData[x].Value) + CpData[x].Value;
+                return value;
+            }
+            else
+            {
+                return Value;
+            }
+        }
+
+    }
+
+
+    //热导率
+    public class KCollection
+    {
+        private double _value=0;
+        [XmlAttribute("Value")]
+        public double Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        }
+        private List<Data> kData = new List<Data>();
+        [XmlElement("Data")]
+        public List<Data> KData
+        {
+            get { return kData; }
+            set { kData = value; }
+        }
+
 
     }
     //比焓
@@ -81,7 +184,7 @@ namespace CobraDLL.Models
         public double Value { get; set; }
         [XmlElement("Data")]
         public List<Data> HData { get; set; }
-        public double Get(double T)
+        internal double Get(double T)
         {
             int x = 0;//比T小的最大序列
             int y = HData.Count;//比T大的最小序列
@@ -111,35 +214,7 @@ namespace CobraDLL.Models
         public double Value { get; set; }
         [XmlElement("Data")]
         public List<Data> CpData { get; set; }
-        public double Get(double T)
-        {
-            if (Value <= 0)
-            {
-                int x = 0;//比T小的最大序列
-                int y = CpData.Count;//比T大的最小序列
-                for (int i = 0; i < CpData.Count; i++)
-                {
-                    if (CpData[i].T < T && i >= x)
-                    {
-                        x = i;
-                    }
-                    else if (CpData[i].T > T && i <= y)
-                    {
-                        y = i;
-                    }
-                    else if (CpData[i].T == T)
-                    {
-                        return CpData[i].Value;
-                    }
-                }
-                double value = (T - CpData[x].T) / (CpData[y].T - CpData[x].T) * (CpData[y].Value - CpData[x].Value) + CpData[x].Value;
-                return value;
-            }
-            else
-            {
-                return Value;
-            }
-        }
+
     }
     //差值数据模型
     public class Data

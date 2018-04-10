@@ -65,7 +65,7 @@
     <Compile Include="Models\OptionCollection.cs" />
     <Compile Include="Models\Transient.cs" />
     <Compile Include="OutputModel.cs" />
-    <Compile Include="FileIO.cs" />
+    <Compile Include="IOManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\PowerFactor.cs" />

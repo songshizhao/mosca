@@ -11,7 +11,7 @@ namespace CobraDLL.Models
     public class ChannelCollection 
     {
 
-        [XmlElement("Channels")]
+        [XmlElement("Channel")]
         public List<Channel> Channels { get; set; }
     
     }

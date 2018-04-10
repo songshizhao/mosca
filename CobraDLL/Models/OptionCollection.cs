@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace CobraDLL.Models
 {
     /// <summary>选项集合</summary>
-    public class OptionCollection
+    public class Options
     {
         /// <summary>堆芯分析还是子通道分析，0表示堆芯整体分析，1表示子通道分析</summary>
         [XmlElement(ElementName = "AnsysType")]
@@ -19,31 +19,84 @@ namespace CobraDLL.Models
         /// <summary>堆芯分析还是子通道分析，0表示堆芯整体分析，1表示子通道分析</summary>
         [XmlElement(ElementName = "DNBR-Formula")]
         public int DNBR_Formula { get; set; }
-        /// <summary>燃料芯块划分的节点数</summary>
-        [XmlElement(ElementName = "Pellet-Node")]
-        public int PelletNode { get; set; }
-        /// <summary>燃料包壳划分的节点数</summary>
-        [XmlElement(ElementName = "Clad-Node")]
-        public int CladNode { get; set; }
+        
+        //[XmlElement(ElementName = "Pellet-Node")]
+        //public int PelletNode { get; set; }
+      
+        //[XmlElement(ElementName = "Clad-Node")]
+        //public int CladNode { get; set; }
 
+
+        //有默认值/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        private int pelletSegment = 6;
+        /// <summary>燃料芯块分段数,节点数=分段数+1</summary>
+        [XmlElement(ElementName = "Pellet-Segment")]
+        public int PelletSegment
+        {
+            get { return pelletSegment; }
+            set { pelletSegment = value; }
+        }
+
+
+        private int cladSegment = 3;
+        ///// <summary>燃料包壳划分的分段数,节点数=分段数+1</summary>
+        [XmlElement(ElementName = "Clad-Segment")]
+        public int CladSegment
+        {
+            get { return cladSegment; }
+            set { cladSegment = value; }
+        }
+
+
+
+
+
+
+        private int maxIteration = 20;
+        [XmlElement(ElementName = "Max-Iteration")]
+        public int MaxIteration
+        {
+            get { return maxIteration; }
+            set { maxIteration = value; }
+        }
+
+        private PowerFactor powerFactor=new PowerFactor();
         /// <summary>功率因子，总功率乘子/燃料棒中份额/燃料包壳中份额/</summary>
         [XmlElement(ElementName = "PowerFactor")]
-        public PowerFactor PowerFactor { get; set; }
+        public PowerFactor PowerFactor
+        {
+            get { return powerFactor; }
+            set { powerFactor = value; }
+        }
 
-        /// <summary>计算摩擦因子</summary>
+        private FluidFrictionFactor fff=new FluidFrictionFactor();
+        /// <summary>计算摩擦因子FluidFrictionFactor</summary>
         [XmlElement(ElementName = "FluidFrictionFactor")]
-        public FluidFrictionFactor FFF { get; set; }
+        public FluidFrictionFactor FFF
+        {
+            get { return fff; }
+            set { fff = value; }
+        }
 
 
+        private Precision precision=new Precision();
         /// <summary>计算精确度，小数点后保留位数</summary>
         [XmlElement(ElementName = "Precision")]
-        public Precision Precision { get; set; }
+        public Precision Precision
+        {
+            get { return precision; }
+            set { precision = value; }
+        }
 
-
+        private Transient transient=new Transient();
         /// <summary>瞬态关系定义</summary>
         [XmlElement(ElementName = "Transient")]
-        public Transient Transient { get; set; }
-
-
+        public Transient Transient
+        {
+            get { return transient; }
+            set { transient = value; }
+        }
     }
 }

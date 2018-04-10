@@ -38,8 +38,11 @@ namespace CobraDLL.Models
  
         /// <summary>定位格架，定义定位格架的阻力系数</summary>
         [XmlElement(ElementName = "Grids")]
-        public GridCollection GridCollection { get; set; }  
- 
+        public GridCollection GridCollection { get; set; }
+
+
+        //[XmlElement(ElementName = "Channels")]
+        //public List<Channel> Channels { get; set; }
         /// <summary>分别描述每一个子通道</summary>
         [XmlElement(ElementName = "Channels")]
         public ChannelCollection ChannelCollection { get; set; }  
@@ -50,7 +53,7 @@ namespace CobraDLL.Models
 
         ///<summary>计算选项描述</summary>
         [XmlElement(ElementName = "Option")]
-        public OptionCollection Options { get; set; }
+        public Options Options { get; set; }
     }
 
 

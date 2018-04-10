@@ -40,7 +40,7 @@ namespace CobraDLL.Models
         [XmlAttribute("FRAMOL6")]
         public double FRAMOL6 { get; set; }
 
-        public double Get()
+        internal double Get_h()
         {
             if (h >= 0)
             {

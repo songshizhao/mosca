@@ -134,11 +134,11 @@
             // 
             // DebugTextBox
             // 
-            this.DebugTextBox.Location = new System.Drawing.Point(36, 337);
+            this.DebugTextBox.Location = new System.Drawing.Point(12, 337);
             this.DebugTextBox.Multiline = true;
             this.DebugTextBox.Name = "DebugTextBox";
             this.DebugTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DebugTextBox.Size = new System.Drawing.Size(534, 150);
+            this.DebugTextBox.Size = new System.Drawing.Size(1421, 311);
             this.DebugTextBox.TabIndex = 9;
             this.DebugTextBox.Text = "计算信息：\r\n";
             // 
@@ -147,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(633, 499);
+            this.ClientSize = new System.Drawing.Size(1433, 660);
             this.Controls.Add(this.DebugTextBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label2);

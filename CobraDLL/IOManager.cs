@@ -1,11 +1,8 @@
 ﻿/////////////////////////////////////////////////////////////
-//********COBRA MODEL CLASS
-//********FIRST CREATED BY SONGSHIZHAO @ 2017年8月15日
-//********已弃用
-//********LASTEST EDITED BY SONGSHIZHAO @ 2017年10月12日10:00:36
-//********END
-/////////////////////////////////////////////////////////////
-
+//输入输出控制类:IOManager>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//说明：使用该对象处理输入输出文件
+//创建于 2017-8-15 宋仕钊;上次编辑2018-3-25 宋仕钊
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,63 +16,69 @@ using CobraDLL.Models;
 
 namespace CobraDLL
 {
-
-    public class FileIO
+    public class IOManager
     {
-        public static string InputXmlString;
-        public static string OutputXmlString;
-        /// 数据输入
-        //public static string FileInput(string XmlString)
-        //{
-        //    string InputResult = "";
-        //    using (StringReader reader = new StringReader(XmlString))
-        //    {
-        //        XmlSerializer xmlSearializer = new XmlSerializer(typeof(CobraInput));
-        //        try
-        //        {
-        //            Main.InputData = (CobraInput)xmlSearializer.Deserialize(reader);
-        //            InputResult = "Read XML Success";
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            InputResult = "反序列化Xml失败：" + ex.Message;
-        //        }
+        /// <summary>输入文件模型 </summary>
+        public InputModel InputData { get; set; }
 
-        //    }
-        //    return InputResult;
-        //}
-
-        //public static string FileOutput()
-        //{
-
-
-
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        var setting = new XmlWriterSettings()
-        //        {
-        //            Encoding = new UTF8Encoding(false),
-        //            Indent = true,
-        //        };
-
-        //        using (XmlWriter writer = XmlWriter.Create(ms, setting))
-        //        {
-
-        //            XmlSerializer xmlSearializer = new XmlSerializer(typeof(CobraOutput));
-        //            xmlSearializer.Serialize(writer, Main.OutputData);
-        //            OutputXmlString = Encoding.UTF8.GetString(ms.ToArray());
-        //        }
-
-        //    }
-
-
-
-        //    return OutputXmlString;
-        //    //Debug.Write(OutputXmlString);
-        //}
-
-        public static string OutputDemoXml()
+        private OutputModel outputData;
+        /// <summary>输出文件模型</summary>
+        public OutputModel OutputData
         {
+            get { return outputData; }
+            set { outputData = value; }
+        }
+        /// <summary>输入文件xml文本</summary>
+        public string InputXmlString { get; set; }
+        /// <summary>输出文件xml文本</summary>
+        public string OutputXmlString { get; set; }
+
+        /// <summary>数据输入反序列化XML文本</summary>
+        public void Input(string XmlString)
+        {
+            Main.MsgCenter.ShowMessage("正在读取输入信息...");
+            //将输入字符串变量赋值
+            InputXmlString = XmlString;
+            using (MemoryStream MS = new MemoryStream(Encoding.UTF8.GetBytes(InputXmlString)))
+            {
+                using (XmlReader xr = XmlReader.Create(MS))
+                {
+                    XmlSerializer xmlSearializer = new XmlSerializer(typeof(InputModel));
+                    InputData = (InputModel)xmlSearializer.Deserialize(xr);
+                    
+                }
+            }
+        }
+
+
+        /// <summary>数据输出序列化XML文本,计算后调用,需要原始对象直接则获取OutputModel属性</summary>
+        public string Output()
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                var setting = new XmlWriterSettings()
+                {
+                    Encoding = new UTF8Encoding(false),
+                    Indent = true,
+                };
+
+                using (XmlWriter writer = XmlWriter.Create(ms, setting))
+                {
+                    XmlSerializer xmlSearializer = new XmlSerializer(typeof(OutputModel));
+                    xmlSearializer.Serialize(writer, OutputData);
+                    OutputXmlString = Encoding.UTF8.GetString(ms.ToArray());
+                }
+
+            }
+            return OutputXmlString;
+        }
+
+        /// <summary>
+        /// 仅测试用
+        /// </summary>
+        public static string OutputDemoInputXml()
+        {
+            string Result;
             //#.InputDemo.#
             InputModel DemoInput = new InputModel()
             {
@@ -85,8 +88,6 @@ namespace CobraDLL
                     Infos = new List<string>
                     {
                         "dsd",
- 
-
                     },
 
                 },
@@ -736,11 +737,11 @@ namespace CobraDLL
                     MassVelocity = 2,
                     Temperature = 240,
                     Pressure = 14,
-                    FluidMateralIndex = 5,
+                    //FluidMateralIndex = 5,
                     Flow_Direction = 1,
                 },
                 //计算选项
-                Options = new OptionCollection()
+                Options = new Options()
                 {
                     AnsysType = 1,
                     DNBR_Formula = 1,
@@ -754,14 +755,10 @@ namespace CobraDLL
             {
                 XmlSerializer xmlSearializer = new XmlSerializer(typeof(InputModel));
                 xmlSearializer.Serialize(writer, DemoInput);
-                OutputXmlString = writer.ToString();
+                Result = writer.ToString();
             }
 
-            return OutputXmlString;
+            return Result;
         }
-
-
-
-
     }
 }

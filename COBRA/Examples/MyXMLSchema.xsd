@@ -76,6 +76,8 @@
             <xs:attribute name="MassVelocity" type="xs:double"/>
             <xs:attribute name="Temperature" type="xs:double"/>
             <xs:attribute name="Pressure" type="xs:double"/>
+            <xs:attribute name="FlowDirection" type="xs:double"/>
+         
           </xs:complexType>
         </xs:element>
 
@@ -86,9 +88,9 @@
               <xs:element name="AnsysType" type="xs:int"/>
               <xs:element name="IsOpenChannel" type="xs:int"/>
               <xs:element name="DNBR-Formula" type="xs:int"/>
-              <xs:element name="Pellet-Node" type="xs:int"/>
-              <xs:element name="Clad-Node" type="xs:int"/>
-              <xs:element name="Flow-Direction" type="xs:double"/>
+              <xs:element name="Pellet-Segment" type="xs:int"/>
+              <xs:element name="Clad-Segment" type="xs:int"/>
+             
 
               <xs:element name="Transient">
                 <xs:complexType>
@@ -173,7 +175,7 @@
     <xs:attribute name="Name" type="xs:string"/>
     <xs:attribute name="Type" type="xs:string"/>
     <!--可选参数-->
-    <xs:attribute name="H" type="xs:double" use="optional"/>
+    <xs:attribute name="h" type="xs:double" use="optional"/>
     <xs:attribute name="FPRESS" type="xs:double" use="optional"/>
     <xs:attribute name="VPLEN" type="xs:double" use="optional"/>
     <xs:attribute name="FRAMOL1" type="xs:double" use="optional"/>

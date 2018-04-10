@@ -20,9 +20,9 @@ namespace CobraDLL.Models
         [XmlAttribute("Pressure")]
         public double Pressure { get; set; }
         //流体材质
-        [XmlAttribute("FluidMateralIndex")]
-        public int FluidMateralIndex { get; set; }
-        [XmlElement(ElementName = "Flow-Direction")]
+        //[XmlAttribute("FluidMateralIndex")]
+        //public int FluidMateralIndex { get; set; }
+        [XmlAttribute("FlowDirection")]
         public int Flow_Direction { get; set; }
     }
 }

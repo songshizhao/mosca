@@ -1,4 +1,10 @@
-﻿using System;
+﻿//////////////////////////////////////////////
+//********流体参数模型；
+//********创建/2017-8-15/宋仕钊；
+//********上次编辑/2018-3-28/宋仕钊；
+//////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,20 +36,29 @@ namespace CobraDLL.Models
         //压力
         [XmlAttribute("Pressure")]
         public double Pressure { get; set; }
-        //对流换热系数
+        /// <summary>对流换热系数</summary>
         [XmlAttribute("h")]
         public double h { get; set; }
-        //普朗特数
+        /// <summary>普朗特数</summary>
         [XmlAttribute("Pr")]
         public double Pr { get; set; }
         //雷诺数
         [XmlAttribute("Re")]
         public double Re { get; set; }
-        //导热系数
+        /// <summary>导热系数</summary>
         [XmlAttribute("K")]
         public double K { get; set; }
-        //临界泡核沸腾比-DNBR
+        /// <summary>运动粘度</summary>
+        [XmlAttribute("Kv")]
+        public double Kv { get; set; }
+        /// <summary>临界泡核沸腾比-DNBR</summary>
         [XmlAttribute("DNBR")]
         public double DNBR { get; set; }
+
+
+        /// <summary>热平衡含气率Xe</summary>
+        [XmlAttribute("Xe")]
+        public double Xe { get; set; }
+
     }
 }
