@@ -13,7 +13,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace CobraDLL
+namespace MoscaCore
 {
     /// <summary>
     /// 接口：用来向使用者报告正在进行计算和分析的详细信息

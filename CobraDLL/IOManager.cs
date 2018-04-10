@@ -10,11 +10,11 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using CobraDLL.Models;
+using MoscaCore.Models;
 
 
 
-namespace CobraDLL
+namespace MoscaCore
 {
     public class IOManager
     {

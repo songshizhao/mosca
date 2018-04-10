@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebCobra
+namespace MoscaWeb
 {
     public partial class userguid : System.Web.UI.Page
     {

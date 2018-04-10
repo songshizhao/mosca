@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CobraDLL;
+using MoscaCore;
 
-namespace WebCobra
+namespace MoscaWeb
 {
     public partial class index : System.Web.UI.Page
     {

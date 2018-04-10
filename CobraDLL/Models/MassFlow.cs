@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     //质量流量输入
     public class MassFlow

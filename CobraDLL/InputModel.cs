@@ -4,14 +4,14 @@
 //********创建/2017-8-15/宋仕钊；
 //********上次编辑/2018-3-22/宋仕钊；
 //****************************************************************
-using CobraDLL;
+using MoscaCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
-using CobraDLL.Models;
+using MoscaCore.Models;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
 
 

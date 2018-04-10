@@ -1,4 +1,4 @@
-﻿namespace COBRA.Properties {
+﻿namespace MoscaPC.Properties {
     
     
     // 通过此类可以处理设置类的特定事件: 

@@ -7,8 +7,8 @@
     <ProjectGuid>{4752FE1A-235D-4059-9906-477FF97C00D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CobraDLL</RootNamespace>
-    <AssemblyName>CobraDll</AssemblyName>
+    <RootNamespace>MoscaCore</RootNamespace>
+    <AssemblyName>MoscaCore</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     ///<summary>内部物性参数</summary>
     public class KernelMaterial

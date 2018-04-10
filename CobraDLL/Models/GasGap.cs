@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     //充气间隙模型
     public class GasGap

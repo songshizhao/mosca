@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     public class FluidData
     {

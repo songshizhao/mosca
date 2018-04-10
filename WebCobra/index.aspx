@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WebCobra.index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="MoscaWeb.index" %>
 
 <!DOCTYPE html>
 
@@ -21,7 +21,7 @@
         <a href="service.asmx">服务</a>
 
 
-        <h1>Cobra远程调用测试</h1>
+        <h1>子通道跑程序远程手动调用测试</h1>
         <h4>手动上传输入文件</h4>
          <asp:FileUpload ID="AspXmlUpload" runat="server" ToolTip="上传输入文件"/>
         <asp:Button ID="Btn_Start" runat="server" OnClick="Btn_Start_Click" Text="开始上传" OnClientClick="uploadbegin"/>

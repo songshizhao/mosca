@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     /// <summary>选项集合</summary>
     public class Options

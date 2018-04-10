@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userguid.aspx.cs" Inherits="WebCobra.userguid" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userguid.aspx.cs" Inherits="MoscaWeb.userguid" %>
 
 <!DOCTYPE html>
 

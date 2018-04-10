@@ -14,10 +14,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CobraDLL.Models;
+using MoscaCore.Models;
 using System.Diagnostics;
 
-namespace CobraDLL
+namespace MoscaCore
 {
     public class FormulaBase
     {

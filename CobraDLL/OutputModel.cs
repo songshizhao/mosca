@@ -7,10 +7,10 @@
 
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using CobraDLL.Models;
+using MoscaCore.Models;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace CobraDLL.Models
+namespace MoscaCore.Models
 {
     public class OutputModel
     {

@@ -2,7 +2,7 @@
 //说明：该函数方法必须使用IOManager输入后才可进行和计算
 //创建于 2017-8-15;上次编辑2018-3-25
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-using CobraDLL;
+using MoscaCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,11 +11,11 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml;
-using CobraDLL.Models;
+using MoscaCore.Models;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace CobraDLL
+namespace MoscaCore
 {
     public class Main:FormulaBase
     {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
-using CobraDLL;
-namespace WebCobra
+using MoscaCore;
+namespace MoscaWeb
 {
     /// <summary>
     /// service 的摘要说明
@@ -24,26 +24,29 @@ namespace WebCobra
         [WebMethod]
         public string All(string XmlString)
         {
-            m.FileInput(XmlString);
-
-
-            
-
-            m.BeginRecognize();
-
-            m.SetOutput();
-
-            m.CaculateGeneralFlow();
+            m.MyIOManager.Input(XmlString);
+            m.RunAllSteps();
+            return m.MyIOManager.OutputXmlString;
+            //m.FileInput(XmlString);
 
 
 
-            m.CaculateChannelFlow();
+
+            //m.BeginRecognize();
+
+            //m.SetOutput();
+
+            //m.CaculateGeneralFlow();
 
 
 
-            m.CaculateRodsTemperature();
+            //m.CaculateChannelFlow();
 
-            return m.FileOutput();
+
+
+            //m.CaculateRodsTemperature();
+
+            //return m.FileOutput();
         }
 
 
@@ -52,8 +55,8 @@ namespace WebCobra
         public string LoadInputXml(string XmlString)
         {
             
-            string InputResult = m.FileInput(XmlString);
-            return "Hello World" + InputResult;
+            m.MyIOManager.Input(XmlString);
+            return "Hello World";
         }
 
 
@@ -70,7 +73,8 @@ namespace WebCobra
         [WebMethod]
         public string ReturnOutputString()
         {
-            return m.FileOutput();
+      
+            return m.MyIOManager.OutputXmlString;
         }
 
 

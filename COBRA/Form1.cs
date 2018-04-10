@@ -1,5 +1,5 @@
-﻿using COBRA.Properties;
-using CobraDLL;
+﻿using MoscaPC.Properties;
+using MoscaCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 
-namespace COBRA
+namespace MoscaPC
 {
     public partial class Form1 : Form,IMsgCenter
     {
