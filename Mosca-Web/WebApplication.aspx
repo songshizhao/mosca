@@ -14,6 +14,11 @@
     <%--SIGNALR以及代理--%>
     <script src="Scripts/jquery.signalR-2.2.3.js"></script>
     <script src="signalr/hubs"></script>
+    <style>
+        .msg {
+            margin-left:10px;font-size:14px;font-weight:300;
+        }
+    </style>
 </head>
 <body>
      <div id="header" style="width:100%;height:80px;background-color:black;color:white;">
@@ -29,15 +34,15 @@
          </div>
       
     </div>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" style="margin:0;padding:0;">
 
         <div class="content-white">
-            <h4 style="margin-left:20px;">选择输入文件</h4>
+            <h4 style="padding-left:20px;padding-top:20px;margin:0;">选择输入文件</h4>
 
             <input class="upload" style="margin-left:20px;" type="file" name="file" id="upload" />
             <input type="button" class="button" value="开始计算" onclick="BeginCaculate()" />
 
-            <div id="msg-container">
+            <div id="msg-container" style="user-select:all;height:800px;overflow-y:scroll">
             </div>
         </div>
         
@@ -48,38 +53,34 @@
     </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <script type="text/javascript">
         var reply;
         $(function () {
             // Declare a proxy to reference the hub. 
             reply = $.connection.replyHub;
             // Create a function that the hub can call to broadcast messages.
-            reply.client.sendMessage = function (msg, id) {
+            reply.client.sendMessage = function (msg) {
                 // Html encode display name and message. 
                 var encodedMsg = $('<div />').text(msg).html();
-                var encodedId = $('<div />').text(id).html();
-                // Add the message to the page. 
-                $('#msg-container').append('<li><strong>' + encodedMsg
-                    + '</strong>:&nbsp;&nbsp;' + encodedId + '</li>');
+                encodedMsg.search("\r\n",);
+                encodedMsg = encodedMsg.replace(/\r\n/g,"<br />");
+                $('#msg-container').append("<div class='msg'>" + encodedMsg + "</div>");
             };
             reply.client.arrival = function (msg) {
                 // Html encode display name and message. 
                 var encodedMsg = $('<div />').text(msg).html();
                 // Add the message to the page. 
-                $('#msg-container').append('<li><strong>' + encodedMsg
-                    + '</strong>:&nbsp;&nbsp;</li>');
+                $('#msg-container').append("<div class='msg'>" + encodedMsg + "</div>");
             };
+            reply.client.showXmlResult = function (xmlstring) {
+
+                $('#msg-container').append("<xmp style='color:white;background:black;'>" + xmlstring + "</xmp>");
+
+            };
+
+
+
+
             // 
             $.connection.hub.start().done(function () {
                 //告知服务器已经登陆，并从服务器获得登陆确认消息
@@ -100,16 +101,23 @@
         function BeginCaculate() {
             var f = document.getElementById('upload');
             var file = f.files[0];
+            console.log(file)
             var reader = new FileReader();
             reader.readAsText(file);
+            reader.onload = function(e) {
+                //设置输入文件
+                var input_string = e.target.result;
+                //alert(input_string);
+                if (input_string != "") {
 
-            alert(input_string);
-            //设置输入文件
-            var input_string = reader.result;
-            if (input_string != "") {
-               
-                reply.server.Caculate(input_string);
+                    reply.server.caculate(input_string);
+                }
             }
+                
+           
+
+           
+
         }
 
     </script>

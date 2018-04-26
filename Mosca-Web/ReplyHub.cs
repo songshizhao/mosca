@@ -6,6 +6,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using MoscaCore;
 using MoscaCore.Helpper;
+using MoscaCore.Models;
 
 namespace MoscaWeb
 {
@@ -34,10 +35,18 @@ namespace MoscaWeb
             //开始计算
             MainCaculation.RunAllSteps();
             //获得输出字符串
-            string r= MainCaculation.MyIOManager.Output();
             //计算结果输出
-            Clients.Caller.sendMessage(r);
+            ShowXmlResult(MainCaculation.MyIOManager.Output());
         }
+
+        public void ShowXmlResult(string xmlstring)
+        {
+
+            //计算结果输出
+            Clients.Caller.showXmlResult(xmlstring);
+        }
+
+
 
         public Task ShowMessage(string msg)
         {
