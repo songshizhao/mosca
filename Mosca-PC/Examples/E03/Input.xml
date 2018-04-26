@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+       xmlns="http://songshizhao.com/MyXMLSchema.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://songshizhao.com/MyXMLSchema.xsd ../MyXMLSchema.xsd">
+
+
+  <Title Value="E03示例">
+    <Info>1</Info>
+    <Info>2</Info>
+    <Info>3</Info>
+  </Title>
+
+  <Materials >
+    <Fluid Type="GetPropertyByName" Name="LightWater"/>
+    <Material Index="1" Type="UserDefine" >
+      
+    </Material>
+    <Material Index="2" Type="UserDefine" >
+      
+    </Material>
+  </Materials>
+  
+  
+
+  
+</Root>

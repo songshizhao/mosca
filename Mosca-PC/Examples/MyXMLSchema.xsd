@@ -87,7 +87,20 @@
             <xs:choice minOccurs="0" maxOccurs="unbounded">
               <xs:element name="AnsysType" type="xs:int"/>
               <xs:element name="IsOpenChannel" type="xs:int"/>
-              <xs:element name="DNBR-Formula" type="xs:int"/>
+              <xs:element name="DNBR-Formula">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="Look-Up-Table"/>
+                    <xs:enumeration value="BAW2"/>
+                    <xs:enumeration value="W3"/>
+                    <xs:enumeration value="EPRI"/>
+                    <xs:enumeration value="Macbeth-12"/>
+                    <xs:enumeration value="Macbeth-6"/>
+                    <xs:enumeration value="Biasi"/>
+                    <xs:enumeration value="Barnett"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="Pellet-Segment" type="xs:int"/>
               <xs:element name="Clad-Segment" type="xs:int"/>
              
@@ -123,34 +136,56 @@
                 </xs:complexType>
               </xs:element>
 
+              <xs:element name="Precision">
+                <xs:complexType>
 
+                  <xs:attribute name="T" type="xs:int" />
+                  <xs:attribute name="h" type="xs:int" />
+                  <xs:attribute name="H" type="xs:int" />
+                  <xs:attribute name="Re" type="xs:int" />
+                  <xs:attribute name="Density" type="xs:int" />
+                  <xs:attribute name="Velocity" type="xs:int" />
+                  <xs:attribute name="Pressure" type="xs:int" />
+                  <xs:attribute name="MassFlowRate" type="xs:int" />
+                  <xs:attribute name="G" type="xs:int" />
+                  <xs:attribute name="K" type="xs:int" />
+                  <xs:attribute name="Kv" type="xs:int" />
+                  <xs:attribute name="Pr" type="xs:int" />
+ 
+                </xs:complexType>
+              </xs:element>
+
+              <xs:element name="Iteration">
+                <xs:complexType>
+
+                  <xs:attribute name="MaxIteration" type="xs:int" />
+                  <xs:attribute name="Sigma" type="xs:double" />
+                  <xs:attribute name="IterationType">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="IOIteration"/>
+                        <xs:enumeration value="NodeIteration"/>
+                        <xs:enumeration value="FieldIteration"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
 
             </xs:choice>
           </xs:complexType>
         </xs:element>
-
-
-
-
-
-
-
-
-
       </xs:choice>
 
     </xs:complexType>
   </xs:element>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
   
   
   
@@ -195,7 +230,14 @@
     </xs:choice>    
     <xs:attribute name="Index" type="xs:int"/>
     <xs:attribute name="Name" type="xs:string"/>
-    <xs:attribute name="Type" type="xs:string"/>
+    <xs:attribute name="Type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="GetPropertyByName"/>
+          <xs:enumeration value="UserDefine"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
 
   <!--热导率-->

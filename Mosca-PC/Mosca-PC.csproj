@@ -103,9 +103,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="COBRA_TemporaryKey.pfx" />
-    <None Include="Examples\E04\MyXMLSchema.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Examples\MyXMLSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -145,10 +142,12 @@
     <Content Include="Examples\E02\ReadMe.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Examples\E03\Input.xml" />
     <Content Include="Examples\E04\Demo - Input.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Examples\E04\Output.xml" />
     <Content Include="Examples\ErrorList.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

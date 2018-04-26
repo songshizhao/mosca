@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="MoscaCore.FormulaBase" Collapsed="true">
+    <Position X="5.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAEAAACAABgAAAAAAAAABgAAAAAAAACACACAA=</HashCode>
+      <FileName>Helpper\Formula.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.MatrixSolver" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAQAAAwgAAAAAACAABAAIAA=</HashCode>
+      <FileName>Helpper\MyMath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Main" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEowAggAEAAggsEgyBAKIAACYADAAAAgAaJAABAAEEQ=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IMsgCenter" />
+      <Property Name="IOManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.WaterProperty" Collapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>5cyzfyOZE1eU7v8IgFLsOQCoGQ4hEBAxL/fzOohr3Y4=</HashCode>
+      <FileName>WaterProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Helpper.IOManager" Collapsed="true">
+    <Position X="5.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAACAAAABQAAAAIAABAEIAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Helpper\IOManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="InputModel" />
+      <Property Name="OutputModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Helpper.TempMsgCenter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpper\MsgCenter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IMsgCenter" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="MoscaCore.Models.InputModel" Collapsed="true">
+    <Position X="6.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAEAAQAAAEIEAAAAIAAAAgBAQAAAAAAAAABAAAI=</HashCode>
+      <FileName>InputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Title1" />
+      <Property Name="MassFlow1" />
+      <Property Name="MaterialCollection1" />
+      <Property Name="RodType" />
+      <Property Name="ChannelCollection1" />
+      <Property Name="RodCollection1" />
+      <Property Name="GridCollection1" />
+      <Property Name="Options1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.ChannelCollection" Collapsed="true">
+    <Position X="9.5" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\Channel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Channel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.Channel" Collapsed="true">
+    <Position X="6.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAACAAAAAAgAAAAAAAAAAAAAAAAAQEAAAAAAAA=</HashCode>
+      <FileName>Models\Channel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.ConnectedChannel" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\Channel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Fluid" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECBAUAAIAAAKAAAAAAAAAQAAAAIEAAAAQbAAAAhAAA=</HashCode>
+      <FileName>Models\Fluid.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WaterProperty" />
+      <Property Name="HCollection" />
+      <Property Name="CpCollection" />
+      <Property Name="KCollection" />
+      <Property Name="KernelMaterial" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.FluidData" Collapsed="true">
+    <Position X="2.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAIAgAgAAAAAAABAAAAAAAAQAEIQoAEAAQ=</HashCode>
+      <FileName>Models\FluidData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.FluidFrictionFactor" Collapsed="true">
+    <Position X="12.5" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAQAAoAEAAAA=</HashCode>
+      <FileName>Models\FluidFrictionFactor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.FluidProperty" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAEIAMAEAAA=</HashCode>
+      <FileName>Models\FluidProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.GasGap" Collapsed="true">
+    <Position X="12.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAYAAAEAAAvQA=</HashCode>
+      <FileName>Models\GasGap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Grid" Collapsed="true">
+    <Position X="0.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAACAgAABAAAAAAA=</HashCode>
+      <FileName>Models\Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.GridCollection" Collapsed="true">
+    <Position X="3.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAgAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GridCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Grid" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.KernelMaterial" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAABAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\KernelMaterial.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Data" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.MassFlow" Collapsed="true">
+    <Position X="3.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAgAEAAI=</HashCode>
+      <FileName>Models\MassFlow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Material" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAIAAAAABAAAAAAAQAAAAAAAAAgYGAAICAAAA=</HashCode>
+      <FileName>Models\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="KCollection" />
+      <Property Name="Material1" />
+      <Property Name="KernelMaterial" />
+      <Property Name="CpCollection" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.KCollection" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAAAABAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Data" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.HCollection" Collapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAABAAAAAAAAAAAAAABAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Data" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.CpCollection" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAwAAAAAAA=</HashCode>
+      <FileName>Models\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Data" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.Data" Collapsed="true">
+    <Position X="10.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAA=</HashCode>
+      <FileName>Models\Material.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.MaterialCollection" Collapsed="true">
+    <Position X="9.5" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAEA=</HashCode>
+      <FileName>Models\MaterialCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Material" />
+      <Property Name="GasGap1" />
+      <Property Name="Fluid1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.Options" Collapsed="true">
+    <Position X="9.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAEQBAQBEgQAA0AAAAIAAAAAAAAAAQKABAEAA=</HashCode>
+      <FileName>Models\OptionCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Transient1" />
+      <Property Name="PowerFactor1" />
+      <Property Name="Precision1" />
+      <Property Name="FluidFrictionFactor" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.PowerFactor" Collapsed="true">
+    <Position X="12.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAgAAAAIAAAAAEAAAABAAAAAAAAAAQAAAAEIAAA=</HashCode>
+      <FileName>Models\PowerFactor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Precision" Collapsed="true">
+    <Position X="12.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAMAAAABEAAAgAAAAQBAgABAABAAAAAwAEoCsAECAQ=</HashCode>
+      <FileName>Models\Precision.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Rod" Collapsed="true">
+    <Position X="15.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAgAAAAAAAAAAQAQEAAAAAAAA=</HashCode>
+      <FileName>Models\Rod.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SubPower" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.ContactedChannel" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAAAAAAAA=</HashCode>
+      <FileName>Models\Rod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.SubPower" Collapsed="true">
+    <Position X="15.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Rod.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.RodCollection" Collapsed="true">
+    <Position X="9.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAEAAABAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RodCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Rod" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.RodType" Collapsed="true">
+    <Position X="6.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAACAAAAAAAAAAAAAAAIAAAAAAEBABAAAAA=</HashCode>
+      <FileName>Models\RodType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Title" Collapsed="true">
+    <Position X="6.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAgAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Title.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.Transient" Collapsed="true">
+    <Position X="9.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAEAAAAAQAAAAAEAAA=</HashCode>
+      <FileName>Models\Transient.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TransientTimer" />
+      <Property Name="Timer1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.Timer" Collapsed="true">
+    <Position X="9.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAIAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Models\Transient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.OutputModel" Collapsed="true">
+    <Position X="3.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAACQAABAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Title1" />
+      <Property Name="Result" />
+      <Property Name="TransientResult1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.Result" Collapsed="true">
+    <Position X="3.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAACAAAACAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GeneralFlow1" />
+      <Property Name="ChannelFlow" />
+      <Property Name="RodTemperature1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.TransientResult" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAACAAAAIAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GeneralFlow" />
+      <Property Name="ChannelFlow" />
+      <Property Name="RodTemperature" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.TransientTimer" Collapsed="true">
+    <Position X="12.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.RodTemperature" Collapsed="true">
+    <Position X="1" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIBAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SubRodTemperature" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.SubRodTemperature" Collapsed="true">
+    <Position X="1" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAAgAAAAAAAACAAAEAAAAAAQCEAAABgAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoscaCore.Models.GeneralFlow" Collapsed="true">
+    <Position X="3.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FluidData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MoscaCore.Models.ChannelFlow" Collapsed="true">
+    <Position X="1" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAJAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>OutputModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FluidData" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="MoscaCore.Helpper.IMsgCenter" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpper\MsgCenter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

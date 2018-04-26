@@ -1,8 +1,8 @@
-﻿//////////////////////////////////////////////
+﻿///--------------------------------------------
 //********精确度控制模型；
 //********创建/2017-8-15/宋仕钊；
 //********上次编辑/2018-3-28/宋仕钊；
-//////////////////////////////////////////////
+///--------------------------------------------
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace MoscaCore.Models
         private int MassFlowRate_Default = 3;//质量流速
         private int G_Default = 3;//质量流密度
         private int K_Default = 3;//导热系数
-        private int Kv_Default = 3;//运动粘度
+        private int Kv_Default = 7;//运动粘度
         private int Pr_Default = 3;//普朗特殊
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace MoscaCore.Models
         }
 
         /// <summary>
-        /// 粘度计算精度
+        /// 粘度计算精度,默认为 7
         /// </summary>
         [XmlAttribute("Kv")]
         public int Kv

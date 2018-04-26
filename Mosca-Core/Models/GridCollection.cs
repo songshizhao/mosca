@@ -15,5 +15,7 @@ namespace MoscaCore.Models
         //格架分定义
         [XmlElement(ElementName = "Grid")]
         public List<Grid> Grids { get; set; }
+
+
     }
 }

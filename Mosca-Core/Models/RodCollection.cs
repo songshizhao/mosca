@@ -19,5 +19,6 @@ namespace MoscaCore.Models
         [XmlElement(ElementName = "Rod")]
         public List<Rod> Rods { get; set; }
 
+
     }
 }

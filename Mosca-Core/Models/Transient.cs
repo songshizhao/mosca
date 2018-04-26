@@ -9,10 +9,6 @@ namespace MoscaCore.Models
 {
     public class Transient
     {
-
-
-       // public bool Use { get; set; } = false;
-
         //是否为瞬态计算
         private bool _use=false;
         [XmlAttribute("use")]
@@ -21,13 +17,14 @@ namespace MoscaCore.Models
             get { return _use=false; }
             set { _use = value; }
         }
+        [XmlElement(ElementName = "Timer")]
+        public List<InputTimer> Timers { get; set; }
 
-        public List<Timer> Timer { get; set; }
 
     }
 
 
-    public class Timer
+    public class InputTimer
     {
         [XmlAttribute("Second")]
         public double Second { get; set; }

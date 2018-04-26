@@ -13,7 +13,7 @@ namespace MoscaCore.Models
 
         [XmlElement("Channel")]
         public List<Channel> Channels { get; set; }
-    
+
     }
 
     public class Channel

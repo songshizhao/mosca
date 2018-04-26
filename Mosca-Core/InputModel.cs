@@ -1,5 +1,5 @@
 ﻿//***************************************************************
-//********Input MODEL CLASS；
+//********InputModel.cs；
 //********输入文件模型定义；
 //********创建/2017-8-15/宋仕钊；
 //********上次编辑/2018-3-22/宋仕钊；
@@ -54,6 +54,8 @@ namespace MoscaCore.Models
         ///<summary>计算选项描述</summary>
         [XmlElement(ElementName = "Option")]
         public Options Options { get; set; }
+
+        
     }
 
 

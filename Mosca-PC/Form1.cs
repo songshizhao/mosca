@@ -1,18 +1,12 @@
 ﻿using MoscaPC.Properties;
 using MoscaCore;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Threading;
+using MoscaCore.Helpper;
+using System.Diagnostics;
 
 namespace MoscaPC
 {
@@ -33,7 +27,8 @@ namespace MoscaPC
             {
                 textBox2.Text = Settings.Default.OutputFileName;
             }
-            //string r = IOManager.OutputDemoInputXml();
+            //测试字符串输出
+            //Debug.WriteLine(IOManager.OutputDemoInputXml());
         }
         //选择输入文件
         private void InputOpenFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -44,7 +39,7 @@ namespace MoscaPC
             Settings.Default.Save();
         }
         //开始选择输入文件
-        private void button1_Click(object sender, EventArgs e)
+        private void SelectInput_Click(object sender, EventArgs e)
         {
             InputOpenFileDialog.Title = "选取输入文件";
             InputOpenFileDialog.FileName = "...";
@@ -52,6 +47,7 @@ namespace MoscaPC
             InputOpenFileDialog.RestoreDirectory = true;
             InputOpenFileDialog.ShowDialog();
         }
+
         //选择输出文件
         private void OutputFileDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -61,7 +57,7 @@ namespace MoscaPC
             Settings.Default.Save();
         }
         //开始选择输出文件
-        private void button2_Click(object sender, EventArgs e)
+        private void SelectOutput(object sender, EventArgs e)
         {
             OutputFileDialog.Title = "选取输出文件";
             OutputFileDialog.FileName = "Output.xml";
@@ -70,7 +66,7 @@ namespace MoscaPC
             OutputFileDialog.ShowDialog();
         }
         //点击开始计算按钮
-        private void button3_Click(object sender, EventArgs e)
+        private void Run_Click(object sender, EventArgs e)
         {
             //Dll主程序实例化
             Main m = new Main();
@@ -86,16 +82,17 @@ namespace MoscaPC
             }
             //开始计算
             m.RunAllSteps();
-            
 
+            string XmlOutput = m.MyIOManager.Output();
+            using (StreamWriter writer = new StreamWriter(textBox2.Text))
+            {
+                writer.Write(XmlOutput);
+            }
         }
 
 
 
-        void AppendMessageToTextBox(string msg)
-        {
-            
-        }
+   
 
         public async Task ShowMessage(string msg)
         {
@@ -110,8 +107,6 @@ namespace MoscaPC
            // return null;
             //throw new NotImplementedException();
         }
-
-
 
 
     }

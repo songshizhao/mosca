@@ -8,7 +8,13 @@ using System.Xml.Serialization;
 
 namespace MoscaCore.Models
 {
-
+    public enum MaterialTypes
+    {
+        [XmlEnum(Name = "GetPropertyByName")]
+        GetPropertyByName,
+        [XmlEnum(Name = "UserDefine")]
+        UserDefine,
+    }
 
     ///材料定义
     public class Material
@@ -21,7 +27,7 @@ namespace MoscaCore.Models
         public string Name { get; set; }
         ///内置或者自定义
         [XmlAttribute("Type")]
-        public string Type { get; set; }
+        public MaterialTypes Type { get; set; }
 
 
         private KCollection k=new KCollection();
@@ -51,7 +57,7 @@ namespace MoscaCore.Models
         {
             double Value = K.Value;
             List<Data> KData = K.KData;
-            if (Type == "GetPropertyByName")
+            if (Type == MaterialTypes.GetPropertyByName)
             {
                 switch (Name)
                 {
@@ -109,7 +115,7 @@ namespace MoscaCore.Models
         {
             double Value = K.Value;
             List<Data> CpData = Cp.CpData;
-            if (Type == "GetPropertyByName")
+            if (Type == MaterialTypes.GetPropertyByName)
             {
                 switch (Name)
                 {
@@ -154,6 +160,7 @@ namespace MoscaCore.Models
             }
         }
 
+        
     }
 
 
@@ -184,6 +191,9 @@ namespace MoscaCore.Models
         public double Value { get; set; }
         [XmlElement("Data")]
         public List<Data> HData { get; set; }
+
+
+
         internal double Get(double T)
         {
             int x = 0;//比T小的最大序列
@@ -214,6 +224,7 @@ namespace MoscaCore.Models
         public double Value { get; set; }
         [XmlElement("Data")]
         public List<Data> CpData { get; set; }
+
 
     }
     //差值数据模型

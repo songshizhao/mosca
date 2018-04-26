@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,7 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpper\Formula.cs" />
+    <Compile Include="Helpper\FormulaBase.cs" />
+    <Compile Include="Models\Iteration.cs" />
+    <Compile Include="WaterProperty.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\FluidData.cs" />
     <Compile Include="Models\Fluid.cs" />
@@ -65,7 +68,7 @@
     <Compile Include="Models\OptionCollection.cs" />
     <Compile Include="Models\Transient.cs" />
     <Compile Include="OutputModel.cs" />
-    <Compile Include="IOManager.cs" />
+    <Compile Include="Helpper\IOManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\PowerFactor.cs" />
@@ -77,17 +80,17 @@
     <Compile Include="Helpper\MsgCenter.cs" />
     <Compile Include="Helpper\MyMath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WaterProperty.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="temp.txt" />
-    <Content Include="TextFile1.txt" />
+    <Content Include="Helpper\temp.txt" />
+    <Content Include="Helpper\TextFile1.txt" />
     <Content Include="UEwasp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="UML_Design.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

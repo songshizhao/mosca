@@ -37,6 +37,10 @@ namespace MoscaCore
         }
 
 
+        public void Fcdf()
+        {
+        }
+
         public double[] Caculate()
         {
             Beta[0] = Matrix[0, 1] / Matrix[0, 0];

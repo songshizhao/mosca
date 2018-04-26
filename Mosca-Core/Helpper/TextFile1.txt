@@ -1,0 +1,535 @@
+﻿
+        //********   R**************************************************************************************************************************
+        //*****  *******************  ** ***   ***********  **********************  ******************* *** *** ** **************************** 
+        //***  ****************** ************* **********  ** *******************  ***************** **************** *********************** 
+        //**  *****************  ***************  *********  **** *****************  ************** ***************************************** 
+        //*** ***************** ***************** ********  ****** ***************  ************* ********************* ******************** 
+        //************** ********* ************** ********  *********** ***** ***  ************ ******************************************* 
+        //*************  *********  *********** **********  *************** **** *  ************ ************* * * *  * * *** ** ********* 
+        //*********** ************** ********* ***********  ****************** **** ************* ************************* ************* 
+        //********* ******************  * * **************  **********************   **************  ********************* ************* 
+        //***  *******************************************  *********************** ****************** ** * ** * *** ****************** 
+        //**************************************************************************************************************************** 
+
+		      <!--<K Value="-1">
+        <Data T="0" Value="9.5"/>
+        <Data T="100" Value="7.61"/>
+        <Data T="200" Value="6.35"/>
+        <Data T="300" Value="5.44"/>
+        <Data T="400" Value="4.77"/>
+        <Data T="500" Value="4.24"/>
+        <Data T="600" Value="3.82"/>
+        <Data T="700" Value="3.47"/>
+        <Data T="800" Value="3.19"/>
+        <Data T="900" Value="2.94"/>
+        <Data T="1000" Value="2.74"/>
+        <Data T="1100" Value="2.56"/>
+        <Data T="1200" Value="2.40"/>
+        <Data T="1300" Value="2.26"/>
+        <Data T="1400" Value="2.14"/>
+        <Data T="1500" Value="2.04"/>
+        <Data T="1600" Value="1.94"/>
+        <Data T="1700" Value="1.86"/>
+        <Data T="1800" Value="1.78"/>
+        <Data T="1900" Value="1.71"/>
+        <Data T="2000" Value="1.65"/>
+        <Data T="2100" Value="1.59"/>
+        <Data T="2200" Value="1.54"/>
+        <Data T="2300" Value="1.50"/>
+        <Data T="2400" Value="1.46"/>
+        <Data T="2500" Value="1.42"/>
+        <Data T="2600" Value="1.39"/>
+      </K>
+      <Cp Value="0">
+        <Data T="0" Value="304.38"/>
+        <Data T="100" Value="306.896"/>
+        <Data T="200" Value="309.424"/>
+        <Data T="300" Value="311.964"/>
+        <Data T="400" Value="314.516"/>
+        <Data T="500" Value="317.08"/>
+        <Data T="600" Value="319.656"/>
+        <Data T="700" Value="322.244"/>
+        <Data T="800" Value="324.844"/>
+        <Data T="900" Value="327.456"/>
+        <Data T="1000" Value="330.08"/>
+        <Data T="1100" Value="332.716"/>
+        <Data T="1200" Value="335.364"/>
+        <Data T="1300" Value="340"/>
+        <Data T="1400" Value="345"/>
+        <Data T="1500" Value="350"/>
+        <Data T="1600" Value="370"/>
+        <Data T="1700" Value="390"/>
+        <Data T="1800" Value="410"/>
+        <Data T="1900" Value="430"/>
+        <Data T="2000" Value="450"/>
+        <Data T="2100" Value="470"/>
+        <Data T="2200" Value="500"/>
+        <Data T="2300" Value="520"/>
+        <Data T="2400" Value="580"/>
+        <Data T="2500" Value="620"/>
+        <Data T="2600" Value="650"/>
+      </Cp>-->
+
+
+
+	      <Material Index="1" Name="UO2" Type="UserDefine">
+      <K Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </K>
+      <Cp Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </Cp>
+    </Material>
+    <Material Index="2" Name="ZirClad" Type="UserDefine">
+      <K Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </K>
+      <Cp Value="0">
+        <Data T="100" Value="2" />
+        <Data T="200" Value="2" />
+        <Data T="300" Value="2" />
+      </Cp>
+    </Material>
+
+
+
+	   public void CaculateChannelFlow()
+        {
+            ///使用压力迭代方法确定不同子通道之间的流量，此计算方法使用压力迭代确定
+            //
+            //质量流量迭代
+            double[] m = new double[Ni];
+            //压降迭代
+            double[] DeltaP = new double[Ni];
+            //压降迭代因子
+
+            double Sigma = 0;
+            //新建输出对象
+            List<ChannelFlow> ChannelFlows = new List<ChannelFlow>();
+            //所有子通道
+            for (int i = 0; i < Ni; i++)
+            {
+                //新建子通道对象
+                ChannelFlow chlFlow = new ChannelFlow();
+                chlFlow.ChannelIndex = Channels[i].Index;
+                chlFlow.FluidDatas = new List<FluidData>();
+                //每个通道数据新增数据节点（0~Nj，共Nj+1个）
+                for (int j = 0; j < Nj + 1; j++)
+                {
+                    chlFlow.FluidDatas.Add(new FluidData());
+                }
+                ChannelFlows.Add(chlFlow);
+            }
+
+
+            do
+            {
+                //初始化Sigma
+                Sigma = 0;
+                //平均压力
+                double AvgPressure = 0;
+                for (int i = 0; i < Ni; i++)
+                {
+                    // 所有偏差之和
+                    AvgPressure += DeltaP[i];
+                    Debug.WriteLine("子通道"+ i+"压降："+DeltaP[i]);
+                }
+                AvgPressure = AvgPressure / Ni;
+                
+                for (int i = 0; i < Ni; i++)
+                {
+                    Sigma += Math.Abs(DeltaP[i] - AvgPressure);// 所有偏差之和
+                }
+                double TotalM = 0;
+                for (int i = 0; i < Ni; i++)
+                {
+                    double Factor = (AvgPressure - DeltaP[i]) / AvgPressure * 0.01;
+
+                    m[i] = m[i] + Factor * m[i];// 所有偏差之和
+
+                    TotalM += m[i];
+                }
+
+                double k = InputData.MassFlow.MassVelocity / TotalM;
+                for (int i = 0; i < Ni; i++)
+                {
+                    m[i] = k * m[i];//对质量流量进行修正
+                    Debug.WriteLine("子通道" + i + "流量" + m[i]);
+                }
+                Debug.WriteLine("Sigma->" + Sigma);
+            }
+            while (Sigma > 1000);
+
+
+
+
+
+
+            //子通道轴向迭代
+            for (int j = 0; j < Nj+1; j++)
+            {
+                //给入口节点初值
+                if (j == 0)
+                {
+                    //遍历所有子通道
+                    for (int i = 0; i < Ni; i++)
+                    {
+                        //第i个子通道
+                        Channel channel = Channels[i];
+                        //初始节点
+                        FluidData Init = new FluidData
+                        {
+                            //入口温度
+                            Temperature = InputData.MassFlow.Temperature,
+                            //位置
+                            Position = 0.000,
+                            //入口压力
+                            Pressure = InputData.MassFlow.Pressure,
+                            //入口质量流量(初始迭代根据面积平均分配)
+                            MassFlowRate = MassFlow.MassVelocity * channel.FlowArea / TotalArea,
+                        };
+                        //质量流量局部变量
+                        m[i] = Init.MassFlowRate;
+                        //比焓
+                        Init.Enthalphy = Coolent.GetH(Init.Temperature, Init.Pressure);
+                        Init.Enthalphy = Math.Round(Init.Enthalphy, Acc.H);
+                        //密度
+                        Init.Density = Coolent.GetDensity(Init.Temperature, Init.Pressure);
+                        Init.Density = Math.Round(Init.Density, Acc.Density);
+                        //流速m/s
+                        Init.Velocity = Math.Round(Init.MassFlowRate / channel.FlowArea / Init.Density, Acc.Velocity);
+                        //等效水力直径
+                        double De = 4 * channel.FlowArea / channel.WetPerimeter;
+                        //运动粘度
+                        double Kv = Coolent.GetKv(Init.Temperature, Init.Pressure);
+                        //雷诺数
+                        Init.Re = Init.Velocity * De / Kv;
+                        Init.Re = Math.Round(Init.Re, Acc.Re);
+                        //普朗特数
+                        Init.Pr = Coolent.GetPr(Init.Temperature, Init.Pressure);
+                        Init.Pr = Math.Round(Init.Pr, Acc.Pr);
+                        //导热系数
+                        Init.K = Coolent.GetK(Init.Temperature, Init.Pressure);
+                        Init.K = Math.Round(Init.K, Acc.K);
+                        //对流换热系数
+                        Init.h = h_convect(Init.Re, Init.Pr, Init.K, De);
+                        Init.h = Math.Round(Init.h, Acc.h);
+                        ChannelFlows[i].FluidDatas[j] = Init;//初始化子通道数据
+                    }
+                }
+                //j!=0
+                else
+                {
+                    //计算当前段的长度j>=1
+                    double Lj = Rods[0].SubPowerCollection[j-1].To - Rods[0].SubPowerCollection[j-1].From;
+                    //子通道计算
+                    for (int i = 0; i < Ni; i++)
+                    {
+                        //当前计算的子通道对象
+                        Channel channel = Channels[i];
+                        FluidData pre = ChannelFlows[i].FluidDatas[j - 1];//获得上一个节点数据
+
+                        double Hin = Coolent.GetH(pre.Temperature, pre.Pressure);
+                        //当前子通道燃料棒功率输出
+                        double SubPowerJ = 0;
+                        //遍历所有燃料棒
+                        foreach (Rod rod in Rods)
+                        {
+                            //燃料棒所有接触的通道
+                            foreach (var ContactedChannel in rod.ContactedChannel)
+                            {
+                                //如果与燃料棒接触的通道,如果是当前正在计算的通道
+                                if (ContactedChannel.Index == channel.Index)
+                                {
+                                    SubPowerJ += rod.SubPowerCollection[j - 1].Value * ContactedChannel.Angle / 360;
+                                }
+                            }
+
+                        }
+                        //子通道的等效水力直径
+                        double De = 4 * channel.FlowArea / channel.WetPerimeter;
+                        //新建-出口节点数据
+                        FluidData next = new FluidData();
+                        //根据功率计算出口焓值
+                        double Hout = Hin + SubPowerJ * 0.001 * Lj / pre.MassFlowRate;
+                        //出口比焓
+                        next.Enthalphy = Math.Round(Hout, Acc.H);
+                        //出口位置百分比
+                        next.Position = Math.Round((double)j / Nj, 3);
+                        //出口温度
+                        next.Temperature = Coolent.GetT(next.Enthalphy, next.Pressure);
+                        next.Temperature = Math.Round(next.Temperature, Acc.T);
+                        //质量流速Math.Round?
+                        next.MassFlowRate = m[i];
+                        //密度
+                        next.Density = Math.Round(Coolent.GetDensity(next.Temperature, next.Pressure), Acc.Density);
+                        //出口流速
+                        next.Velocity = Math.Round(next.MassFlowRate / channel.FlowArea / next.Density, Acc.Velocity);
+                        //运动粘度
+                        double Kv = Coolent.GetKv(next.Temperature, next.Pressure);
+                        //雷诺数
+                        next.Re = next.Velocity * De / Kv;
+                        next.Re = Math.Round(next.Re, Acc.Re);
+                        //普朗特数
+                        next.Pr = Coolent.GetPr(next.Temperature, next.Pressure);
+                        next.Pr = Math.Round(next.Pr, Acc.Pr);
+                        //导热系数
+                        next.K = Coolent.GetK(next.Temperature, next.Pressure);
+                        next.K = Math.Round(next.K, Acc.K);
+                        //对流换热系数
+                        next.h = h_convect(next.Re, next.Pr, next.K, De);
+                        next.h = Math.Round(next.h, Acc.h);
+                        //重力压降
+                        double Ph = next.Density * G * Lj * InputData.MassFlow.Flow_Direction;
+                        //摩擦压降
+                        double Pf = FrictionFactor(next.Re) * Lj / De * next.Density * next.Velocity * next.Velocity / 2;
+                        //加速压降
+                        double Pa = next.Density * (next.Velocity + pre.Velocity) / 2 * (next.Velocity - pre.Velocity);
+                        //总压降
+                        double P = (Ph + Pf + Pa);
+                        //此节点的压降
+                        next.Pressure = pre.Pressure + P * 0.000001;
+                        next.Pressure = Math.Round(next.Pressure, 6);
+                        //存储计算结果
+                        ChannelFlows[i].FluidDatas[j] = next;
+
+                        DeltaP[i] = P;
+                    }
+
+
+                }
+                
+
+              
+            }
+
+            //新建output输出燃料棒对象
+
+            //for (int k = 0; k < Nk; k++)
+            //{
+
+            //    RodTemperature rt = new RodTemperature
+            //    {
+            //        SubRodTemperature = new List<SubRodTemperature>()
+            //    };
+            //    OutputData.RodsTemperature.RodTemperature.Add(rt);
+            //}
+
+
+
+
+
+
+        }
+
+
+
+
+
+		m.SetOutput();
+
+            //在这里认为进行了5%的工作
+            progressBar1.Value = 5;
+
+
+            progressBar1.Value = 10;
+
+            m.BeginRecognize();
+            DebugTextBox.AppendText("\n" + "Recognize Input" + "...\n");
+            progressBar1.Value = 15;
+
+
+            m.CaculateGeneralFlow();
+            DebugTextBox.AppendText("\n" + "Caculate General Flow" + "...\n");
+            progressBar1.Value = 25;
+
+
+            m.CaculateChannelFlow();
+            DebugTextBox.AppendText("\n" + "Caculate Channel Flow" + "...\n");
+            progressBar1.Value = 45;
+
+
+            //m.CaculateRodsTemperature();
+            DebugTextBox.AppendText("\n" + "Caculate Rods Temperature" + "...\n");
+            progressBar1.Value = 100;
+
+
+
+
+            //设置输出
+            try
+            {
+                m.SetOutput();
+            }
+            catch (Exception ex)
+            {
+
+                DebugTextBox.AppendText("\n Error：F0003:" + ex.Message + "\n");
+                return;//放弃计算
+            }
+            //在这里认为进行了10%的工作
+            progressBar1.Value = 10;
+            //输入数据处理
+
+
+
+            try
+            {
+                m.BeginRecognize();
+                DebugTextBox.AppendText("\n" + "Recognize Input" + "...\n");
+            }
+            catch (Exception ex)
+            {
+
+                DebugTextBox.AppendText("\n" + ex.Message + "\n");
+                return;//放弃计算
+            }
+            //在这里认为进行了15%的工作
+            progressBar1.Value = 15;
+            try
+            {
+                m.CaculateGeneralFlow();
+                DebugTextBox.AppendText("\n" + "Caculate General Flow" + "...\n");
+            }
+            catch (Exception ex)
+            {
+
+                DebugTextBox.AppendText("\n" + ex.Message + "\n");
+                return;//放弃计算
+            }
+            //在这里认为进行了25%的工作
+            progressBar1.Value = 25;
+            try
+            {
+                m.CaculateChannelFlow();
+                DebugTextBox.AppendText("\n" + "Caculate Channel Flow" + "...\n");
+            }
+            catch (Exception ex)
+            {
+
+                DebugTextBox.AppendText("\n" + ex.Message + "\n");
+                return;//放弃计算
+            }
+
+            //在这里认为进行了35%的工作
+            progressBar1.Value = 35;
+            try
+            {
+               // m.CaculateRodsTemperature();
+                DebugTextBox.AppendText("\n" + "Caculate Rods Temperature" + "...\n");
+            }
+            catch (Exception ex)
+            {
+
+                DebugTextBox.AppendText("\n" + ex.Message + "\n");
+                return;//放弃计算
+            }
+            //在这里认为进行了45%的工作
+            progressBar1.Value = 45;
+
+            //开始输出计算的结果
+
+
+
+            //try
+            //{
+            //    string XmlOutput = m.MyIOManager.Output();
+            //    using (StreamWriter writer = new StreamWriter(textBox2.Text, false, Encoding.UTF8))
+            //    {
+            //        //writer.Encoding = ;
+            //        writer.Write(XmlOutput);
+            //    }
+            //    DebugTextBox.AppendText("\n" + "Completed！" + "...\n");
+            //}
+            //catch (Exception ex)
+            //{
+            //    DebugTextBox.AppendText("\n" + "F0002" + ex.Message + "\n");
+            //    return;
+            //}
+
+            //在这里认为进行了100%的工作
+            progressBar1.Value = 100;
+
+
+
+			            //输入和输出对象
+            ///
+            //新建输出对象
+            List<ChannelFlow> ChannelFlows = new List<ChannelFlow>();
+            //一些局部变量
+            ///
+            //多个子通道的质量流量
+            double[] m = new double[Ni];
+
+            //遍历所有子通道,计算流体
+            for (int i = 0; i < Ni; i++)
+            {
+                //获取当前通道
+                Channel channel = Channels[i];
+                //共Nj个分段,有Nj+1个节点
+                for (int j = 0; j < Nj + 1; j++)
+                {
+                    if (j == 0)
+                    {
+                        //初始节点
+                        FluidData InitNode = new FluidData
+                        {
+                            //入口温度
+                            Temperature = MassFlow.Temperature,
+                            //位置
+                            Position = 0.000,
+                            //入口压力
+                            Pressure = MassFlow.Pressure,
+                            //入口质量流量(初始迭代根据面积平均分配)
+                            MassFlowRate = MassFlow.MassVelocity * channel.FlowArea / TotalArea,
+                        };
+                        //质量流量局部变量
+                        m[i] = InitNode.MassFlowRate;
+                        //比焓
+                        InitNode.Enthalphy = Coolent.GetH(InitNode.Temperature, InitNode.Pressure);
+                        InitNode.Enthalphy = Math.Round(InitNode.Enthalphy, Acc.H);
+                        //密度
+                        InitNode.Density = Coolent.GetDensity(InitNode.Temperature, InitNode.Pressure);
+                        InitNode.Density = Math.Round(InitNode.Density, Acc.Density);
+                        //流速m/s
+                        InitNode.Velocity = Math.Round(InitNode.MassFlowRate / channel.FlowArea / InitNode.Density, Acc.Velocity);
+                        //等效水力直径
+                        double De = 4 * channel.FlowArea / channel.WetPerimeter;
+                        //运动粘度
+                        double Kv = Coolent.GetKv(InitNode.Temperature, InitNode.Pressure);
+                        //雷诺数
+                        InitNode.Re = InitNode.Velocity * De / Kv;
+                        InitNode.Re = Math.Round(InitNode.Re, Acc.Re);
+                        //普朗特数
+                        InitNode.Pr = Coolent.GetPr(InitNode.Temperature, InitNode.Pressure);
+                        InitNode.Pr = Math.Round(InitNode.Pr, Acc.Pr);
+                        //导热系数
+                        InitNode.K = Coolent.GetK(InitNode.Temperature, InitNode.Pressure);
+                        InitNode.K = Math.Round(InitNode.K, Acc.K);
+                        //对流换热系数
+                        InitNode.h = h_convect(InitNode.Re, InitNode.Pr, InitNode.K, De);
+                        InitNode.h = Math.Round(InitNode.h, Acc.h);
+                        ChannelFlows[i].FluidDatas[j] = InitNode;//初始化子通道数据
+                    }
+                    else
+                    {
+                        //第j段长度
+                        double Lj = Rods[0].SubPowerCollection[j].To - Rods[0].SubPowerCollection[j].From;
+                    }
+                }
+            }
+
+
+
+
+
+
+			    //MsgCenter.ShowMessage(h.ToMatrixString());
+                //MsgCenter.ShowMessage(Tf.ToMatrixString());
+                //MsgCenter.ShowMessage(massFlowDensity.ToMatrixString());

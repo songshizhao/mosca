@@ -17,5 +17,6 @@ namespace MoscaCore.Models
 
         [XmlElement(ElementName = "GasGap")]
         public GasGap GasGap { get; set; }
+
     }
 }

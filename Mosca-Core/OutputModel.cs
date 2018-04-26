@@ -1,14 +1,15 @@
-﻿/////////////////////////////////////////////////////////////////
+﻿///-------------------------------------------------------------
 //********输出结果存储类；                                       
 //********  主程序输出结果存储
 //********          创建/2018-3-22/宋仕钊
 //********              上次编辑/2018-3-22/宋仕钊
-/////////////////////////////////////////////////////////////////
+///-------------------------------------------------------------
 
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using MoscaCore.Models;
 using MathNet.Numerics.LinearAlgebra;
+using System;
 
 namespace MoscaCore.Models
 {
@@ -18,11 +19,13 @@ namespace MoscaCore.Models
         [XmlElement(ElementName = "Title")]
         public Title Title { get; set; }
         //稳态计算结果
-        [XmlElement(ElementName = "SteadyResult")]
+        [XmlElement(ElementName = "Steady")]
         public Result SteadyResult { get; set; }
         //瞬态计算结果
-        [XmlElement(ElementName = "TransientResult")]
+        [XmlElement(ElementName = "Transient")]
         public TransientResult TransientResult { get; set; }
+
+       
     }
 
 
@@ -38,8 +41,9 @@ namespace MoscaCore.Models
         public List<ChannelFlow> ChannelsFlow { get; set; }
 
         //燃料棒数据
-        [XmlElement("RodsTemperature")]
-        public List<RodTemperature> RodsTemperature { get; set; }
+        [XmlElement("RodTemperature")]
+        public List<RodTemperature> RodTemperature { get; set; }
+
     }
 
     public class TransientResult
@@ -48,6 +52,7 @@ namespace MoscaCore.Models
         //瞬态计算数据
         [XmlElement("TransientResult")]
         public List<TransientTimer> TransientTimers { get; set; }
+
     }
 
     public class TransientTimer
@@ -68,14 +73,13 @@ namespace MoscaCore.Models
     public class RodTemperature
     {
         //当前燃料棒的编号
-        [XmlElement("Index")]
+        [XmlAttribute("Index")]
         public int Index { get; set; }
         //子芯块温度关键数据整理
-        [XmlElement("SubRodTemperature")]
-        public List<SubRodTemperature> SubRodTemperature { get; set; }
-        //芯块温度场
-        [XmlElement("TemperatureField")]
-        public Matrix<double> TemperatureField { get; set; }
+        [XmlElement("SubRod")]
+        public List<SubRodTemperature> SubRods { get; set; }
+
+
     }
 
     public class SubRodTemperature
@@ -114,6 +118,11 @@ namespace MoscaCore.Models
         [XmlAttribute("DNBR")]
         public double DNBR { get; set; }
 
+        //子芯块温度场
+        [XmlElement("T")]
+        public Vector<double> TemperatureVector { get; set; }
+
+
     }
 
     //public class TemperatureField
@@ -133,8 +142,6 @@ namespace MoscaCore.Models
         public List<FluidData> FluidDatas { get; set; }
     }
 
-
-
     public class ChannelFlow
     {
         //材料名称
@@ -143,6 +150,7 @@ namespace MoscaCore.Models
         //内置或者自定义
         [XmlElement("FluidData")]
         public List<FluidData> FluidDatas { get; set; }
+
     }
 
 

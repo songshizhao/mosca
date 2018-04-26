@@ -9,9 +9,6 @@
     <Info>因为数据读取方式为反序列化XML</Info>
     <Info>因此不能在这个输入文件中添加XML注释</Info>
   </Title>
- 
-
-
 
   <Materials>
 
@@ -20,8 +17,6 @@
     <Material Index="1" Name="UO2" Type="GetPropertyByName"/>
     <Material Index="2" Name="Zr4" Type="GetPropertyByName"/>
     
-
-
     <GasGap h="5678"/>
   </Materials>
   <RodTypes Index="1" CladMaterialIndex="1" PelletMaterialIndex="2" Diameter="0.008" PelletDiameter="0.006" CladThickness="0.001" />
@@ -133,16 +128,17 @@
   <Option>
     <AnsysType>1</AnsysType>
     <IsOpenChannel>1</IsOpenChannel>
-    <DNBR-Formula>1</DNBR-Formula>
+    <DNBR-Formula>W3</DNBR-Formula>
     <Pellet-Segment>7</Pellet-Segment>
     <Clad-Segment>3</Clad-Segment>
+    <Iteration IterationType="NodeIteration" MaxIteration="20" Sigma="100"/>
     <Transient use="0">
       <Timer Second="0" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>
       <Timer Second="0.1" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>
     </Transient>
 
     <PowerFactor Multiplier="1.3" PelletShare="0.974" FluidShare="0.02" CladShare="0"/>
-
+    <Precision Kv="8" Re="0" h="0" Pressure="0" H="3"  />
     <!--<UdfPara>
       <FFF a="1" b="1" c="1"></FFF>
       

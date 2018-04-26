@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="OutputModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title"/>
+        <xs:element ref="Steady"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Title">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Infos" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="Value" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Steady">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="GeneralFlow"/>
+        <xs:element ref="ChannelsFlow" maxOccurs="unbounded"/>
+        <xs:element ref="RodTemperature" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeneralFlow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="FluidData" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FluidData">
+    <xs:complexType>
+      <xs:attribute name="DNBR" type="xs:double" use="required"/>
+      <xs:attribute name="H" type="xs:double" use="required"/>
+      <xs:attribute name="K" type="xs:double" use="required"/>
+      <xs:attribute name="Kv" type="xs:double" use="required"/>
+      <xs:attribute name="M" type="xs:double" use="required"/>
+      <xs:attribute name="P" type="xs:double" use="required"/>
+      <xs:attribute name="Pr" type="xs:double" use="required"/>
+      <xs:attribute name="Re" type="xs:double" use="required"/>
+      <xs:attribute name="T" type="xs:double" use="required"/>
+      <xs:attribute name="V" type="xs:double" use="required"/>
+      <xs:attribute name="Xe" type="xs:double" use="required"/>
+      <xs:attribute name="h" type="xs:double" use="required"/>
+      <xs:attribute name="rou" type="xs:double" use="required"/>
+      <xs:attribute name="z" type="xs:double" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChannelsFlow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="FluidData" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="ChannelIndex" type="xs:int" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RodTemperature">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="SubRod" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="Index" type="xs:int" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubRod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="T" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="CladInsideT" type="xs:double" use="required"/>
+      <xs:attribute name="CladOutsideT" type="xs:double" use="required"/>
+      <xs:attribute name="DNBR" type="xs:double" use="required"/>
+      <xs:attribute name="Index" type="xs:double" use="required"/>
+      <xs:attribute name="PelletCenterT" type="xs:double" use="required"/>
+      <xs:attribute name="PelletOutsideT" type="xs:double" use="required"/>
+      <xs:attribute name="h" type="xs:double" use="required"/>
+      <xs:attribute name="q" type="xs:double" use="required"/>
+      <xs:attribute name="qc" type="xs:double" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

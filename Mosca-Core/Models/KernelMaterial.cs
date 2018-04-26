@@ -1,11 +1,10 @@
-﻿
-/////////////////////////////////////////////////////////////
+﻿///--------------------------------------------------------
 //********COBRA MODEL CLASS
 //********FIRST CREATED BY SONGSHIZHAO @ 2017年12月18日17:53:47
 //********内置模型参数
 //********LASTEST EDITED BY SONGSHIZHAO @ ？？？？
 //********END
-/////////////////////////////////////////////////////////////
+///-------------------------------------------------------
 
 
 using System;
@@ -24,7 +23,7 @@ namespace MoscaCore.Models
         {
             Index = -1,
             Name = "UO2",
-            Type = "GetPropertyByName",
+            Type = MaterialTypes.GetPropertyByName,
             K = new KCollection()
             {
                 Value = -1,
@@ -100,7 +99,7 @@ namespace MoscaCore.Models
         {
             Index = -1,
             Name = "Zr4",
-            Type = "GetPropertyByName",
+            Type = MaterialTypes.GetPropertyByName,
             K = new KCollection()
             {
                 Value = -1,
@@ -150,7 +149,7 @@ namespace MoscaCore.Models
         {
             Index = -1,
             Name = "Zr4",
-            Type = "GetPropertyByName",
+            Type = MaterialTypes.GetPropertyByName,
             K = new KCollection()
             {
                 Value = -1,
@@ -194,6 +193,7 @@ namespace MoscaCore.Models
             }
 
         };
+
 
     }
 }

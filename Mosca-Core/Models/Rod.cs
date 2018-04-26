@@ -21,6 +21,8 @@ namespace MoscaCore.Models
         //接触的子通道
         [XmlElement("ContactedChannel")]
         public List<ContactedChannel> ContactedChannel { get; set; }
+
+       
     }
 
     public class ContactedChannel

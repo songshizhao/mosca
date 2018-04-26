@@ -84,17 +84,40 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\img\background.png" />
+    <Content Include="Assets\img\bg2.png" />
+    <Content Include="Assets\img\bg3.png" />
+    <Content Include="Assets\img\btnskin.png" />
+    <Content Include="Assets\img\btnskin2.png" />
+    <Content Include="Assets\img\button2skin.png" />
+    <Content Include="Assets\img\csp.png" />
+    <Content Include="Assets\img\divide.png" />
+    <Content Include="Assets\img\pwdistribution.png" />
+    <Content Include="Assets\img\scp.jpg" />
+    <Content Include="CSS\StyleSheet.css" />
+    <Content Include="favicon.ico" />
     <Content Include="index.aspx" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.css" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery-ui.structure.css" />
+    <Content Include="Scripts\jquery-ui.structure.min.css" />
+    <Content Include="Scripts\jquery-ui.theme.css" />
+    <Content Include="Scripts\jquery-ui.theme.min.css" />
     <Content Include="Scripts\jquery.signalR-2.2.3.js" />
     <Content Include="Scripts\jquery.signalR-2.2.3.min.js" />
-    <Content Include="service.asmx" />
+    <Content Include="CoupleService.asmx" />
     <Content Include="style.css" />
     <Content Include="userguid.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebApplication.aspx" />
+    <Content Include="子通道分析程序-说明.pdf" />
+    <Content Include="软件详细设计文档.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="index.aspx.cs">
@@ -106,8 +129,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReplyHub.cs" />
-    <Compile Include="service.asmx.cs">
-      <DependentUpon>service.asmx</DependentUpon>
+    <Compile Include="CoupleService.asmx.cs">
+      <DependentUpon>CoupleService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="StartUp.cs" />
@@ -117,6 +140,13 @@
     </Compile>
     <Compile Include="userguid.aspx.designer.cs">
       <DependentUpon>userguid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebApplication.aspx.cs">
+      <DependentUpon>WebApplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebApplication.aspx.designer.cs">
+      <DependentUpon>WebApplication.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

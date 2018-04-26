@@ -25,6 +25,9 @@ namespace MoscaCore.Models
         /// <summary>饱和气体比焓,只有使用自定义冷却剂模型时需要</summary>
         [XmlAttribute("hg")]
         private double HG { get; set; }
+
+        
+
         //可选使用if97或者if67
         private long Range = 97;
 
@@ -191,8 +194,10 @@ namespace MoscaCore.Models
             {
                 WaterProperty.PT2U(P, T, out ReturnValue, out Range);
             }
-
+            //Debug.WriteLine(ReturnValue + "!!!!!");
             return ReturnValue;
+
+            
         }
 
 
