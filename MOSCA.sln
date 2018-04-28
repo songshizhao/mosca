@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Core", "Mosca-Core\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosca-Web", "Mosca-Web\Mosca-Web.csproj", "{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MoscaPcSetup", "MoscaPcSetup\MoscaPcSetup.vdproj", "{835BCB6F-F5FD-4F53-A848-B587708D15F4}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ExcelHandler", "ExcelHandler\ExcelHandler.vbproj", "{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,24 @@ Global
 		{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}.Release|x64.ActiveCfg = Release|Any CPU
 		{2F1FE486-8FDC-45C4-A1FD-019EF5C13B5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Debug|Any CPU.ActiveCfg = Debug
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Debug|x64.ActiveCfg = Debug
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Debug|x86.ActiveCfg = Debug
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Release|Any CPU.ActiveCfg = Release
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Release|x64.ActiveCfg = Release
+		{835BCB6F-F5FD-4F53-A848-B587708D15F4}.Release|x86.ActiveCfg = Release
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|x64.Build.0 = Release|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{360CDA1F-EF87-4DC1-82B1-9604C5A7C0F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

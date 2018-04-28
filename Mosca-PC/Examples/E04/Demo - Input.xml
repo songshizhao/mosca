@@ -131,7 +131,7 @@
     <DNBR-Formula>W3</DNBR-Formula>
     <Pellet-Segment>7</Pellet-Segment>
     <Clad-Segment>3</Clad-Segment>
-    <Iteration IterationType="NodeIteration" MaxIteration="20" Sigma="100"/>
+    <Iteration IterationType="IOIteration" MaxIteration="20" Sigma="100"/>
     <Transient use="0">
       <Timer Second="0" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>
       <Timer Second="0.1" PowerMultiplier="1.1" MassFlowMultiplier="1.1"/>

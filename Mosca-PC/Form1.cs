@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MoscaCore.Helpper;
 using System.Diagnostics;
+using ExcelHandler;
+using System.Collections.Generic;
+using MoscaCore.Models;
 
 namespace MoscaPC
 {
@@ -88,26 +91,153 @@ namespace MoscaPC
             {
                 writer.Write(XmlOutput);
             }
+
+         
+            using (FolderBrowserDialog select_folder = new FolderBrowserDialog())
+            {
+                
+
+                select_folder.Description = "选择excel文件输出路径";
+                select_folder.ShowDialog();
+                if (select_folder.SelectedPath!="")
+                {
+                    string full_filename = select_folder.SelectedPath + "/output.xlsx";
+                    Output_Result_To_Excel(m.MyIOManager.OutputData, full_filename);
+                    // @"C:\Users\Administrator\Desktop\text.xlsx"
+                }
+
+            }
+
         }
 
 
 
    
 
-        public async Task ShowMessage(string msg)
+        public Task ShowMessage(string msg)
         {
             //await Task.Run(() =>{ });
             DebugTextBox.AppendText("\n" + msg + "\n");
             
-            //return null;
+            return null;
         }
 
-        public async Task ShowProcess(double process)
+        public Task ShowProcess(double process)
         {
-           // return null;
+           return null;
             //throw new NotImplementedException();
         }
 
+
+
+
+        void Output_Result_To_Excel(OutputModel outputModel, string path)
+        {
+            int currentRow = 1;
+            int currentColumn = 1;
+            //新建一个excel 程序
+            var ExcelObject = new ExcelInstance();
+            List<string> SheetsNameList = new List<string> {
+                "基本数据",
+                 "进阶数据",
+                 "其他数据",
+            };
+            //创建一个Excel 文件
+            ExcelObject.CreatNewExcel(path, SheetsNameList, false);
+            //写标题
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, 1, "标题:" + outputModel.Title.Value);
+            //写说明
+            foreach (string info in outputModel.Title.Infos)
+            {
+                currentRow += 1;
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn, "说明:" + info);
+
+            }
+            currentRow += 1;
+            //写一个表头标题
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn, "平均通道计算结果");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 1, "位置");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 2, "温度℃");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 3, "压力Mpa");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 4, "密度");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 5, "比焓kJ/kg");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 6, "流速m/s");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 7, "质量流苏kg/s");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 8, "对流换热系数W/m2");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 9, "导热系数");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 10, "运动粘度");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 11, "雷诺数");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 12, "热平衡含气率");
+            ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 13, "DNBR");
+            
+            foreach (var fluidData in outputModel.SteadyResult.GeneralFlow.FluidDatas)
+            {
+                currentRow += 1;
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 1, fluidData.Position);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 2, fluidData.Temperature);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 3, fluidData.Pressure);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 4, fluidData.Density);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 5, fluidData.Enthalphy);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 6, fluidData.Velocity);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 7, fluidData.MassFlowRate);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 8, fluidData.h);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 9, fluidData.K);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 10, fluidData.Kv);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 11, fluidData.Re);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 12, fluidData.Xe);
+                ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 13, fluidData.DNBR);
+            }
+            currentRow += 1;
+            foreach (var channeFlow in outputModel.SteadyResult.ChannelsFlow)
+            {
+                
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn, "子通道"+ channeFlow.ChannelIndex + "计算结果");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 1, "位置");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 2, "温度℃");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 3, "压力Mpa");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 4, "密度");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 5, "比焓kJ/kg");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 6, "流速m/s");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 7, "质量流苏kg/s");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 8, "对流换热系数W/m2");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 9, "导热系数");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 10, "运动粘度");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 11, "雷诺数");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 12, "热平衡含气率");
+                ExcelObject.Output_On_Cell<string>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 13, "DNBR");
+
+                currentRow += 1;
+                foreach (var fluidData in channeFlow.FluidDatas)
+                {
+                    
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 1, fluidData.Position);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 2, fluidData.Temperature);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 3, fluidData.Pressure);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 4, fluidData.Density);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 5, fluidData.Enthalphy);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 6, fluidData.Velocity);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 7, fluidData.MassFlowRate);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 8, fluidData.h);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 9, fluidData.K);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 10, fluidData.Kv);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 11, fluidData.Re);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 12, fluidData.Xe);
+                    ExcelObject.Output_On_Cell<double>(ExcelObject.ExcelSheets[0], currentRow, currentColumn + 13, fluidData.DNBR);
+                    currentRow += 1;
+                }
+            }
+
+
+
+
+
+
+            //保存一个Excel 文件
+            ExcelObject.SaveExcel(@"C:\Users\Administrator\Desktop\text.xlsx", true);
+
+
+        }
+        
 
     }
 }
@@ -121,35 +251,3 @@ namespace MoscaPC
 
 
 
-//try
-//{
-//    string XmlString = reader.ReadToEnd();
-//    //给计算程序输入数据
-//    string InputResult = CobraDLL.FileIO.FileInput(XmlString);
-//    if (InputResult!= "Read XML Success")
-//    {
-//        DebugTextBox.AppendText("\n致命错误:" + InputResult+"\n");
-//        return;//放弃计算
-//    }
-//    else
-//    {
-//        DebugTextBox.AppendText("\n" + InputResult + "...\n");
-//    }
-//    //发出开始计算命令...
-
-//    //获得计算结果并输出
-//    Main m = new Main();
-//    m.Caculate();
-
-//    string XmlOutput=FileIO.FileOutput();
-//    Debug.Write(XmlOutput);
-//    using (StreamWriter writer=new StreamWriter(textBox2.Text))
-//    {
-//        writer.Write(XmlOutput);
-//    }
-//}
-//catch (Exception ex)
-//{
-//    DebugTextBox.AppendText("\n读取文件失败,致命:" + ex.Message);
-//    return;//放弃计算
-//}

@@ -29,14 +29,18 @@ namespace MoscaCore.Helpper
     public class TempMsgCenter : IMsgCenter
     {
 
-
-        public async Task ShowMessage(string msg)
+        public Task ShowMessage(string msg)
         {
+            return null;
         }
 
-        public async Task ShowProcess(double process)
+        public Task ShowProcess(double process)
         {
+            return null;
         }
+
+
+
     }
 
 }

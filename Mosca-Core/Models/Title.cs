@@ -15,16 +15,12 @@ namespace MoscaCore.Models
 
         private List<string> infos=new List<string>();
         /// <summary>信息说明</summary>
+        [XmlElement(ElementName = "Info")]
         public List<string> Infos
         {
             get { return infos; }
             set { infos= value; }
         }
-
-
-        //[XmlElement(ElementName = "Info")]
-        //public List<string> Infos { get; set; }
-
 
     }
 }

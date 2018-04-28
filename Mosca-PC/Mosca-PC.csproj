@@ -8,12 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoscaPC</RootNamespace>
     <AssemblyName>MoscaPC</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
-    <PublishUrl>E:\COBRA\Publish\</PublishUrl>
+    <PublishUrl>C:\Users\songs\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -74,7 +74,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -102,7 +101,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="COBRA_TemporaryKey.pfx" />
+    <None Include="MOSCA_TemporaryKey.pfx" />
     <None Include="Examples\MyXMLSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -171,6 +170,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExcelHandler\ExcelHandler.vbproj">
+      <Project>{360cda1f-ef87-4dc1-82b1-9604c5a7c0f9}</Project>
+      <Name>ExcelHandler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mosca-Core\Mosca-Core.csproj">
       <Project>{4752fe1a-235d-4059-9906-477ff97c00d4}</Project>
       <Name>Mosca-Core</Name>
